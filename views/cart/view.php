@@ -28,10 +28,27 @@ use yii\widgets\ActiveForm;
     </div>
     <!-- End Bradcaump area -->
     <!-- cart-main-area start -->
-    <div class="cart-main-area ptb--120 bg__white">
+    <div class="cart-main-area ptb--60 bg__white">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
+                    <?php if (Yii::$app->session->hasFlash('success')): //сообщение об успешной валидации ?>
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <?php echo(Yii::$app->session->getFlash('success')); ?>
+                        </div>
+                    <?php endif;?>
+
+                    <?php if (Yii::$app->session->hasFlash('error')): //сообщение об непройденной валидации ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <?php echo(Yii::$app->session->getFlash('error')); ?>
+                        </div>
+                    <?php endif;?>
                         <div class="table-content table-responsive cart-table">
                             <table>
                                 <thead>
@@ -72,12 +89,6 @@ use yii\widgets\ActiveForm;
                                     <a class="ti-shopping-cart-clear" href="<?= \yii\helpers\Url::to(['cart/clear'])?>" style="cursor: pointer;" id="clearCart-button">Очистить корзину</a>
                                     <a href="<?=\yii\helpers\Url::home(); ?>">Продолжить покупки</a>
                                 </div>
-                                <div class="coupon">
-                                    <h3>Купон</h3>
-                                    <p>Если у вас есть купон, введите его сюда</p>
-                                    <input type="text" placeholder="Код купона" />
-                                    <input type="submit" value="Загрузить купон" />
-                                </div>
                             </div>
                             <div class="col-md-4 col-sm-5 col-xs-12">
                                 <div class="cart_totals">
@@ -111,27 +122,12 @@ use yii\widgets\ActiveForm;
                                 </div>
                             </div>
                         </div>
+                    <?php if (!empty($session['cart'])) :?>
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12" id="form">
                                 <h2 class="bradcaump-title">Форма оформления заказа</h2>
                                 <br>
-                                <?php if (Yii::$app->session->hasFlash('success')): //сообщение об успешной валидации ?>
-                                    <div class="alert alert-success alert-dismissible" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <?php echo(Yii::$app->session->getFlash('success')); ?>
-                                    </div>
-                                <?php endif;?>
 
-                                <?php if (Yii::$app->session->hasFlash('error')): //сообщение об непройденной валидации ?>
-                                    <div class="alert alert-danger alert-dismissible" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <?php echo(Yii::$app->session->getFlash('error')); ?>
-                                    </div>
-                                <?php endif;?>
                                 <?php $form = ActiveForm::begin([
                                     'class' => 'form',
                                     'encodeErrorSummary' => false,
@@ -144,8 +140,10 @@ use yii\widgets\ActiveForm;
                                 <?= $form->field($order, 'address')?>
                                 <?= Html::submitButton('Заказать', ['class' => 'btn btn-success'])?>
                                 <?php ActiveForm::end()?>
+
                             </div>
                         </div>
+                    <?php endif;?>
                 </div>
             </div>
         </div>

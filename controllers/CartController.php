@@ -52,11 +52,23 @@ class CartController extends AppController
         $order = new Order();
         $this->setMeta('Корзина');
         if ($order->load(Yii::$app->request->post())){
+
             $order->created_at = (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d H:i:s');
+            $order->sum = (int)$session['cart.sum'];
+            $order->qty = (int)$session['cart.qty'];
+
             if ($order->save())
             {
                 $this->saveOrderItems($session['cart'], $order->id);
+
+                $message = Yii::$app->mailer->compose('order', ['session' => $session])
+                    ->setFrom(['bogdan8080@yandex.ru' => 'STORE.LOC'])
+                    ->setTo($order->email)
+                    ->setSubject('Заказ с сайта store.loc')
+                    ->send();
+
                 Yii::$app->session->setFlash('success','Ваш заказ оформлен, мы свяжемся с вами в ближайшее время');
+
                 $this->cartClear();
                 return $this->refresh();
             }

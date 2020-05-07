@@ -30,6 +30,7 @@ class CartController extends AppController
 
     public function actionDelete($id, $isAjax = false) {
         $product = Product::findOne($id);
+        $fromDelete = true;
         $session = Yii::$app->session;
         $session->open();
 
@@ -39,7 +40,7 @@ class CartController extends AppController
         $this->setMeta('Корзина');
 
         $order = new Order();
-        $this->orderLoad($order, $session);
+        $this->orderLoad($order, $session, $fromDelete);
         if($isAjax){
             $this->layout = false;
             return $this->render('ajax-cart', compact('order','session'));
@@ -92,7 +93,7 @@ class CartController extends AppController
         $session->remove('cart.sum');
     }
 
-    protected function orderLoad($order, $session){
+    protected function orderLoad($order, $session, $fromDelete = false){
         if ($order->load(Yii::$app->request->post())){
 
             $order->created_at = (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d H:i:s');
@@ -117,10 +118,12 @@ class CartController extends AppController
                     ->send();
 
                 Yii::$app->session->setFlash('success','Ваш заказ оформлен, мы свяжемся с вами в ближайшее время');
-                debug(Yii::$app->session->getAllFlashes());
 
                 $this->cartClear();
-                return $this->refresh();
+                if($fromDelete)
+                    $this->actionView();
+                else
+                    return $this->refresh();
             }
             else{
                 Yii::$app->session->setFlash('error','Ошибка в оформлении заказа, обратитесь к администратору');

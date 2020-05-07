@@ -133,7 +133,7 @@ use yii\widgets\ActiveForm;
                                     'encodeErrorSummary' => false,
                                     'errorSummaryCssClass' => 'help-block',
                                 ])?>
-                                <?= $form->errorSummary($order) ?>
+                                <?= $form->errorSummary($order)?>
                                 <?= $form->field($order, 'name')?>
                                 <?= $form->field($order, 'email')?>
                                 <?= $form->field($order, 'phone')?>

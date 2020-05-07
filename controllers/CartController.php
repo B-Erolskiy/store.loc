@@ -28,15 +28,25 @@ class CartController extends AppController
         //return $this->render('view', compact('session'));
     }
 
-    public function actionDelete($id) {
+    public function actionDelete($id, $isAjax = false) {
         $product = Product::findOne($id);
         $session = Yii::$app->session;
         $session->open();
+
         $cart = new Cart();
         $cart->deleteFromCart($product);
-        $this->layout = false;
 
-        return $this->render('cart-main-area', compact('session'));
+        $this->setMeta('Корзина');
+
+        $order = new Order();
+        $this->orderLoad($order, $session);
+        if($isAjax){
+            $this->layout = false;
+            return $this->render('ajax-cart', compact('order','session'));
+        }
+        else{
+            return $this->render('view', compact('order','session'));
+        }
     }
 
     public function beforeAction($action)
@@ -51,31 +61,7 @@ class CartController extends AppController
         $session->open();
         $order = new Order();
         $this->setMeta('Корзина');
-        if ($order->load(Yii::$app->request->post())){
-
-            $order->created_at = (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d H:i:s');
-            $order->sum = (int)$session['cart.sum'];
-            $order->qty = (int)$session['cart.qty'];
-
-            if ($order->save())
-            {
-                $this->saveOrderItems($session['cart'], $order->id);
-
-                $message = Yii::$app->mailer->compose('order', ['session' => $session])
-                    ->setFrom(['bogdan8080@yandex.ru' => 'STORE.LOC'])
-                    ->setTo($order->email)
-                    ->setSubject('Заказ с сайта store.loc')
-                    ->send();
-
-                Yii::$app->session->setFlash('success','Ваш заказ оформлен, мы свяжемся с вами в ближайшее время');
-
-                $this->cartClear();
-                return $this->refresh();
-            }
-            else{
-                Yii::$app->session->setFlash('error','Ошибка в оформлении заказа, обратитесь к администратору');
-            }
-        }
+        $this->orderLoad($order, $session);
         return $this->render('view', compact('order','session'));
     }
 
@@ -104,5 +90,41 @@ class CartController extends AppController
         $session->remove('cart');
         $session->remove('cart.qty');
         $session->remove('cart.sum');
+    }
+
+    protected function orderLoad($order, $session){
+        if ($order->load(Yii::$app->request->post())){
+
+            $order->created_at = (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d H:i:s');
+            $order->sum = (int)$session['cart.sum'];
+            $order->qty = (int)$session['cart.qty'];
+
+            if ($order->save())
+            {
+                $this->saveOrderItems($session['cart'], $order->id);
+                /*foreach ($session['cart'] as $id => $item) {
+                    $imgContainer[$item['id']] = Yii::getAlias("@webroot/images/product/big-img/" . $item['img']);
+                    //$imgContainer[$item['id']] = Swift_Image::fromPath('http://store.loc/images/product/big-img/samsung-galaxy-a50.jpg');
+                }*/
+                $message = Yii::$app->mailer->compose('order',
+                    ['session' => $session,
+                        'order' => $order,
+                        //'imgContainer' => $imgContainer
+                    ])
+                    ->setFrom(['bogdan8080@yandex.ru' => 'STORE.LOC'])
+                    ->setTo($order->email)
+                    ->setSubject('Заказ с сайта store.loc')
+                    ->send();
+
+                Yii::$app->session->setFlash('success','Ваш заказ оформлен, мы свяжемся с вами в ближайшее время');
+                debug(Yii::$app->session->getAllFlashes());
+
+                $this->cartClear();
+                return $this->refresh();
+            }
+            else{
+                Yii::$app->session->setFlash('error','Ошибка в оформлении заказа, обратитесь к администратору');
+            }
+        }
     }
 }

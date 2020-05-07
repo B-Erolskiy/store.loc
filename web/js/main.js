@@ -120,12 +120,13 @@
         var id = $(this).data('id');
         $.ajax({
             url: '/cart/delete',
-            data: {id: id},
+            data: {id: id, isAjax: true},
             type: 'GET',
             success: function (res) {
                 $('.cart-main-area').html(res);
             },
             error: function (res) {
+
                 console.log('Error' + res);
             }
         });

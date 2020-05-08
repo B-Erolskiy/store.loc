@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Product;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,8 +10,10 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Category;
+use yii\web\Request;
 
-class SiteController extends Controller
+class SiteController extends AppController
 {
     /**
      * {@inheritdoc}
@@ -61,7 +64,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $this->setMeta('TMART');
+        $hits = Product::find()->where(['hit' => 1])->limit(6)->all();
+        $news = Product::find()->where(['new' => 1])->limit(6)->all();
+
+        return $this->render('index', compact('hits', 'news'));
     }
 
     /**

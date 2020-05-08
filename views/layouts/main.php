@@ -56,7 +56,7 @@ ltAppAsset::register($this);
                         <nav class="mainmenu__nav hidden-xs hidden-sm">
                             <ul class="main__menu">
                                 <li><a href="<?=\yii\helpers\Url::home(); ?>">Главная</a></li>
-                                <li><a href="portfolio-gutter-box-3.html">portfolio</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
                                 <li><a href="blog.html">Blog</a></li>
                                 <li class="drop"><a href="#">pages</a>
                                     <ul class="dropdown">

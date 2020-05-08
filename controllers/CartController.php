@@ -69,7 +69,7 @@ class CartController extends AppController
     public function actionClear() {
         $this->cartClear();
         $this->layout = false;
-        return $this->render('cart-main-area', compact('session'));
+        return $this->render('ajax-cart', compact('order','session'));
     }
 
     protected function saveOrderItems($items, $order_id){

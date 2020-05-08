@@ -2,9 +2,10 @@
 
 use app\components\MenuWidget;
 use yii\helpers\Html;
+use yii\web\View;
+
 /* @var $this yii\web\View */
 ?>
-
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url('../../web/images/bg/2.jpg') no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
@@ -14,7 +15,7 @@ use yii\helpers\Html;
                     <div class="bradcaump__inner text-center">
                         <h2 class="bradcaump-title">Shop Sidebar</h2>
                         <nav class="bradcaump-inner">
-                            <a class="breadcrumb-item" href="<?=\yii\helpers\Url::home(); ?>">Home</a>
+                            <a class="breadcrumb-item" href="<?=\yii\helpers\Url::home(); ?>">Главная</a>
                             <span class="brd-separetor">/</span>
                             <span class="breadcrumb-item active"><?= $category->name?></span>
                         </nav>
@@ -31,7 +32,15 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
                 <div class="htc__shop__left__sidebar">
-                    <!-- Start Range -->
+                    <!-- Start Product Cat -->
+                    <div class="htc__shop__cat">
+                        <h4 class="section-title-4"> Категории</h4>
+                        <div class="category-menu-list">
+                            <ul class="catalog">
+                                <?= MenuWidget::widget(['tpl' => 'menu'])?>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="htc-grid-range">
                         <h4 class="section-title-4">FILTER BY PRICE</h4>
                         <div class="content-shopby">
@@ -52,18 +61,6 @@ use yii\helpers\Html;
                             </div>
                         </div>
                     </div>
-                    <!-- End Range -->
-                    <!-- Start Product Cat -->
-                    <div class="htc__shop__cat">
-                        <h4 class="section-title-4"> Категории</h4>
-                        <div class="category-menu-list">
-                            <ul class="catalog">
-                                <?= MenuWidget::widget(['tpl' => 'menu'])?>
-                            </ul>
-                        </div>
-                    </div>
-
-
                     <!-- End Product Cat -->
                     <!-- Start Color Cat -->
                     <div class="htc__shop__cat">
@@ -117,16 +114,14 @@ use yii\helpers\Html;
                             <div class="product__list__option">
                                 <div class="order-single-btn">
                                     <select class="select-color selectpicker">
-                                        <option>Sort by newness</option>
-                                        <option>Match</option>
-                                        <option>Updated</option>
-                                        <option>Title</option>
-                                        <option>Category</option>
-                                        <option>Rating</option>
+                                        <option>Сортировка по умолчанию</option>
+                                        <option>По названию</option>
+                                        <option>По категории</option>
+                                        <option>По дате создания</option>
                                     </select>
                                 </div>
                                 <div class="shp__pro__show">
-                                    <span>Showing 1 - 4 of 25 results</span>
+                                    <span>Показано <?= count($products);?> товаров</span>
                                 </div>
                             </div>
                             <!-- End Short Form -->
@@ -144,38 +139,38 @@ use yii\helpers\Html;
                         <!-- Start Single View -->
                         <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade in active clearfix">
                             <?php if (!empty($products)):  ?>
-                            <!-- Start Single Product -->
-                            <?php $i = 0; foreach ($products as $product): ?>
-                            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-                                <div class="product">
-                                    <div class="product__inner">
-                                        <div class="pro__thumb">
-                                            <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
-                                                <?= Html::img('@web/images/product/big-img/' . $product->img, ['alt' => $product->name, 'title' => $product->name]) ?>
-                                            </a>
-                                        </div>
-                                        <div class="product__hover__info">
-                                            <ul class="product__action">
-                                                <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                <li><a class="ti-shopping-cart" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>"></a></li>
-                                                <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
-                                            </ul>
+                                <!-- Start Single Product -->
+                                <?php $i = 0; foreach ($products as $product): ?>
+                                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+                                        <div class="product">
+                                            <div class="product__inner">
+                                                <div class="pro__thumb">
+                                                    <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
+                                                        <?= Html::img('@web/images/product/big-img/' . $product->img, ['alt' => $product->name, 'title' => $product->name]) ?>
+                                                    </a>
+                                                </div>
+                                                <div class="product__hover__info">
+                                                    <ul class="product__action">
+                                                        <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                        <li><a class="ti-shopping-cart" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>"></a></li>
+                                                        <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product__details">
+                                                <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>"><?= $product->name?></a></h2>
+                                                <ul class="product__price">
+                                                    <li class="new__price"><?= $product->price/100 ?> ₽</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="product__details">
-                                        <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>"><?= $product->name?></a></h2>
-                                        <ul class="product__price">
-                                            <li class="new__price"><?= $product->price/100 ?> ₽</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Product -->
-                                <?php $i++; ?>
-                                <?php if ($i % 3 === 0) :?>
-                                    <div class="clearfix"></div>
-                                <?php endif;?>
-                            <?php endforeach; ?>
+                                    <!-- End Single Product -->
+                                    <?php $i++; ?>
+                                    <?php if ($i % 3 === 0) :?>
+                                        <div class="clearfix"></div>
+                                    <?php endif;?>
+                                <?php endforeach; ?>
                             <?php else : ?>
                                 <h2 >Здесь товаров пока нет...</h2>
                             <?php endif;?>
@@ -186,26 +181,26 @@ use yii\helpers\Html;
                         <div role="tabpanel" id="list-view" class="single-grid-view tab-pane fade clearfix">
                             <!-- Start List Content-->
                             <?php if (!empty($products)):  ?>
-                            <?php foreach ($products as $product): ?>
-                            <div class="single__list__content clearfix">
-                                <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
-                                    <div class="list__thumb">
-                                        <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
-                                            <?= Html::img('@web/images/product/big-img/' . $product->img, ['alt' => $product->name, 'title' => $product->name]) ?>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12">
-                                    <div class="list__details__inner">
-                                        <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>"><?= $product->name?></a></h2>
-                                        <p><?= $product->content?></p>
-                                        <span class="product__price"><?= $product->price/100 ?> ₽</span>
-                                        <div class="shop__btn">
-                                            <a class="htc__btn" href="cart.html"><span class="ti-shopping-cart"></span>Add to Cart</a>
+                                <?php foreach ($products as $product): ?>
+                                    <div class="single__list__content clearfix">
+                                        <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
+                                            <div class="list__thumb">
+                                                <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
+                                                    <?= Html::img('@web/images/product/big-img/' . $product->img, ['alt' => $product->name, 'title' => $product->name]) ?>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12">
+                                            <div class="list__details__inner">
+                                                <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>"><?= $product->name?></a></h2>
+                                                <p><?= $product->content?></p>
+                                                <span class="product__price"><?= $product->price/100 ?> ₽</span>
+                                                <div class="shop__btn">
+                                                    <a class="ti-shopping-cart htc__btn" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>"  data-id="<?= $product->id?>">Добавить в корзину</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <h2 >Здесь товаров пока нет...</h2>

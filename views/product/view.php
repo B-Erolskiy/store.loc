@@ -57,25 +57,6 @@ use yii\helpers\Html;
                         <ul class="pro__dtl__prize">
                             <li><?= $product->price/100?>  ₽</li>
                         </ul>
-                        <div class="pro__dtl__color">
-                            <h2 class="title__5">Выберите цвет</h2>
-                            <ul class="pro__choose__color">
-                                <li class="red"><a href="#"><i class="zmdi zmdi-circle"></i></a></li>
-                                <li class="blue"><a href="#"><i class="zmdi zmdi-circle"></i></a></li>
-                                <li class="perpal"><a href="#"><i class="zmdi zmdi-circle"></i></a></li>
-                                <li class="yellow"><a href="#"><i class="zmdi zmdi-circle"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="pro__dtl__size">
-                            <h2 class="title__5">Размер</h2>
-                            <ul class="pro__choose__size">
-                                <li><a href="#">xl</a></li>
-                                <li><a href="#">m</a></li>
-                                <li><a href="#">ml</a></li>
-                                <li><a href="#">lm</a></li>
-                                <li><a href="#">xxl</a></li>
-                            </ul>
-                        </div>
                         <div class="product-action-wrap">
                             <div class="prodict-statas"><span>Количество :</span></div>
                             <div class="product-quantity">

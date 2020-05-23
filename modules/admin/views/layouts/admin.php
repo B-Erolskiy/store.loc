@@ -88,8 +88,18 @@ ltAppAsset::register($this);
                         <div class="col-md-2 col-sm-4 col-xs-3">
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li><a href="login-register.html"><span class="ti-user"></span></a></li>
-                                <li class="li-cart">
+                                <?php if(Yii::$app->user->isGuest) : ?>
+                                    <li>
+                                        <a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span></a>
+                                    </li>
+                                <?php else :?>
+                                    <li>
+                                        <a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span><?php Yii::$app->user->identity['username']?></a>
+                                    </li>
+                                    <li>
+                                        <a href="<?=\yii\helpers\Url::to(['/site/logout'])?>"><span class="ti-shift-left"></span></a>
+                                    </li>
+                                <?php endif;?>                                <li class="li-cart">
 
                                     <a href="<?=\yii\helpers\Url::to(['cart/view']); ?>">
                                         <div class="number hidden">+</div>

@@ -1786,6 +1786,7 @@ product__style--7
 }
 .single__chooose {
     margin-top: -40px;
+    display: block;
 }
 .choose__us {
     display: flex;
@@ -1801,6 +1802,11 @@ product__style--7
 .choose__icon {
     min-width: 37px;
 }
+
+.choose__us a:hover {
+    color: #ff4136;
+}
+
 .choose__details h4 {
     color: #505050;
     font-size: 22px;

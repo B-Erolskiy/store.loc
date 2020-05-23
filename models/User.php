@@ -63,7 +63,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function generateAuthKey(){
-        $this->auth_key = Yii::$app->getSecurity()->generatePasswordHash(\Yii::$app->security->generateRandomString());
+        $this->auth_key = \Yii::$app->getSecurity()->generatePasswordHash(\Yii::$app->security->generateRandomString());
     }
 
     /**

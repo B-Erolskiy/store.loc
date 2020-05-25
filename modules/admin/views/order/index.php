@@ -2,14 +2,20 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Заказы';
+$this->params['breadcrumbs'][] = ['label' => 'Панель администратора', 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-index container">
+<div class="order-index">
+
+    <?=  Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]);?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -80,7 +80,7 @@ use yii\helpers\Html;
     <div class="only-banner ptb--100 bg__white">
         <div class="container">
             <div class="only-banner-img">
-                <a href="shop-sidebar.html"><img src="../../web/images/new-product/3.jpg" alt="new product"></a>
+                <img src="../../web/images/new-product/slide-1.jpg" alt="new product">
             </div>
         </div>
     </div>

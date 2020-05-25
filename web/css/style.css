@@ -1803,8 +1803,13 @@ product__style--7
     min-width: 37px;
 }
 
-.choose__us a:hover {
-    color: #ff4136;
+.choose__details a:hover h4 {
+    color: #ff4136 !important;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
 }
 
 .choose__details h4 {
@@ -1819,6 +1824,25 @@ product__style--7
 .video__inner {
     position: relative;
     z-index: 1;
+}
+.to-admin{
+    font-size: 20px;
+}
+.to-admin .ti-arrow-left {
+    color: #505050;
+    font-size: 36px;
+}
+.to-admin:hover .ti-arrow-left{
+    color: #ff4136 !important;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+.ui-datepicker-title {
+    color: #333;
 }
 /*------------------------------
   15. Team Area

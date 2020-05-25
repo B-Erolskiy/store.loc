@@ -8,23 +8,23 @@
                         <div class="choose__icon">
                             <span class="ti-home"></span>
                         </div>
-                        <a href="<?= \yii\helpers\Url::home()?>">
                             <div class="choose__details">
-                                <h4>Главная</h4>
+                                <a href="<?= \yii\helpers\Url::home()?>">
+                                    <h4>Главная</h4>
+                                </a>
                                 <p>Переход на главную страницу сайта.</p>
                             </div>
-                        </a>
                     </div>
                     <div class="choose__us">
                         <div class="choose__icon">
                             <span class="ti-package"></span>
                         </div>
-                        <a href="<?= \yii\helpers\Url::to(['/admin/order'])?>">
-                            <div class="choose__details">
-                            <h4>Заказы</h4>
+                        <div class="choose__details">
+                                <a href="<?= \yii\helpers\Url::to(['/admin/order'])?>">
+                                    <h4>Заказы</h4>
+                                </a>
                             <p>Список всех заказов с сайта.</p>
                         </div>
-                        </a>
                     </div>
                 </div>
                 <div class="single__chooose col-md-6">
@@ -32,23 +32,23 @@
                         <div class="choose__icon">
                             <span class="ti-layout-grid2"></span>
                         </div>
-                        <a href="<?= \yii\helpers\Url::to(['/admin/order'])?>">
-                            <div class="choose__details">
+                        <div class="choose__details">
+                            <a href="<?= \yii\helpers\Url::to(['/admin/order'])?>">
                                 <h4>Категории</h4>
-                                <p>Список всех категорий товаров сайта.</p>
-                            </div>
-                        </a>
+                            </a>
+                            <p>Список всех категорий товаров с сайта.</p>
+                        </div>
                     </div>
                     <div class="choose__us">
                         <div class="choose__icon">
                             <span class="ti-tablet"></span>
                         </div>
-                        <a href="<?= \yii\helpers\Url::to(['/admin/order'])?>">
-                            <div class="choose__details">
+                        <div class="choose__details">
+                            <a href="<?= \yii\helpers\Url::to(['/admin/order'])?>">
                                 <h4>Товары</h4>
-                                <p>Список всех товаров сайта.</p>
-                            </div>
-                        </a>
+                            </a>
+                            <p>Список всех товаров сайта.</p>
+                        </div>
                     </div>
                 </div>
             </div>

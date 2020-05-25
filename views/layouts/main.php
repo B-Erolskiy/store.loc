@@ -57,7 +57,7 @@ ltAppAsset::register($this);
                             <ul class="main__menu">
                                 <li><a href="<?=\yii\helpers\Url::home(); ?>">Главная</a></li>
                                 <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
-                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="#">Акции</a></li>
                                 <li class="drop"><a href="#">pages</a>
                                     <ul class="dropdown">
                                         <li><a href="about.html">about</a></li>
@@ -71,16 +71,16 @@ ltAppAsset::register($this);
                                         <li><a href="login-register.html">login & register</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">contact</a></li>
+                                <li><a href="contact.html">Контакты</a></li>
                             </ul>
                         </nav>
                         <div class="mobile-menu clearfix visible-xs visible-sm">
                             <nav id="mobile_dropdown">
                                 <ul>
                                     <li><a href="<?=\yii\helpers\Url::home(); ?>">Home</a></li>
-                                    <li><a href="blog.html">blog</a></li>
-                                    <li><a href="#">pages</a></li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
+                                    <li><a href="blog.html">Акции</a></li>
+                                    <li><a href="contact.html">Контакты</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -89,22 +89,12 @@ ltAppAsset::register($this);
                     <div class="col-md-2 col-sm-4 col-xs-3">
                         <ul class="menu-extra">
                             <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                            <?php if(Yii::$app->user->isGuest) : ?>
                                 <li>
                                         <a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span></a>
                                 </li>
-                            <?php else :?>
-                                <li>
-                                    <a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span></a>
-                                </li>
-                                <li>
-                                    <a href="<?=\yii\helpers\Url::to(['/site/logout'])?>"><span class="ti-shift-left"></span></a>
-                                </li>
-                            <?php endif;?>
                             <li class="li-cart">
 
                                 <a href="<?=\yii\helpers\Url::to(['cart/view']); ?>">
-                                    <div class="number hidden">+</div>
                                     <?= Html::img('@web/images/cart/cart.png')?>
                                 </a>
 

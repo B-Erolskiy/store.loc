@@ -56,20 +56,7 @@ ltAppAsset::register($this);
                                 <ul class="main__menu">
                                     <li><a href="<?=\yii\helpers\Url::home(); ?>">Главная</a></li>
                                     <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li class="drop"><a href="#">pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="about.html">about</a></li>
-                                            <li><a href="shop.html">shop</a></li>
-                                            <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                            <li><a href="product-details-sticky-right.html">product details</a></li>
-                                            <li><a href="cart.html">cart</a></li>
-                                            <li><a href="wishlist.html">wishlist</a></li>
-                                            <li><a href="checkout.html">checkout</a></li>
-                                            <li><a href="team.html">team</a></li>
-                                            <li><a href="login-register.html">login & register</a></li>
-                                        </ul>
-                                    </li>
+
                                     <li><a href="contact.html">contact</a></li>
                                 </ul>
                             </nav>
@@ -77,8 +64,7 @@ ltAppAsset::register($this);
                                 <nav id="mobile_dropdown">
                                     <ul>
                                         <li><a href="<?=\yii\helpers\Url::home(); ?>">Home</a></li>
-                                        <li><a href="blog.html">blog</a></li>
-                                        <li><a href="#">pages</a></li>
+                                        <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
                                         <li><a href="contact.html">contact</a></li>
                                     </ul>
                                 </nav>
@@ -87,27 +73,20 @@ ltAppAsset::register($this);
                         <!-- End MAinmenu Ares -->
                         <div class="col-md-2 col-sm-4 col-xs-3">
                             <ul class="menu-extra">
-                                <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
                                 <?php if(Yii::$app->user->isGuest) : ?>
                                     <li>
                                         <a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span></a>
                                     </li>
                                 <?php else :?>
                                     <li>
-                                        <a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span><?php Yii::$app->user->identity['username']?></a>
+                                        <a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span><?= '   ' . Yii::$app->user->identity['username']?></a>
                                     </li>
                                     <li>
                                         <a href="<?=\yii\helpers\Url::to(['/site/logout'])?>"><span class="ti-shift-left"></span></a>
                                     </li>
-                                <?php endif;?>                                <li class="li-cart">
-
-                                    <a href="<?=\yii\helpers\Url::to(['cart/view']); ?>">
-                                        <div class="number hidden">+</div>
-                                        <?= Html::img('@web/images/cart/cart.png')?>
-                                    </a>
+                                <?php endif;?>
 
                                 </li>
-                                <li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>
                             </ul>
                         </div>
                     </div>
@@ -117,36 +96,12 @@ ltAppAsset::register($this);
             <!-- End Mainmenu Area -->
         </header>
         <!-- End Header Style -->
-
-        <div class="body__overlay"></div>
-        <!-- Start Offset Wrapper -->
-        <div class="offset__wrapper">
-            <!-- Start Search Popap -->
-            <div class="search__area">
-                <div class="container" >
-                    <div class="row" >
-                        <div class="col-md-12" >
-                            <div class="search__inner">
-                                <form action="<?= \yii\helpers\Url::to(['category/search'])?>" method="get">
-                                    <input placeholder="Введите здесь... " name="q" type="text">
-                                    <button type="submit"></button>
-                                </form>
-                                <div class="search__close__btn">
-                                    <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Search Popap -->
-
-        </div>
         <!-- End Offset Wrapper -->
         <!-- Start Feature Product -->
+        <div class="container">
 
-        <?= $content; ?>
-
+            <?= $content; ?>
+        </div>
         <!-- Start Footer Area -->
         <footer class="htc__foooter__area gray-bg">
             <div class="container">

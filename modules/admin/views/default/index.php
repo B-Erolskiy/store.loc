@@ -33,7 +33,7 @@
                             <span class="ti-layout-grid2"></span>
                         </div>
                         <div class="choose__details">
-                            <a href="<?= \yii\helpers\Url::to(['/admin/order'])?>">
+                            <a href="<?= \yii\helpers\Url::to(['/admin/categories'])?>">
                                 <h4>Категории</h4>
                             </a>
                             <p>Список всех категорий товаров с сайта.</p>

@@ -4204,3 +4204,7 @@ a.shipping-calculator-button:hover {
 .ti-shopping-cart-clear {
     font-family: 'Helvetica', sans-serif;
 }
+
+.alert-success, .categories-form, .order-form, .btn-success, .btn-primary, .btn-danger{
+    margin: 20px 0;
+}

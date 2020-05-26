@@ -44,7 +44,7 @@
                             <span class="ti-tablet"></span>
                         </div>
                         <div class="choose__details">
-                            <a href="<?= \yii\helpers\Url::to(['/admin/order'])?>">
+                            <a href="<?= \yii\helpers\Url::to(['/admin/product'])?>">
                                 <h4>Товары</h4>
                             </a>
                             <p>Список всех товаров сайта.</p>

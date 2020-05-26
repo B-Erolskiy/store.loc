@@ -168,11 +168,21 @@
     z-index: -1;
 }
 .product__action li a span {
+     color: #666666;
+     font-size: 20px;
+     transition: all 0.3s ease 0s;
+     margin-top: 14px;
+     display: inline-block;
+ }
+.product__action li a.ti-shopping-cart {
     color: #666666;
     font-size: 20px;
     transition: all 0.3s ease 0s;
     margin-top: 14px;
     display: inline-block;
+}
+.product__action li a.ti-shopping-cart:hover {
+    color: #fd3f0f;
 }
 .home-6 .product__action li a span {
     margin-top: 0px;

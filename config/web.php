@@ -13,6 +13,14 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'admin',
+            ],
+        'jodit' => [
+            'class' => 'yii2jodit\JoditModule',
+            'extensions'=>['jpg','png','gif'],
+            'root'=> '@webroot/images/global/',
+            'baseurl'=> '@web/images/global/',
+            'maxFileSize'=> '20mb',
+            'defaultPermission'=> 0775,
         ],
     ],
     'aliases' => [
@@ -85,6 +93,16 @@ $config = [
             ],
         ],
 
+    ],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\PathController',
+            'access' => ['@'],
+            'root' => [
+                'path' => 'images/global',
+                'name' => 'Files'
+            ],
+        ]
     ],
     'params' => $params,
 ];

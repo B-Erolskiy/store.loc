@@ -3,28 +3,26 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
+/* @var $searchModel app\modules\admin\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Категории';
+$this->title = 'Товары';
 $this->params['breadcrumbs'][] = ['label' => 'Панель администратора', 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="categories-index">
-
+<div class="product-index">
     <?=  Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]);?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-
     <p>
-        <?= Html::a('Создать категорию', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать товар', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-
 
     <?php if (Yii::$app->session->hasFlash('error')): ?>
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -35,28 +33,42 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     <?php endif;?>
 
-    <?php \yii\widgets\Pjax::begin()?>
+    <?php Pjax::begin();?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'id',
             'name',
             [
-                'attribute' => 'parent',
-                'value' => function($data){
-                    return $data->category->name ? $data->category->name : 'Нет родительской категории';
-                },
-                'format' => 'html',
+                    'attribute' => 'category_id',
+                    'value' => function($data){
+                    return $data->category->name;
+                    }
             ],
-            'keywords',
-            'description',
+            //'alias',
+            //'content:ntext',
+            [
+                'attribute' => 'price',
+                'value' => function($data){
+                    return $data->price/100;
+                }
+            ],
+            //'keywords_tag',
+            //'description:ntext',
+            //'img',
+            //'hit',
+            //'new',
+            //'sale',
+            //'description_tag:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <?php \yii\widgets\Pjax::end()?>
-
+    <?php Pjax::end();?>
 
 
 </div>

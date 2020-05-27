@@ -17,8 +17,8 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id',  'price', 'hit', 'new', 'sale'], 'integer'],
-            [['name','category_id', 'alias', 'content', 'keywords_tag', 'description', 'img', 'description_tag'], 'safe'],
+            [['id',  'price'], 'integer'],
+            [['name','category_id', 'alias', 'content', 'keywords_tag', 'description', 'img', 'description_tag', 'hit', 'new', 'sale'], 'safe'],
         ];
     }
 
@@ -54,6 +54,11 @@ class ProductSearch extends Product
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
+        }
+        if($this->hit=="да")
+            $this->hit = 1;
+        elseif ($this->hit=="нет"){
+            $this->hit = 0;
         }
         if ($this->price){
             $query->andFilterWhere([

@@ -68,13 +68,13 @@ class Product extends \yii\db\ActiveRecord
             'alias' => 'Alias',
             'content' => 'Контент',
             'price' => 'Цена',
-            'keywords_tag' => 'Keywords Tag',
-            'description_tag' => 'Description Tag',
+            'keywords_tag' => 'Ключевые слова',
+            'description_tag' => 'Мета-описание',
             'description' => 'Описание',
             'img' => 'Изображение',
             'hit' => 'Хит',
-            'new' => 'Новый',
-            'sale' => 'Скидка',
+            'new' => 'Новинка',
+            'sale' => 'Распродажа',
         ];
     }
 

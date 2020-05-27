@@ -17,8 +17,8 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id',  'price'], 'integer'],
-            [['name','category_id', 'alias', 'content', 'keywords_tag', 'description', 'img', 'description_tag', 'hit', 'new', 'sale'], 'safe'],
+            [['id',  'price', 'hit', 'new', 'sale'], 'integer'],
+            [['name','category_id', 'alias', 'content', 'keywords_tag', 'description', 'img', 'description_tag'], 'safe'],
         ];
     }
 
@@ -55,11 +55,6 @@ class ProductSearch extends Product
             // $query->where('0=1');
             return $dataProvider;
         }
-        if($this->hit=="да")
-            $this->hit = 1;
-        elseif ($this->hit=="нет"){
-            $this->hit = 0;
-        }
         if ($this->price){
             $query->andFilterWhere([
                 'id' => $this->id,
@@ -78,7 +73,6 @@ class ProductSearch extends Product
                 'sale' => $this->sale,
             ]);
         }
-
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'alias', $this->alias])

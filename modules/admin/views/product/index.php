@@ -57,33 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->price/100;
                 }
             ],
-            [
-                'attribute' => 'hit',
-                'value' => function($data){
-                    return !$data->hit ?
-                    '<span class="text-danger">Нет</span>' :
-                    '<span class="text-success">Да</span>';}
-                ,
-                'format' => 'html',
-            ],
-            [
-                'attribute' => 'new',
-                'value' => function($data){
-                    return !$data->hit ?
-                        '<span class="text-danger">Нет</span>' :
-                        '<span class="text-success">Да</span>';}
-                ,
-                'format' => 'html',
-            ],
-            [
-                'attribute' => 'sale',
-                'value' => function($data){
-                    return !$data->hit ?
-                        '<span class="text-danger">Нет</span>' :
-                        '<span class="text-success">Да</span>';}
-                ,
-                'format' => 'html',
-            ],
+
             //'keywords_tag',
             //'description:ntext',
             //'img',

@@ -28,9 +28,22 @@ class Product extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public $image;
+    public $gallery;
+
     public static function tableName()
     {
         return 'product';
+    }
+
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
     }
 
     public function beforeSave($insert)
@@ -53,6 +66,8 @@ class Product extends \yii\db\ActiveRecord
             [['alias'], 'string', 'max' => 150],
             [['keywords_tag', 'img'], 'string', 'max' => 200],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['image'],'file', 'extensions' => 'jpg, png'],
+            //[['gallery'],'file', 'extensions' => 'jpg, png', 'maxFiles' => 4],
         ];
     }
 
@@ -71,7 +86,7 @@ class Product extends \yii\db\ActiveRecord
             'keywords_tag' => 'Ключевые слова',
             'description_tag' => 'Мета-описание',
             'description' => 'Описание',
-            'img' => 'Изображение',
+            'image' => 'Изображение',
             'hit' => 'Хит',
             'new' => 'Новинка',
             'sale' => 'Распродажа',

@@ -146,7 +146,8 @@ use yii\web\View;
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
                                                     <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
-                                                        <?= Html::img('@web/images/product/big-img/' . $product->img, ['alt' => $product->name, 'title' => $product->name]) ?>
+                                                        <?php $image = $product->getImage();
+                                                        echo Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
                                                     </a>
                                                 </div>
                                                 <div class="product__hover__info">
@@ -186,7 +187,8 @@ use yii\web\View;
                                         <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
                                             <div class="list__thumb">
                                                 <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
-                                                    <?= Html::img('@web/images/product/big-img/' . $product->img, ['alt' => $product->name, 'title' => $product->name]) ?>
+                                                    <?php $image = $product->getImage();
+                                                    echo Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
                                                 </a>
                                             </div>
                                         </div>

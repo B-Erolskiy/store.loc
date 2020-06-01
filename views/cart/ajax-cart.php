@@ -39,7 +39,7 @@ use yii\widgets\ActiveForm;
                         <?php foreach ($session['cart'] as $id => $item):?>
                             <tr>
                                 <td class="product-thumbnail"><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $item['id']]); ?>">
-                                        <?= Html::img('@web/images/product/big-img/' . $item['img'], ['alt' => $item['name'], 'title' => $item['name']]) ?>
+                                        <?= Html::img($item['image'], ['alt' => $item['name'], 'title' => $item['name']]) ?>
                                     </a>
                                 </td>
                                 <td class="product-name"><a href="#"><?=$item['name']?></a></td>

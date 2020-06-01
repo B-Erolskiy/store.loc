@@ -31,9 +31,12 @@ use yii\helpers\Html;
             <div class="row">
                 <div class="col-md-7 col-lg-7 col-sm-5 col-xs-12">
                     <div class="product__details__container product-details-5">
+                        <?php $gallery = $product->getImages();
+                        foreach ($gallery as $image):?>
                         <div class="scroll-single-product mb--30">
-                            <?= Html::img('@web/images/product/big-img/' . $product->img, ['alt' => $product->name, 'title' => $product->name]) ?>
+                            <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
                         </div>
+                        <?php endforeach;?>
                     </div>
                 </div>
                 <div class="sidebar-active col-md-5 col-lg-5 col-sm-7 col-xs-12 xmt-30">
@@ -271,7 +274,8 @@ use yii\helpers\Html;
                                     <div class="product__inner">
                                         <div class="pro__thumb">
                                             <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $hit->id]); ?>">
-                                                <?= Html::img('@web/images/product/big-img/' . $hit->img, ['alt' => $hit->name, 'title' => $hit->name]) ?>
+                                                <?php $image=$hit->getImage();
+                                                echo Html::img($image->getUrl(), ['alt' => $hit->name, 'title' => $hit->name]) ?>
                                             </a>
                                         </div>
                                         <div class="product__hover__info">

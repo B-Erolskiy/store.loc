@@ -15,4 +15,12 @@ class Category extends ActiveRecord
     public function getProducts(){
         return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
 }

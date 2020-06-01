@@ -12,7 +12,7 @@ use mihaildev\elfinder\ElFinder;
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/from-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -53,6 +53,8 @@ use mihaildev\elfinder\ElFinder;
     <?= $form->field($model, 'description_tag')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'image')->fileInput() ?>
+
+    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <?= $form->field($model, 'hit')->dropDownList([ '0'=>'Нет', '1' =>'Да' ]) ?>
 

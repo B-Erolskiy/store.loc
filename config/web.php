@@ -30,7 +30,6 @@ $config = [
             'imagesCachePath' => 'uploads/cache', //path to resized copies
             'graphicsLibrary' => 'GD', //but really its better to use 'Imagick'
             'placeHolderPath' => '@webroot/uploads/no-image.jpg',
-            'imageCompressionQuality' => 100,
         ],
     ],
     'aliases' => [

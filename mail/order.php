@@ -1951,21 +1951,7 @@ product__style--7
   19. Our Shop Sidebar
 --------------------------------*/
 
-        .section-title-4 {
-            font-size: 18px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-        .htc__shop__cat {
-            border-bottom: 1px solid #b7b7b7;
-            margin-bottom: 57px;
-            padding-bottom: 32px;
-        }
-        .htc-grid-range {
-            border-bottom: 1px solid #b7b7b7;
-            margin-bottom: 60px;
-            padding-bottom: 40px;
-        }
+
         .sidebar__list li {
             color: #575757;
             font-size: 14px;
@@ -1994,13 +1980,6 @@ product__style--7
         .sidebar__list li.orange i {
             color: #ffba00;
         }
-        .htc__tags {
-            display: flex;
-            flex-flow: row wrap;
-            font-weight: 300;
-            margin-left: -13px;
-            margin-right: -13px;
-        }
         .htc__tags li a {
             color: #575757;
             font-size: 14px;
@@ -2014,38 +1993,7 @@ product__style--7
             margin-bottom: 10px;
             padding: 0 13px;
         }
-        .ui-slider-horizontal {
-            height: 5px;
-            margin-top: 20px;
-        }
-        .ui-widget-header {
-            background: #b7b7b7 none repeat scroll 0 0;
-            border: 1px solid #b7b7b7;
-            color: #b7b7b7;
-        }
-        .ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all {
-            background: #ddd none repeat scroll 0 0;
-            border: 0 none;
-            border-radius: 0;
-            height: 3px;
-        }
-        .ui-slider-range.ui-widget-header.ui-corner-all {
-            background: #b7b7b7 none repeat scroll 0 0;
-        }
-        .ui-slider-handle.ui-state-default.ui-corner-all {
-            background: #fff none repeat scroll 0 0;
-            border: 2px solid #b7b7b7;
-            border-radius: 100%;
-            height: 13px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 13px;
-        }
-        .price__output--wrap {
-            align-items: center;
-            display: flex;
-            justify-content: space-between;
-        }
+
         .price--output input {
             border: medium none;
         }
@@ -2064,33 +2012,11 @@ product__style--7
             padding-left: 10px;
             width: 70%;
         }
-        .slider__range--output {
-            margin-top: 18px;
-        }
+
         /*--------------------------
     Shop Right SideBar
 ----------------------------*/
 
-        .producy__view__container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .view__mode {
-            display: flex;
-            justify-content: flex-end;
-        }
-        .product__list__option {
-            display: flex;
-        }
-        select.select-color {
-            border: 0 none;
-            color: #606060;
-            font-size: 14px;
-        }
-        .shp__pro__show {
-            align-items: center;
-            display: flex;
-        }
         .shp__pro__show span {
             color: #606060;
             font-size: 14px;
@@ -2884,7 +2810,7 @@ product__style--7
                         <div class="pro__details">
                             <h3>Здравствуйте, <?=$order->name?></h3>
                             <h4 style="color: #0b0b0b">Ваш номер заказа - <?= $order->id?></h4>
-                            <p>Товары уже готовятся к отправке — мы пришлем уведомление, как только покупки можно будет забрать. Если появятся вопросы, вы сможете найти ответ в разделе помощи покупателям.</p>
+                            <p style="color: #0b0b0b; font-size: 18px">Товары уже готовятся к отправке — мы пришлем уведомление, как только покупки можно будет забрать. Если появятся вопросы, вы сможете найти ответ в разделе помощи покупателям.</p>
                         </div>
                         <div style="color: #0b0b0b; font-size: 18px">
                             <p>Дата оформления заказа: <?=$order->created_at?></p>

@@ -3,6 +3,9 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use rico\yii2images;
+
 
 /**
  * This is the model class for table "product".
@@ -67,7 +70,7 @@ class Product extends \yii\db\ActiveRecord
             [['keywords_tag', 'img'], 'string', 'max' => 200],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['image'],'file', 'extensions' => 'jpg, png'],
-            //[['gallery'],'file', 'extensions' => 'jpg, png', 'maxFiles' => 4],
+            [['gallery'],'file', 'extensions' => 'jpg, png', 'maxFiles' => 4],
         ];
     }
 
@@ -87,6 +90,7 @@ class Product extends \yii\db\ActiveRecord
             'description_tag' => 'Мета-описание',
             'description' => 'Описание',
             'image' => 'Изображение',
+            'gallery' => 'Галерея',
             'hit' => 'Хит',
             'new' => 'Новинка',
             'sale' => 'Распродажа',
@@ -100,4 +104,34 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Categories::className(), ['id' => 'category_id']);
     }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $path = 'uploads/store/' . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($path);
+            $this->attachImage($path, true);
+            @unlink($path);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function uploadGallery()
+    {
+        if ($this->validate()) {
+            foreach ($this->gallery as $file){
+                $path = 'uploads/store/' . $file->baseName . '.' . $file->extension;
+                $file->saveAs($path);
+                $this->attachImage($path);
+                @unlink($path);
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

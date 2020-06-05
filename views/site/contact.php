@@ -8,61 +8,29 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Магазины компании';
 ?>
-<div class="site-contact">
+<div class="site-contact container">
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
-
-        <div class="alert alert-success">
-            Thank you for contacting us. We will respond to you as soon as possible.
+    <div class="row">
+        <div class="col-md-4 col-sm-5 col-xs-12">
+            <ul class="nav flex-column" role="navigation">
+                <?php $i=0;
+            foreach ($offices as $office):?>
+                <li class="nav-item <?php if(!$i) echo "active"?>">
+                <a href="#<?=$office->id?>" class="nav-link active" data-toggle="tab" role="tab" aria-controls="<?=$office->id?>"><?=$office->addess?></a>
+                </li>
+          <?php $i++; endforeach;?>
+            </ul>
         </div>
-
-        <p>
-            Note that if you turn on the Yii debugger, you should be able
-            to view the mail message on the mail panel of the debugger.
-            <?php if (Yii::$app->mailer->useFileTransport): ?>
-                Because the application is in development mode, the email is not sent but saved as
-                a file under <code><?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
-                Please configure the <code>useFileTransport</code> property of the <code>mail</code>
-                application component to be false to enable email sending.
-            <?php endif; ?>
-        </p>
-
-    <?php else: ?>
-
-        <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us.
-            Thank you.
-        </p>
-
-        <div class="row">
-            <div class="col-lg-5">
-
-                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
-
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
-
-                    <?= $form->field($model, 'email') ?>
-
-                    <?= $form->field($model, 'subject') ?>
-
-                    <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-
-                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    ]) ?>
-
-                    <div class="form-group">
-                        <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-                    </div>
-
-                <?php ActiveForm::end(); ?>
-
-            </div>
+        <div class="tab-content col-md-8 col-sm-7 col-xs-12">
+        <?php $i=0;
+        foreach ($offices as $office):?>
+            <div class="tab-pane fade show <?php if(!$i) echo "active in"?>" id="<?=$office->id?>" role="tabpanel">
+                <span class="ti-pin"></span><h3><?= $office->addess?> </h3>
+            <span class="ti-time"></span><p><?= $office->worktime?> .</p>
         </div>
-
-    <?php endif; ?>
+        <?php $i++; endforeach;?>
+        </div>
+    </div>
 </div>

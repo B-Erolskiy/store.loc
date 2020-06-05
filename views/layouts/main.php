@@ -71,7 +71,7 @@ ltAppAsset::register($this);
                                         <li><a href="login-register.html">login & register</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Контакты</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to(['/offices'])?>">Магазины</a></li>
                             </ul>
                         </nav>
                         <div class="mobile-menu clearfix visible-xs visible-sm">
@@ -80,7 +80,7 @@ ltAppAsset::register($this);
                                     <li><a href="<?=\yii\helpers\Url::home(); ?>">Home</a></li>
                                     <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
                                     <li><a href="blog.html">Акции</a></li>
-                                    <li><a href="contact.html">Контакты</a></li>
+                                    <li><a href="contact.html">Магазины</a></li>
                                 </ul>
                             </nav>
                         </div>

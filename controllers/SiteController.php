@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Offices;
 use app\models\Product;
 use Yii;
 use yii\filters\AccessControl;
@@ -69,6 +70,13 @@ class SiteController extends AppController
         $news = Product::find()->where(['new' => 1])->limit(6)->all();
 
         return $this->render('index', compact('hits', 'news'));
+    }
+
+    public function actionOffices()
+    {
+        $this->setMeta('TMART | Магазины');
+        $offices = Offices::find()->all();
+        return $this->render('contact', compact('offices'));
     }
 
     /**

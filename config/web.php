@@ -99,6 +99,7 @@ $config = [
                 'product/<id:\d+>' => 'product/view',
                 'search' => 'category/search',
                 'cart' => 'cart/view',
+                'offices' => 'site/offices',
             ],
         ],
 

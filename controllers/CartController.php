@@ -40,7 +40,10 @@ class CartController extends AppController
         $this->setMeta('Корзина');
 
         $order = new Order();
-        $this->orderLoad($order, $session, $fromDelete);
+        if ($this->orderLoad($order, $session, $fromDelete))
+        {
+            Yii::$app->session->setFlash('success','Ваш заказ оформлен, мы свяжемся с вами в ближайшее время');
+            return $this->render('view', compact('order','session'));        }
         if($isAjax){
             $this->layout = false;
             return $this->render('ajax-cart', compact('order','session'));
@@ -62,7 +65,12 @@ class CartController extends AppController
         $session->open();
         $order = new Order();
         $this->setMeta('Корзина');
-        $this->orderLoad($order, $session);
+        if ($this->orderLoad($order, $session))
+        {
+            Yii::$app->session->setFlash('success','Ваш заказ оформлен, мы свяжемся с вами в ближайшее время');
+            return $this->render('view', compact('order','session'));
+        }
+
         return $this->render('view', compact('order','session'));
     }
 
@@ -103,30 +111,27 @@ class CartController extends AppController
             if ($order->save())
             {
                 $this->saveOrderItems($session['cart'], $order->id);
-                /*foreach ($session['cart'] as $id => $item) {
-                    $imgContainer[$item['id']] = Yii::getAlias("@webroot/images/product/big-img/" . $item['img']);
-                    //$imgContainer[$item['id']] = Swift_Image::fromPath('http://store.loc/images/product/big-img/samsung-galaxy-a50.jpg');
-                }*/
                 $message = Yii::$app->mailer->compose('order',
                     ['session' => $session,
                         'order' => $order,
-                        //'imgContainer' => $imgContainer
                     ])
                     ->setFrom(['bogdan8080@yandex.ru' => 'STORE.LOC'])
                     ->setTo($order->email)
-                    ->setSubject('Заказ с сайта store.loc')
+                    ->setSubject('Заказ с сайта store.loc - ' . $order->id)
                     ->send();
 
-                Yii::$app->session->setFlash('success','Ваш заказ оформлен, мы свяжемся с вами в ближайшее время');
 
                 $this->cartClear();
-                if($fromDelete)
+                return true;
+                /*if($fromDelete)
                     $this->actionView();
                 else
-                    return $this->refresh();
+                    return true;
+                    return $this->refresh();*/
             }
             else{
-                Yii::$app->session->setFlash('error','Ошибка в оформлении заказа, обратитесь к администратору');
+                return false;
+                //Yii::$app->session->setFlash('error','Ошибка в оформлении заказа, обратитесь к администратору');
             }
         }
     }

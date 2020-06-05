@@ -1246,7 +1246,7 @@ h3.widget-title-modal {
 }
 .feature__thumb a img {
     width: 100%;
-}
+}addess
 .feature {
     position: relative;
 }
@@ -4217,4 +4217,12 @@ a.shipping-calculator-button:hover {
 
 .alert-success, .categories-form, .order-form, .btn-success, .btn-primary, .btn-danger{
     margin: 20px 0;
+}
+
+.tab-content>.tab-pane{
+    display: none !important;
+}
+
+.tab-content> .active{
+    display: block !important;
 }

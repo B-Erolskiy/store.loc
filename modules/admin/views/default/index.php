@@ -26,6 +26,17 @@
                             <p>Список всех заказов с сайта.</p>
                         </div>
                     </div>
+                    <div class="choose__us">
+                        <div class="choose__icon">
+                            <span class="ti-pin"></span>
+                        </div>
+                        <div class="choose__details">
+                            <a href="<?= \yii\helpers\Url::to(['/admin/offices'])?>">
+                                <h4>Магазины</h4>
+                            </a>
+                            <p>Список всех магазинов.</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="single__chooose col-md-6">
                     <div class="choose__us">
@@ -50,6 +61,7 @@
                             <p>Список всех товаров сайта.</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "82a92c1a9f01094548ae0c6e6c31bf00",
+    "content-hash": "a2fa7c4e6e0de4e89b98fabfbb2a934c",
     "packages": [
         {
             "name": "abeautifulsite/simpleimage",
@@ -60,7 +60,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -82,7 +82,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -540,6 +540,49 @@
                 "yii2"
             ],
             "time": "2019-12-16T09:37:15+00:00"
+        },
+        {
+            "name": "mirocow/yii2-yandex-maps",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mirocow/yii2-yandex-maps.git",
+                "reference": "e09b68e4b0590d6b1d0c490561c4651a4b481ac5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mirocow/yii2-yandex-maps/zipball/e09b68e4b0590d6b1d0c490561c4651a4b481ac5",
+                "reference": "e09b68e4b0590d6b1d0c490561c4651a4b481ac5",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-0": {
+                    "mirocow\\yandexmaps\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mirocow",
+                    "email": "mr.mirocow@gmail.com",
+                    "homepage": "http://www.mirocow.com"
+                }
+            ],
+            "description": "Yii 2 yandex map module",
+            "keywords": [
+                "map",
+                "yandex",
+                "yii",
+                "yii2"
+            ],
+            "time": "2020-02-10T00:48:09+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -21,7 +21,8 @@
         "yiisoft/yii2-jui": "^2.0",
         "kartik-v/yii2-widget-datetimepicker": "*",
         "jodit/yii2-jodit": "dev-master",
-        "costa-rico/yii2-images": "*"
+        "costa-rico/yii2-images": "*",
+        "mirocow/yii2-yandex-maps": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

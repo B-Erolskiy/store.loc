@@ -4226,3 +4226,12 @@ a.shipping-calculator-button:hover {
 .tab-content> .active{
     display: block !important;
 }
+
+.nav>.active{
+    color: #ff4136 !important;
+    background-color: #f6f6f6;
+}
+.nav>.active a{
+    color: #ff4136;
+    background-color: #f6f6f6;
+}

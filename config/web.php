@@ -48,6 +48,9 @@ $config = [
                 ],
             ],
         ],
+        'yandexMapsApi' => [
+            'class' => 'mirocow\yandexmaps\Api',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'oJmgj2ghNB9ZPgm1NgtbaQSYy4HevJz3',

@@ -9,7 +9,7 @@ use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
 $this->title = 'Магазины компании';
-$map = new \mirocow\yandexmaps\Map('yandex_map', [
+/*$map = new \mirocow\yandexmaps\Map('yandex_map', [
     'center' => [55.684758, 37.738521],
     'zoom' => 13,
     // Enable zoom with mouse scroll
@@ -25,20 +25,18 @@ $map = new \mirocow\yandexmaps\Map('yandex_map', [
             //'new ymaps.control.GeolocationControl({options: {size: "small"}})',
             'search' => 'new ymaps.control.SearchControl({options: {size: "small"}})',
             //'new ymaps.control.FullscreenControl({options: {size: "small"}})',
+            //searchControlProvider: 'yandex#search'
             //'new ymaps.control.RouteEditor({options: {size: "small"}})',
-        ],
-        'behaviors' => [
-            'scrollZoom' => 'disable',
-        ],
+        ],/*
         'objects' => [
             <<<JS
                 search.events.add("resultselect", function (result){
-                
+
                     // Remove old coordinates
                     \$Maps['yandex_map'].geoObjects.each(function(obj){
                         \$Maps['yandex_map'].geoObjects.remove(obj);
-                    });  
-                
+                    });
+
                     // Add selected coordinates
                     var index = result.get('index');
                     var searchControl = \$Maps['yandex_map'].controls.get(1);
@@ -48,7 +46,49 @@ $map = new \mirocow\yandexmaps\Map('yandex_map', [
                         $('#coordinates').append('<input type="hidden" name="User[coordinates][]" value="'+coordinates[0]+'">');
                         $('#coordinates').append('<input type="hidden" name="User[coordinates][]" value="'+coordinates[1]+'">');
                     });
-                    
+
+                });
+JS
+
+        ],
+    ]
+);*/
+$map = new \mirocow\yandexmaps\Map('yandex_map', [
+    'center' => [55.684758, 37.738521],
+    'zoom' => 13,
+    // Enable zoom with mouse scroll
+    'behaviors' => array('default', 'scrollZoom'),
+    'type' => "yandex#map",
+    'controls' => [
+        'zoomControl', 'typeSelector',  'fullscreenControl', 'routeButtonControl',
+        'searchControl'
+    ],
+    'searchControlProvider' => 'yandex#search',
+],
+    [
+        'minZoom' => 1,
+        'maxZoom' => 18,
+        'objects' => [
+            <<<JS
+         var mySearchResults = new ymaps.GeoObjectCollection(null, {
+            hintContentLayout: ymaps.templateLayoutFactory.createClass('$[properties.name]')
+        });
+        console.log(mySearchResults);
+        \$Maps['yandex_map'].geoObjects.add(mySearchResults);
+         var searchControl = \$Maps['yandex_map'].controls.get('searchControl');
+
+            
+                console.log(\$Maps['yandex_map']);
+                searchControl.events.add("resultselect", function (result){
+                    var index = result.get('index');
+                    mySearchControl.getResult(index).then(function (res) {
+                       //console.log(res);
+                    });
+                    // Remove old coordinates
+                    \$Maps['yandex_map'].geoObjects.each(function(obj){
+                        console.log('2');
+                        \$Maps['yandex_map'].geoObjects.remove(obj);
+                    });
                 });
 JS
 
@@ -104,7 +144,6 @@ JS
 
         ]
     );
-
     $map->addObject($pm);?>
 
     <?= \mirocow\yandexmaps\Canvas::widget([

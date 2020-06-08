@@ -9,89 +9,71 @@ use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
 $this->title = 'Магазины компании';
-/*$map = new \mirocow\yandexmaps\Map('yandex_map', [
-    'center' => [55.684758, 37.738521],
-    'zoom' => 13,
-    // Enable zoom with mouse scroll
-    'behaviors' => array('default', 'scrollZoom'),
-    'type' => "yandex#map",
-], [
-        'minZoom' => 1,
-        'maxZoom' => 18,
-        'controls' => [
-            // v 2.1
-            'new ymaps.control.ZoomControl({options: {size: "small"}})',
-            //'new ymaps.control.TrafficControl({options: {size: "small"}})',
-            //'new ymaps.control.GeolocationControl({options: {size: "small"}})',
-            'search' => 'new ymaps.control.SearchControl({options: {size: "small"}})',
-            //'new ymaps.control.FullscreenControl({options: {size: "small"}})',
-            //searchControlProvider: 'yandex#search'
-            //'new ymaps.control.RouteEditor({options: {size: "small"}})',
-        ],/*
-        'objects' => [
-            <<<JS
-                search.events.add("resultselect", function (result){
 
-                    // Remove old coordinates
-                    \$Maps['yandex_map'].geoObjects.each(function(obj){
-                        \$Maps['yandex_map'].geoObjects.remove(obj);
-                    });
+foreach ($offices as $office){
+    $codeJS .= "var menuItem = " . "\$(" . "'<li class=\"nav-item\"><a id=$office->id class=\"nav-link active\" href=\"#\"> " . "\"$office->addess\"" . "</a></li>'),\n" .
+    "placemark$office->id = new ymaps.Placemark([$office->coord1, $office->coord2], 
+    { balloonContentHeader: \"$office->addess\", balloonContentBody: \"$office->worktime<br><a href='tel:$office->phone' class='btn btn-danger center-block'>Позвонить</a>\",balloonContentFooter: 'Информация предоставлена:<br/>OOO \"TMART\"', options:{maxWidth: '350px'}},
+    {preset: 'islands#redCircleDotIcon'});\n" .
+    "menuItem.appendTo('#menu-item')\n" .
+    ".find('a#$office->id')
+            .bind('click', function () {
+                if (!placemark$office->id.balloon.isOpen()) {
+                    placemark$office->id.balloon.open();
+                } else {
+                    placemark$office->id.balloon.close();
+                }
+                return false;
+            });".
+    "\$Maps['yandex_map'].geoObjects.add(placemark$office->id);";
+}
 
-                    // Add selected coordinates
-                    var index = result.get('index');
-                    var searchControl = \$Maps['yandex_map'].controls.get(1);
-                    searchControl.getResult(index).then(function(res) {
-                        var coordinates = res.geometry.getCoordinates();
-                        $('#coordinates').html('');
-                        $('#coordinates').append('<input type="hidden" name="User[coordinates][]" value="'+coordinates[0]+'">');
-                        $('#coordinates').append('<input type="hidden" name="User[coordinates][]" value="'+coordinates[1]+'">');
-                    });
+$officesCount = count($offices);
 
-                });
-JS
-
-        ],
-    ]
-);*/
 $map = new \mirocow\yandexmaps\Map('yandex_map', [
-    'center' => [55.684758, 37.738521],
-    'zoom' => 13,
-    // Enable zoom with mouse scroll
+    'center' => [60, 30.448927],
+    'zoom' => 9,
     'behaviors' => array('default', 'scrollZoom'),
     'type' => "yandex#map",
-    'controls' => [
-        'zoomControl', 'typeSelector',  'fullscreenControl', 'routeButtonControl',
-        'searchControl'
-    ],
-    'searchControlProvider' => 'yandex#search',
+    'controls' => []
 ],
     [
+        'controls' => [
+            // v 2.1
+            'new ymaps.control.ZoomControl()',
+            'new ymaps.control.TrafficControl()',
+            'new ymaps.control.GeolocationControl()',
+            'search' => 'new ymaps.control.SearchControl({options: {provider: "yandex#search"}})',
+            'new ymaps.control.FullscreenControl()',
+            'new ymaps.control.RulerControl()',
+            //'new ymaps.control.RouteEditor({options: {size: "small"}})',
+        ],
         'minZoom' => 1,
         'maxZoom' => 18,
         'objects' => [
-            <<<JS
-         var mySearchResults = new ymaps.GeoObjectCollection(null, {
-            hintContentLayout: ymaps.templateLayoutFactory.createClass('$[properties.name]')
-        });
-        console.log(mySearchResults);
-        \$Maps['yandex_map'].geoObjects.add(mySearchResults);
-         var searchControl = \$Maps['yandex_map'].controls.get('searchControl');
-
+        <<<JS
+         // Контейнер для меню.
+        
+        $codeJS;
+        \$Maps['yandex_map'].setBounds(\$Maps['yandex_map'].geoObjects.getBounds());
+        \$Maps['yandex_map'].geoObjects.options.set('balloonMaxWidth', 200);
+        search.events.add("resultselect", function (result){
+            // Remove old coordinates
+            /*\$Maps['yandex_map'].geoObjects.each(function(obj){
+                \$Maps['yandex_map'].geoObjects.remove(obj);
+            });*/  
+            // Add selected coordinates
+            var index = result.get('index');
+            var searchControl = \$Maps['yandex_map'].controls.get(3);
+            searchControl.getResult(index).then(function(res) {
+                var coordinates = res.geometry.getCoordinates();
+                $('#coordinates').html('');
+                $('#coordinates').append('<input name="User[coordinates][]" value="'+coordinates[0]+'">');
+                $('#coordinates').append('<input name="User[coordinates][]" value="'+coordinates[1]+'">');
+            });
             
-                console.log(\$Maps['yandex_map']);
-                searchControl.events.add("resultselect", function (result){
-                    var index = result.get('index');
-                    mySearchControl.getResult(index).then(function (res) {
-                       //console.log(res);
-                    });
-                    // Remove old coordinates
-                    \$Maps['yandex_map'].geoObjects.each(function(obj){
-                        console.log('2');
-                        \$Maps['yandex_map'].geoObjects.remove(obj);
-                    });
-                });
+        });
 JS
-
         ],
     ]
 );
@@ -100,26 +82,19 @@ JS
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-12">
-            <ul class="nav flex-column" role="navigation">
-                <?php $i=0;
-            foreach ($offices as $office):?>
-                <li class="nav-item <?php if(!$i) echo "active"?>">
-                <a href="#<?=$office->id?>" class="nav-link active" data-toggle="tab" role="tab" aria-controls="<?=$office->id?>"><?=$office->addess?></a>
-                </li>
-          <?php $i++; endforeach;?>
-            </ul>
+            <ul class="nav flex-column"  id="menu-item" role="navigation"></ul>
         </div>
         <div class="tab-content col-md-8 col-sm-7 col-xs-12">
-        <?php $i=0;
-        foreach ($offices as $office):?>
-            <div class="tab-pane fade show <?php if(!$i) echo "active in"?>" id="<?=$office->id?>" role="tabpanel">
-                <span class="ti-pin"></span><h3><?= $office->addess?> </h3>
-            <span class="ti-time"></span><p><?= $office->worktime?> .</p>
-
+            <?= \mirocow\yandexmaps\Canvas::widget([
+        'htmlOptions' => [
+            'style' => 'height: 400px;',
+        ],
+        'map' => $map,
+    ]);?>
         </div>
-        <?php $i++; endforeach;?>
-        </div>
+        <div id="coordinates"> </div>
     </div>
+</div>
 <?php
 
     /*$geoObj = new \mirocow\yandexmaps\GeoObject([
@@ -129,7 +104,7 @@ JS
     ]);*/
 
     //добавление объекта на карту
-    $pm = new \mirocow\yandexmaps\objects\Placemark([55.684758, 37.738521],
+    /*$pm = new \mirocow\yandexmaps\objects\Placemark([55.684758, 37.738521],
         [
             'balloonContentHeader' => 'hello world!',
             'balloonContentBody' => 'hello world!',
@@ -144,17 +119,10 @@ JS
 
         ]
     );
-    $map->addObject($pm);?>
+    $map->addObject($pm);?>*/
 
-    <?= \mirocow\yandexmaps\Canvas::widget([
-        'htmlOptions' => [
-            'style' => 'height: 400px;',
-        ],
-        'map' => $map,
-    ]);
+
 
     ?>
-
     <div id="coordinates"></div>
-
 </div>

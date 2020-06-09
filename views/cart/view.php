@@ -3,6 +3,88 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
+
+$map = new \mirocow\yandexmaps\Map('yandex_map', [
+    'center' => [60, 30.448927],
+    'zoom' => 9,
+    'behaviors' => array('default', 'scrollZoom'),
+    'type' => "yandex#map",
+    'controls' => []
+],
+    [
+        'controls' => [
+            // v 2.1
+            'new ymaps.control.ZoomControl()',
+            'new ymaps.control.TrafficControl()',
+            'new ymaps.control.GeolocationControl()',
+            'search' => 'new ymaps.control.SearchControl({options: {provider: "yandex#search"}})',
+            'new ymaps.control.FullscreenControl()',
+            'new ymaps.control.RulerControl()',
+            //'new ymaps.control.RouteEditor({options: {size: "small"}})',
+        ],
+        'minZoom' => 1,
+        'maxZoom' => 18,
+        'objects' => [
+            <<<JS
+         // Контейнер для меню.
+          \$Maps['yandex_map'].geoObjects.options.set('balloonMaxWidth', 200);
+        
+        // Слушаем клик на карте.
+            var myPlacemark;
+            \$Maps['yandex_map'].events.add('click', function (e) {
+                var coords = e.get('coords');
+                // Если метка уже создана – просто передвигаем ее.
+                if (myPlacemark) {
+                    myPlacemark.geometry.setCoordinates(coords);
+                }
+                // Если нет – создаем.
+                else {
+                    myPlacemark = createPlacemark(coords);
+                    \$Maps['yandex_map'].geoObjects.add(myPlacemark);
+                    // Слушаем событие окончания перетаскивания на метке.
+                    myPlacemark.events.add('dragend', function () {
+                        getAddress(myPlacemark.geometry.getCoordinates());
+                    });
+                }
+                getAddress(coords);
+            });
+        
+            // Создание метки.
+            function createPlacemark(coords) {
+                return new ymaps.Placemark(coords, {
+                    iconCaption: 'поиск...'
+                }, {
+                    preset: 'islands#redDotIconWithCaption',
+                    draggable: true
+                });
+            }
+        
+            // Определяем адрес по координатам (обратное геокодирование).
+            function getAddress(coords) {
+                myPlacemark.properties.set('iconCaption', 'поиск...');
+                ymaps.geocode(coords).then(function (res) {
+                    var firstGeoObject = res.geoObjects.get(0);
+                    document.getElementById('addess').value = firstGeoObject.getAddressLine();
+                    
+                    myPlacemark.properties
+                        .set({
+                            // Формируем строку с данными об объекте.
+                            iconCaption: [
+                                // Название населенного пункта или вышестоящее административно-территориальное образование.
+                                firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
+                                // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
+                                firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
+                            ].filter(Boolean).join(', '),
+                            // В качестве контента балуна задаем строку с адресом объекта.
+                            balloonContent: firstGeoObject.getAddressLine()
+                        });
+                });
+            }
+JS
+        ],
+    ]
+);
+
 ?>
 <div class="wrapper fixed__footer">
 
@@ -62,7 +144,8 @@ use yii\widgets\ActiveForm;
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php if(!empty($session['cart'])): ?>
+                                <?php
+                                if(!empty($session['cart'])): ?>
                                     <?php foreach ($session['cart'] as $id => $item):?>
                                         <tr>
                                             <td class="product-thumbnail"><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $item['id']]); ?>">
@@ -122,8 +205,12 @@ use yii\widgets\ActiveForm;
                                 </div>
                             </div>
                         </div>
+                </div>
+            </div>
+        </div>
+    </div>
                     <?php if (!empty($session['cart'])) :?>
-                        <div class="row">
+                        <div id="orderForm" class="container">
                             <div class="col-md-12 col-sm-12 col-xs-12" id="form">
                                 <h2 class="bradcaump-title">Форма оформления заказа</h2>
                                 <br>
@@ -137,7 +224,13 @@ use yii\widgets\ActiveForm;
                                 <?= $form->field($order, 'name')?>
                                 <?= $form->field($order, 'email')?>
                                 <?= $form->field($order, 'phone')?>
-                                <?= $form->field($order, 'address')?>
+                                <?= $form->field($order, 'address')->textInput(['maxlength' => true, 'id' => 'addess'])?>
+                                <?= \mirocow\yandexmaps\Canvas::widget([
+                                    'htmlOptions' => [
+                                        'style' => 'height: 500px;',
+                                    ],
+                                    'map' => $map,
+                                ]);?>
                                 <?= Html::submitButton('Заказать', ['class' => 'btn btn-success'])?>
                                 <?php ActiveForm::end()?>
 

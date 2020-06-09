@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 ?>
 <div class="container">
     <div class="row">
@@ -35,7 +36,8 @@ use yii\widgets\ActiveForm;
                     </tr>
                     </thead>
                     <tbody>
-                    <?php if(!empty($session['cart'])): ?>
+                    <?php
+                    if(!empty($session['cart'])): ?>
                         <?php foreach ($session['cart'] as $id => $item):?>
                             <tr>
                                 <td class="product-thumbnail"><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $item['id']]); ?>">
@@ -47,12 +49,14 @@ use yii\widgets\ActiveForm;
                                 <td class="product-price"><span class="amount"><?=$item['qty']?></span></td>
                                 <td class="product-subtotal"><?=$item['price']/100*$item['qty']?></td>
                                 <td class="product-remove"><a href="<?= \yii\helpers\Url::to(['cart/delete','id'=> $item['id']])?>" data-id="<?=$item['id']?>" class="del-item">X</a></td>
+                                <input type="hidden" name="emptyCart" value="false"/>
                             </tr>
                         <?php endforeach; ?>
                     <?php else : ?>
                     <tr>
                         <td colspan="6">Корзина пуста</td>
-                        <?php endif;?>
+                        <input type="hidden" name="emptyCart" value="true"/>
+                        <?php $emptyCart = true; endif;?>
                     </tbody>
                 </table>
             </div>
@@ -95,28 +99,6 @@ use yii\widgets\ActiveForm;
                     </div>
                 </div>
             </div>
-            <?php if (!empty($session['cart'])) :?>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12" id="form">
-                        <h2 class="bradcaump-title">Форма оформления заказа</h2>
-                        <br>
-
-                        <?php $form = ActiveForm::begin([
-                            'class' => 'form',
-                            'encodeErrorSummary' => false,
-                            'errorSummaryCssClass' => 'help-block',
-                        ])?>
-                        <?= $form->errorSummary($order)?>
-                        <?= $form->field($order, 'name')?>
-                        <?= $form->field($order, 'email')?>
-                        <?= $form->field($order, 'phone')?>
-                        <?= $form->field($order, 'address')?>
-                        <?= Html::submitButton('Заказать', ['class' => 'btn btn-success'])?>
-                        <?php ActiveForm::end()?>
-
-                    </div>
-                </div>
-            <?php endif;?>
         </div>
     </div>
 </div>

@@ -30,7 +30,7 @@ class Offices extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['addess'], 'required'],
+            [['addess', 'coord1', 'coord2'], 'required'],
             [['addess', 'coord1', 'coord2', 'worktime', 'phone'], 'string', 'max' => 255],
         ];
     }

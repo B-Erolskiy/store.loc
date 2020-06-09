@@ -11,10 +11,10 @@ use yii\captcha\Captcha;
 $this->title = 'Магазины компании';
 
 foreach ($offices as $office){
-    $codeJS .= "var menuItem = " . "\$(" . "'<li class=\"nav-item\"><a id=$office->id class=\"nav-link active\" href=\"#\"> " . "\"$office->addess\"" . "</a></li>'),\n" .
+    $codeJS .= "var menuItem = " . "\$(" . "'<li class=\"nav-item\"><a id=$office->id class=\"nav-link active\" href=\"#\"> " . "$office->addess" . "</a></li>'),\n" .
     "placemark$office->id = new ymaps.Placemark([$office->coord1, $office->coord2], 
     { balloonContentHeader: \"$office->addess\", balloonContentBody: \"$office->worktime<br><a href='tel:$office->phone' class='btn btn-danger center-block'>Позвонить</a>\",balloonContentFooter: 'Информация предоставлена:<br/>OOO \"TMART\"', options:{maxWidth: '350px'}},
-    {preset: 'islands#redCircleDotIcon'});\n" .
+    {iconLayout: 'default#image',iconImageHref: 'images/map/map-marker-icon.png',iconImageSize: [35, 50],iconImageOffset: [-5, -38]});\n" .
     "menuItem.appendTo('#menu-item')\n" .
     ".find('a#$office->id')
             .bind('click', function () {
@@ -25,7 +25,7 @@ foreach ($offices as $office){
                 }
                 return false;
             });".
-    "\$Maps['yandex_map'].geoObjects.add(placemark$office->id);";
+    "\$Maps['yandex_map'].geoObjects.add(placemark$office->id); ";
 }
 
 $officesCount = count($offices);
@@ -52,10 +52,26 @@ $map = new \mirocow\yandexmaps\Map('yandex_map', [
         'maxZoom' => 18,
         'objects' => [
         <<<JS
-         // Контейнер для меню.
-        
+        //var collectionPlacemarks = new ymaps.GeoObjectCollection(null,{}); 
         $codeJS;
+        
         \$Maps['yandex_map'].setBounds(\$Maps['yandex_map'].geoObjects.getBounds());
+        
+         /* Контейнер для меню.
+         var clusterer = new \$Maps['yandex_map'].Clusterer({
+                     preset: 'islands#invertedVioletClusterIcons',
+                    groupByCoordinates: false,
+                    clusterDisableClickZoom: true,
+                    clusterHideIconOnBalloonOpen: false,
+                    geoObjectHideIconOnBalloonOpen: false
+         });
+         clusterer.options.set({
+        gridSize: 80,
+        clusterDisableClickZoom: true
+    });
+        clusterer.add(collectionPlacemarks);*/
+        
+       //  \$Maps['yandex_map'].geoObjects.add(clusterer);
         \$Maps['yandex_map'].geoObjects.options.set('balloonMaxWidth', 200);
         search.events.add("resultselect", function (result){
             // Remove old coordinates
@@ -78,21 +94,47 @@ JS
     ]
 );
 ?>
+<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url('../../web/images/bg/2.jpg') no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title"><?= Html::encode($this->title) ?></h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="<?=\yii\helpers\Url::home(); ?>">Главная</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">Магазины</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="site-contact container">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="ptb--30">
+        <h2>Поиск магазина</h2>
+        <p><?php if($officesCount == 1) $officesCountStr = "магазин";
+            elseif ($officesCount < 5) $officesCountStr = "магазина";
+            else $officesCountStr = "магазинов";
+            echo $officesCount . " " . $officesCountStr;?> по России</p>
+    </div>
     <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-12">
+            <p>Чтобы найти магазин на карте, нажмите на него в меню ниже:</p>
             <ul class="nav flex-column"  id="menu-item" role="navigation"></ul>
         </div>
         <div class="tab-content col-md-8 col-sm-7 col-xs-12">
             <?= \mirocow\yandexmaps\Canvas::widget([
         'htmlOptions' => [
-            'style' => 'height: 400px;',
+            'style' => 'height: 500px;',
         ],
         'map' => $map,
     ]);?>
         </div>
-        <div id="coordinates"> </div>
+
     </div>
 </div>
 <?php
@@ -119,10 +161,9 @@ JS
 
         ]
     );
-    $map->addObject($pm);?>*/
+    $map->addObject($pm);?>
+    <div id="coordinates"> </div>*/
 
 
 
     ?>
-    <div id="coordinates"></div>
-</div>

@@ -4227,11 +4227,22 @@ a.shipping-calculator-button:hover {
     display: block !important;
 }
 
+#menu-item{
+    overflow-y: auto;
+    height: 400px;
+}
 .nav>.active{
     color: #ff4136 !important;
     background-color: #f6f6f6;
 }
 .nav>.active a{
     color: #ff4136;
-    background-color: #f6f6f6;
+    background-color: #f8f8f8;
+}
+
+.nav>li:nth-child(2n) a{
+    background: #f6f6f6; /* Цвет фона */
+}
+.nav>li{
+    border-bottom: 1px #dddddd solid;
 }

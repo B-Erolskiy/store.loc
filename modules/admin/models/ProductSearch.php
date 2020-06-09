@@ -79,7 +79,6 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'keywords_tag', $this->keywords_tag])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'img', $this->img])
             ->andFilterWhere(['like', 'description_tag', $this->description_tag]);
 
         $query->joinWith(['category' => function ($q) { //поиск по связанной таблице categories

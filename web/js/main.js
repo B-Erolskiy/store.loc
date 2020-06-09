@@ -124,20 +124,19 @@
             type: 'GET',
             success: function (res) {
                 $('.cart-main-area').html(res);
-                console.log(111);
+                var emptyCart = $("input[name='emptyCart']").val();
+                if(emptyCart == "true"){
+                    $('#orderForm').css('display', 'none');
+                }
+                else {
+                    $('#orderForm').css('display', 'block');
+                }
             },
             error: function (res) {
                 console.log('Error' + res);
             }
         });
-        var emptyCart = $("input[name='emptyCart']").val();
-        console.log(emptyCart + "1");
-        if(emptyCart){
-            $('#orderForm').css('display', 'none');
-        }
-        else {
-            $('#orderForm').css('display', 'block');
-        }
+
     });
     /*-------------------------------------------
   01. jQuery MeanMenu

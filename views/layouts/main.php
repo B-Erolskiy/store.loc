@@ -58,19 +58,6 @@ ltAppAsset::register($this);
                                 <li><a href="<?=\yii\helpers\Url::home(); ?>">Главная</a></li>
                                 <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
                                 <li><a href="#">Акции</a></li>
-                                <li class="drop"><a href="#">pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="about.html">about</a></li>
-                                        <li><a href="shop.html">shop</a></li>
-                                        <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                                        <li><a href="product-details-sticky-right.html">product details</a></li>
-                                        <li><a href="cart.html">cart</a></li>
-                                        <li><a href="wishlist.html">wishlist</a></li>
-                                        <li><a href="checkout.html">checkout</a></li>
-                                        <li><a href="team.html">team</a></li>
-                                        <li><a href="login-register.html">login & register</a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="<?= \yii\helpers\Url::to(['/offices'])?>">Магазины</a></li>
                             </ul>
                         </nav>
@@ -80,7 +67,7 @@ ltAppAsset::register($this);
                                     <li><a href="<?=\yii\helpers\Url::home(); ?>">Home</a></li>
                                     <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
                                     <li><a href="blog.html">Акции</a></li>
-                                    <li><a href="contact.html">Магазины</a></li>
+                                    <li><a href="<?= \yii\helpers\Url::to(['/offices'])?>">Магазины</a></li>
                                 </ul>
                             </nav>
                         </div>

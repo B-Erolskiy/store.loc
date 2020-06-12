@@ -25,7 +25,7 @@ foreach ($offices as $office){
                 }
                 return false;
             });".
-    "\$Maps['yandex_map'].geoObjects.add(placemark$office->id); ";
+    "\$Maps['yandex_map'].geoObjects.add(placemark$office->id); myGeoObjects.push(placemark$office->id);";
 }
 
 $officesCount = count($offices);
@@ -53,6 +53,8 @@ $map = new \mirocow\yandexmaps\Map('yandex_map', [
         'objects' => [
         <<<JS
         //var collectionPlacemarks = new ymaps.GeoObjectCollection(null,{}); 
+        myGeoObjects = [];
+        
         $codeJS;
         
         \$Maps['yandex_map'].setBounds(\$Maps['yandex_map'].geoObjects.getBounds());
@@ -89,6 +91,16 @@ $map = new \mirocow\yandexmaps\Map('yandex_map', [
             });
             
         });
+        
+        /*console.log(myGeoObjects);
+        clusterer = new ymaps.Clusterer({
+            preset: 'islands#invertedRedClusterIcons',
+            groupByCoordinates: false,
+            clusterDisableClickZoom: false,
+        });
+        clusterer.add(myGeoObjects);
+        
+        \$Maps['yandex_map'].geoObjects.add(clusterer);*/
 JS
         ],
     ]

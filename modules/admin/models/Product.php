@@ -18,7 +18,6 @@ use rico\yii2images;
  * @property int|null $price
  * @property string|null $keywords_tag
  * @property string|null $description
- * @property string|null $img
  * @property int $hit
  * @property int|null $new
  * @property int|null $sale
@@ -67,7 +66,7 @@ class Product extends \yii\db\ActiveRecord
             [['content', 'description', 'description_tag'], 'string'],
             [['name'], 'string', 'max' => 100],
             [['alias'], 'string', 'max' => 150],
-            [['keywords_tag', 'img'], 'string', 'max' => 200],
+            [['keywords_tag'], 'string', 'max' => 200],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['image'],'file', 'extensions' => 'jpg, png'],
             [['gallery'],'file', 'extensions' => 'jpg, png', 'maxFiles' => 4],

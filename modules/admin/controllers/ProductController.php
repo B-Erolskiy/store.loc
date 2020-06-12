@@ -88,6 +88,7 @@ class ProductController extends Controller
     {
         $model = $this->findModel($id);
 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $model->image = UploadedFile::getInstance($model, 'image');
@@ -121,6 +122,38 @@ class ProductController extends Controller
         return $this->redirect(['index']);
     }
 
+
+    public function actionDmimage($id, $isAjax = false){
+        $model = $this->findModel($id);
+        $image = $model->getImage();
+        $model->removeImage($image);
+        if ($isAjax){
+            $this->layout = false;
+            return $this->render('delete-images', compact('model'));
+        }
+        else{
+            $this->layout = true;
+            return $this->render('update', compact('model'));
+        }
+    }
+
+    public function actionDgimage($id, $imageId,$isAjax = false){
+        $model = $this->findModel($id);
+        $images = $model->getImages();
+        foreach ($images as $image) {
+            if ($image->getPrimaryKey() == $imageId) {
+                $model->removeImage($image);
+            }
+        }
+        if ($isAjax){
+            $this->layout = false;
+            return $this->render('delete-images', compact('model'));
+        }
+        else{
+            $this->layout = true;
+            return $this->render('update', compact('model'));
+        }
+    }
     /**
      * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -136,4 +169,5 @@ class ProductController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

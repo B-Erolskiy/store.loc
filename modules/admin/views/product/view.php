@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                     'attribute' => 'image',
-                    'value' => Html::img($img->getUrl()),
+                    'value' => Html::img($img->getUrl(),['style' => 'width: 300px;']),
                     'format' => 'html',
             ],
             [

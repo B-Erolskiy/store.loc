@@ -411,7 +411,7 @@
     display: block;
 }
 .scroll-single-product > img {
-    width: 100%;
+    width: 400px;
 }
 .sidebar-active {
     will-change: min-height;

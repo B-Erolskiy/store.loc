@@ -138,6 +138,50 @@
         });
 
     });
+
+    //удаление главного изображения товара
+    $('.main-image').on('click', '.remove-main-image', function (e) {
+        e.preventDefault(); //отмена дефолтного поведения
+        var id = $(this).data('id');
+        var question = "Вы уверены, что хотите удалить главное изображение товара?";
+        var result = confirm(question);
+        if(result){
+            $.ajax({
+                url: 'dmimage',
+                data: {id: id, isAjax: true},
+                type: 'GET',
+                success: function (res) {
+                    $('.field-images').html(res);
+                },
+                error: function (res) {
+                    console.log('Error' + res);
+                }
+            });
+        }
+    });
+
+    //удаление изображения из галереи товара
+    $('.gallery-image').on('click', '.remove-gallery-image', function (e) {
+        e.preventDefault(); //отмена дефолтного поведения
+        var id = $(this).data('id');
+        var imageId = $(this).data('image');
+        console.log(imageId);
+        var question = "Вы уверены, что хотите удалить изображение из галереи товара?";
+        var result = confirm(question);
+        if(result){
+            $.ajax({
+                url: 'dgimage',
+                data: {id: id, imageId: imageId, isAjax: true},
+                type: 'GET',
+                success: function (res) {
+                    $('.field-images').html(res);
+                },
+                error: function (res) {
+                    console.log('Error' + res);
+                }
+            });
+        }
+    });
     /*-------------------------------------------
   01. jQuery MeanMenu
 --------------------------------------------- */

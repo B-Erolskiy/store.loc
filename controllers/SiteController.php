@@ -66,10 +66,12 @@ class SiteController extends AppController
     public function actionIndex()
     {
         $this->setMeta('TMART');
+
+        $categories = $this->getTree(Category::find()->indexBy('id')->asArray()->all());
         $hits = Product::find()->where(['hit' => 1])->limit(6)->all();
         $news = Product::find()->where(['new' => 1])->limit(6)->all();
 
-        return $this->render('index', compact('hits', 'news'));
+        return $this->render('index', compact('categories','hits', 'news'));
     }
 
     public function actionOffices()
@@ -139,5 +141,16 @@ class SiteController extends AppController
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function getTree($data){
+        $tree = [];
+        foreach ($data as $id=>&$node) {
+            if (!$node['parent'])
+                $tree[$id] = &$node;
+            else
+                $data[$node['parent']]['childs'][$node['id']] = &$node;
+        }
+        return $tree;
     }
 }

@@ -20,6 +20,11 @@ class MenuWidget extends Widget
             $menu = \Yii::$app->cache->get('menu');
             if ($menu) return $menu;
         }
+        if ($this->tpl == 'menu-index.php'){
+            $this->data = Category::find()->indexBy('id')->asArray()->all();
+            $this->tree = $this->getTree();
+            return $this->tree;
+        }
         $this->data = Category::find()->indexBy('id')->asArray()->all();
         $this->tree = $this->getTree();
         $this->menuHtml = $this->getMenuHtml($this->tree);
@@ -28,7 +33,6 @@ class MenuWidget extends Widget
         if ($this->tpl == 'menu.php'){
             Yii::$app->cache->set('menu', $this->menuHtml, 60);
         }
-        //debug($this->data);
         return $this->menuHtml;
     }
 

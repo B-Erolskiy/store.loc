@@ -4246,3 +4246,19 @@ a.shipping-calculator-button:hover {
 .nav>li{
     border-bottom: 1px #dddddd solid;
 }
+
+.category-menu-list ul li .category-menu-dropdown ul li a{
+    border-bottom: 0;
+}
+
+.categories-subtitle{
+     border-bottom: 0 !important;
+     padding: 0px !important;
+ }
+
+.category-menu-list ul li a{
+    text-transform: none !important;
+}
+.categories-subtitle:hover{
+    background: #fff !important;
+}

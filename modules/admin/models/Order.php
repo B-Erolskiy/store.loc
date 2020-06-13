@@ -3,6 +3,8 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "order".
@@ -34,7 +36,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'qty', 'sum'], 'required'],
+            [['qty', 'sum'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['qty', 'sum'], 'integer'],
             [['status'], 'string'],
@@ -64,5 +66,4 @@ class Order extends \yii\db\ActiveRecord
     public function getOrderItems(){
         return $this->hasMany(OrderItems::className(),['order_id' => 'id']);
     }
-
 }

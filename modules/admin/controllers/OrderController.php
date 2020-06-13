@@ -72,7 +72,9 @@ class OrderController extends Controller
     {
         $model = new Order();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->created_at = (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d H:i:s');
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -92,7 +94,9 @@ class OrderController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->updated_at = (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d H:i:s');
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

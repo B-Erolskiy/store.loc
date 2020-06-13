@@ -4,6 +4,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii\behaviors\SluggableBehavior;
 
 class Category extends ActiveRecord
 {
@@ -20,7 +21,7 @@ class Category extends ActiveRecord
         return [
             'image' => [
                 'class' => 'rico\yii2images\behaviors\ImageBehave',
-            ]
+            ],
         ];
     }
 }

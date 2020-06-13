@@ -4,6 +4,9 @@ namespace app\modules\admin\models;
 
 use app\models\Category;
 use Yii;
+use yii\behaviors\SluggableBehavior;
+use yii\db\ActiveRecord;
+use yii\helpers\Inflector;
 
 /**
  * This is the model class for table "categories".
@@ -13,6 +16,7 @@ use Yii;
  * @property int $parent
  * @property string|null $keywords
  * @property string|null $description
+ * @property string $alias
  *
  * @property Product[] $products
  */
@@ -34,6 +38,7 @@ class Categories extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['parent'], 'integer'],
+            ['alias', 'safe'],
             [['name'], 'string', 'max' => 100],
             [['keywords', 'description'], 'string', 'max' => 255],
         ];
@@ -63,5 +68,16 @@ class Categories extends \yii\db\ActiveRecord
 
     public function getCategory(){
         return $this->hasOne(Category::className(),['id' => 'parent']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => ['name','id'],
+                'slugAttribute' => 'alias',
+            ]
+        ];
     }
 }

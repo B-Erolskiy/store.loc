@@ -16,16 +16,16 @@ class CategoryController extends AppController
         $this->setMeta('TMART | Каталог');
 
         $products = Product::find()->all();
-        //debug($hits);
+
         return $this->render('index', compact('products','hits', 'news'));
     }
 
     public function actionView($id){
         //$id = Yii::$app->request->get('id');
-        $category = Category::findOne($id);
+        $category = Category::find()->where(['alias' => $id])->one();
         if (empty($category))
             throw new \yii\web\HttpException(404, 'Такой категории не существует');
-        $products = Product::find()->where(['category_id' => $id])->all();
+        $products = Product::find()->where(['category_id' => $category['id']])->all();
 
         $this->setMeta('TMART | '. $category->name, $category->keywords, $category->description);
 

@@ -1724,7 +1724,6 @@ product__style--7
     color: #afafaf !important;
 }
 .htc__newsletter__area .subscribe__btn input.bst__btn {
-    background-image: url("images/icons/send-2.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 29% auto;
@@ -3392,14 +3391,6 @@ blockquote::before {
 .htc__shop__left__sidebar .htc__shop__cat:last-child {
     border-bottom: 0 solid transparent;
 }
-.order-single-btn select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    background: rgba(0, 0, 0, 0) url("images/icons/select-option.png") no-repeat scroll 83% 8px / 14px 9px;
-    padding-right: 50px;
-}
 /*---------------------------------------
   25. Our Wishlist Area
 ----------------------------------------*/
@@ -3827,16 +3818,6 @@ a.shipping-calculator-button:hover {
 .payment-menu li:hover {
     border: 1px solid #ff4136;
 }
-.single-checkout-box select {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -o-appearance: none;
-    background: rgba(0, 0, 0, 0) url("images/icons/select-option.png") no-repeat scroll 96% 14px / 11px 9px;
-    border: 1px solid #c1c1c1;
-    height: 40px;
-    line-height: 40px;
-    padding-left: 20px;
-}
 .payment-form-inner .single-checkout-box.select-option {
     margin-top: 0;
 }
@@ -4261,4 +4242,7 @@ a.shipping-calculator-button:hover {
 }
 .categories-subtitle:hover{
     background: #fff !important;
+}
+.block{
+    display: block !important;
 }

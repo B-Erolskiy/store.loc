@@ -57,39 +57,7 @@ use yii\helpers\Html;
                         </div>
                         <div class="category-menu-list">
                             <ul>
-
-                                <?php foreach ($categories as $category):?>
-                                <?php if(isset($category['childs'])) :?>
-                                <li>
-                                    <a href="<?= \yii\helpers\Url::to(['category/view', 'id' => $category['id']])?>"><?= $category['name']?><i class="zmdi zmdi-chevron-right"></i></a>
-                                    <div class="category-menu-dropdown">
-                                        <?php foreach ($category['childs'] as $categoryChildFirst):?>
-                                        <div class="category-common mb--30">
-                                            <h4 >
-                                                <a class="categories-subtitle" href="<?= \yii\helpers\Url::to(['category/view', 'id' => $categoryChildFirst['id']])?>">
-                                                    <?= $categoryChildFirst['name']?></a>
-                                            </h4>
-                                            <ul>
-                                                <?php if(isset($categoryChildFirst['childs'])) :?>
-                                                <?php foreach ($categoryChildFirst['childs'] as $categoryChildSec):?>
-                                                <li>
-                                                    <a href="<?= \yii\helpers\Url::to(['category/view', 'id' => $categoryChildSec['id']])?>">
-                                                    <?= $categoryChildSec['name']?></a>
-                                                </li>
-                                                 <?php endforeach;?>
-                                                <?php endif;?>
-                                            </ul>
-                                        </div>
-                                        <?php endforeach;?>
-                                    </div>
-                                </li>
-                                <?php else:?>
-                                    <li>
-                                        <a href="<?= \yii\helpers\Url::to(['category/view', 'id' => $category['id']])?>" class="categories-subtitle">
-                                            <?= $category['name']?></a>
-                                    </li>
-                                <?php endif;?>
-                                <?php endforeach;?>
+                                <?= MenuWidget::widget(['tpl' => 'menu'])?>
                             </ul>
                         </div>
                     </div>
@@ -98,7 +66,6 @@ use yii\helpers\Html;
             </div>
         </div>
     </section>
-    <?php debug($categories);?>
     <!-- End Feature Product -->
     <div class="only-banner ptb--100 bg__white">
         <div class="container">

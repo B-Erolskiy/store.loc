@@ -36,6 +36,7 @@ class Cart extends ActiveRecord
         else{
             $_SESSION['cart'][$product->id] = [
                 'qty' => $qty,
+                'alias' => $product->alias,
                 'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,

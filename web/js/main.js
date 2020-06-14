@@ -72,19 +72,14 @@
             url: '/cart/clear',
             type: 'GET',
             success: function (res) {
-                if(!res) console.log('Error');
                 $('.cart-main-area').html(res);
-            },
-            error: function () {
-                console.log('Error');
-            }
-        });
-        $.ajax({
-            url: 'cart/view',
-            type: 'GET',
-            success: function (res) {
-                if(!res) console.log('Error');
-                //showCart(res);
+                var emptyCart = $("input[name='emptyCart']").val();
+                if(emptyCart == "true"){
+                    $('#orderForm').css('display', 'none');
+                }
+                else {
+                    $('#orderForm').css('display', 'block');
+                }
             },
             error: function () {
                 console.log('Error');

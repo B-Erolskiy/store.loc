@@ -108,7 +108,7 @@ use yii\web\View;
                                         <div class="product">
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
-                                                    <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
+                                                    <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->alias]); ?>">
                                                         <?php $image=$product->getImage();
                                                         echo Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
                                                     </a>
@@ -122,7 +122,7 @@ use yii\web\View;
                                                 </div>
                                             </div>
                                             <div class="product__details">
-                                                <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>"><?= $product->name?></a></h2>
+                                                <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->alias]); ?>"><?= $product->name?></a></h2>
                                                 <ul class="product__price">
                                                     <li class="new__price"><?= $product->price/100 ?> ₽</li>
                                                 </ul>
@@ -155,7 +155,7 @@ use yii\web\View;
                                     <div class="single__list__content clearfix">
                                         <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
                                             <div class="list__thumb">
-                                                <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
+                                                <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->alias]); ?>">
                                                     <?php $image=$product->getImage();
                                                     echo Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
                                                 </a>
@@ -163,7 +163,7 @@ use yii\web\View;
                                         </div>
                                         <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12">
                                             <div class="list__details__inner">
-                                                <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>"><?= $product->name?></a></h2>
+                                                <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $product->alias]); ?>"><?= $product->name?></a></h2>
                                                 <p><?= $product->content?></p>
                                                 <span class="product__price"><?= $product->price/100 ?> ₽</span>
                                                 <div class="shop__btn">

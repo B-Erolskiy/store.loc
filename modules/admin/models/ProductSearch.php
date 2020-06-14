@@ -80,7 +80,6 @@ class ProductSearch extends Product
         }
 
         $query->andFilterWhere(['like', 'product.name', $this->name])
-            ->andFilterWhere(['like', 'alias', $this->alias])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'keywords_tag', $this->keywords_tag])
             ->andFilterWhere(['like', 'description', $this->description])

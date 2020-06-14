@@ -40,11 +40,11 @@ use yii\widgets\ActiveForm;
                     if(!empty($session['cart'])): ?>
                         <?php foreach ($session['cart'] as $id => $item):?>
                             <tr>
-                                <td class="product-thumbnail"><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $item['id']]); ?>">
+                                <td class="product-thumbnail"><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $item['alias']]); ?>">
                                         <?= Html::img($item['image'], ['alt' => $item['name'], 'title' => $item['name']]) ?>
                                     </a>
                                 </td>
-                                <td class="product-name"><a href="#"><?=$item['name']?></a></td>
+                                <td class="product-name"><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $item['alias']]); ?>"><?=$item['name']?></a></td>
                                 <td class="product-price"><span class="amount"><?=$item['price']/100?></span></td>
                                 <td class="product-price"><span class="amount"><?=$item['qty']?></span></td>
                                 <td class="product-subtotal"><?=$item['price']/100*$item['qty']?></td>

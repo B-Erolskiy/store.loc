@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\behaviors\SluggableBehavior;
 use yii\web\UploadedFile;
 use rico\yii2images;
 
@@ -44,6 +45,13 @@ class Product extends \yii\db\ActiveRecord
         return [
             'image' => [
                 'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ],
+            [
+            'class' => SluggableBehavior::className(),
+                'attribute' => ['name'],
+                'slugAttribute' => 'alias',
+                'immutable' => true,//неизменный
+                'ensureUnique'=> true,//генерировать уникальный
             ]
         ];
     }
@@ -65,7 +73,6 @@ class Product extends \yii\db\ActiveRecord
             [['hit', 'new', 'sale'],'default', 'value' => 0],
             [['content', 'description', 'description_tag'], 'string'],
             [['name'], 'string', 'max' => 100],
-            [['alias'], 'string', 'max' => 150],
             [['keywords_tag'], 'string', 'max' => 200],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['image'],'file', 'extensions' => 'jpg, png'],
@@ -82,7 +89,6 @@ class Product extends \yii\db\ActiveRecord
             'id' => '№ Товара',
             'name' => 'Наименование',
             'category_id' => 'Категория',
-            'alias' => 'Alias',
             'content' => 'Краткое описание',
             'price' => 'Цена',
             'keywords_tag' => 'Ключевые слова',
@@ -132,5 +138,4 @@ class Product extends \yii\db\ActiveRecord
             return false;
         }
     }
-
 }

@@ -78,7 +78,12 @@ class SiteController extends AppController
     {
         $this->setMeta('TMART | Магазины');
         $offices = Offices::find()->all();
-        return $this->render('contact', compact('offices'));
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post())) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+            return $this->refresh();
+        }
+        return $this->render('contact', compact('offices','model'));
     }
 
     /**

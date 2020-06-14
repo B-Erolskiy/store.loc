@@ -148,34 +148,39 @@ JS
         </div>
 
     </div>
+    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
+        <div class="alert alert-success">
+            Спасибо за заявку! Мы обязательно ответим вам в ближайшее время.
+        </div>
+    <?php else: ?>
+
+        <div class="row">
+            <div class="col-lg-5 ptb--50">
+                <h2>Свяжитесь с нами</h2>
+
+                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+
+                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+
+                <?= $form->field($model, 'email') ?>
+
+                <?= $form->field($model, 'subject') ?>
+
+                <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
+
+                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                ]) ?>
+
+                <div class="form-group">
+                    <?= Html::submitButton('Отправить', ['class' => 'btn btn-success', 'name' => 'contact-button']) ?>
+                </div>
+
+                <?php ActiveForm::end(); ?>
+
+            </div>
+        </div>
+
+    <?php endif; ?>
+
 </div>
-<?php
-
-    /*$geoObj = new \mirocow\yandexmaps\GeoObject([
-        'geometry' => [
-
-        ],
-    ]);*/
-
-    //добавление объекта на карту
-    /*$pm = new \mirocow\yandexmaps\objects\Placemark([55.684758, 37.738521],
-        [
-            'balloonContentHeader' => 'hello world!',
-            'balloonContentBody' => 'hello world!',
-            'balloonContentFooter' => 'hello world!'
-        ],
-        [
-            'preset' => 'islands#redIcon',
-            'draggable'=>false,
-            'events'=>[
-                'dragend'=>'function(e){console.log(111);}'
-            ],
-
-        ]
-    );
-    $map->addObject($pm);?>
-    <div id="coordinates"> </div>*/
-
-
-
-    ?>

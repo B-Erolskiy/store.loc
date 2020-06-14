@@ -72,10 +72,10 @@ use yii\helpers\Html;
         </div>
     </section>
     <!-- End Feature Product -->
-    <div class="only-banner ptb--100 bg__white">
+    <div class="only-banner ptb--50 bg__white">
         <div class="container">
             <div class="only-banner-img">
-                <img src="../../web/images/new-product/slide-1.jpg" alt="new product">
+                <img src="../../web/images/banner/banner-1.jpg" alt="new product">
             </div>
         </div>
     </div>
@@ -125,7 +125,7 @@ use yii\helpers\Html;
                                 <li>
                                     <a href="#home3" data-toggle="tab">
                                         <div class="tab-menu-text">
-                                            <h4>top rated</h4>
+                                            <h4>Распродажа</h4>
                                         </div>
                                     </a>
                                 </li>
@@ -142,7 +142,7 @@ use yii\helpers\Html;
                                             <div class="product">
                                                 <div class="product__inner">
                                                     <div class="pro__thumb">
-                                                        <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $hit->id]); ?>">
+                                                        <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $hit->alias]); ?>">
                                                             <?php $image = $hit->getImage();
                                                             echo Html::img($image->getUrl(), ['alt' => $hit->name, 'title' => $hit->name]) ?>
                                                         </a>
@@ -156,7 +156,7 @@ use yii\helpers\Html;
                                                     </div>
                                                 </div>
                                                 <div class="product__details">
-                                                    <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $hit->id]); ?>"><?= $hit->name?></a></h2>
+                                                    <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $hit->alias]); ?>"><?= $hit->name?></a></h2>
                                                     <ul class="product__price">
                                                         <li class="new__price"><?= $hit->price/100 ?> ₽</li>
                                                     </ul>
@@ -178,7 +178,7 @@ use yii\helpers\Html;
                                                     <div class="product">
                                                         <div class="product__inner">
                                                             <div class="pro__thumb">
-                                                                <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $new->id]); ?>">
+                                                                <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $new->alias]); ?>">
                                                                     <?php $image = $new->getImage();
                                                                     echo Html::img($image->getUrl(), ['alt' => $new->name, 'title' => $new->name]) ?>
                                                                 </a>
@@ -192,7 +192,7 @@ use yii\helpers\Html;
                                                             </div>
                                                         </div>
                                                         <div class="product__details">
-                                                            <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $new->id]); ?>"><?= $new->name?></a></h2>
+                                                            <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $new->alias]); ?>"><?= $new->name?></a></h2>
                                                             <ul class="product__price">
                                                                 <li class="new__price"><?= $new->price/100 ?> ₽</li>
                                                             </ul>

@@ -140,7 +140,7 @@
     });
 
     //удаление главного изображения товара
-    $('.main-image').on('click', '.remove-main-image', function (e) {
+    $('.field-images').on('click', '.remove-main-image', function (e) {
         e.preventDefault(); //отмена дефолтного поведения
         var id = $(this).data('id');
         var question = "Вы уверены, что хотите удалить главное изображение товара?";
@@ -161,11 +161,10 @@
     });
 
     //удаление изображения из галереи товара
-    $('.gallery-image').on('click', '.remove-gallery-image', function (e) {
+    $('.field-images').on('click', '.remove-gallery-image', function (e) {
         e.preventDefault(); //отмена дефолтного поведения
         var id = $(this).data('id');
         var imageId = $(this).data('image');
-        console.log(imageId);
         var question = "Вы уверены, что хотите удалить изображение из галереи товара?";
         var result = confirm(question);
         if(result){
@@ -182,6 +181,17 @@
             });
         }
     });
+
+    /*  CAROUSEL  */
+
+    $().ready(function(){
+        $("#thumbnail a").click(function(){
+            $("#large img").hide().attr({"src": $("> img", this).attr("src"), "title": $("> img", this).attr("title")});
+            return false;
+        });
+        $("#large>img").load(function(){$("#large>img:hidden").show('fast')});
+    });
+
     /*-------------------------------------------
   01. jQuery MeanMenu
 --------------------------------------------- */

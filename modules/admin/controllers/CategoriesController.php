@@ -67,9 +67,16 @@ class CategoriesController extends Controller
     {
         $model = new Categories();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Категория "'. $model->name . '" добавлена');
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            try{
+                $model->save();
+                Yii::$app->session->setFlash('success', 'Категория "'. $model->name . '" добавлена');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            catch (\Exception $e){
+                Yii::$app->session->setFlash('error', $e->getMessage());
+                return $this->refresh();
+            }
         }
 
         return $this->render('create', [
@@ -88,9 +95,16 @@ class CategoriesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Категория "'. $model->name . '" обновлена');
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            try{
+                $model->save();
+                Yii::$app->session->setFlash('success', 'Категория "'. $model->name . '" обновлена');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            catch (\Exception $e){
+                Yii::$app->session->setFlash('error', $e->getMessage());
+                return $this->refresh();
+            }
         }
 
         return $this->render('update', [
@@ -107,9 +121,13 @@ class CategoriesController extends Controller
      */
     public function actionDelete($id)
     {
-        Yii::$app->session->setFlash('error', 'Категория "'. $this->findModel($id)->name . '" удалена');
-        $this->findModel($id)->delete();
-
+        try{
+            Yii::$app->session->setFlash('error', 'Категория "'. $this->findModel($id)->name . '" удалена');
+            $this->findModel($id)->delete();
+        }
+        catch (\Exception $e){
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
         return $this->redirect(['index']);
     }
 

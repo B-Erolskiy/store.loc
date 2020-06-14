@@ -64,7 +64,7 @@ class CartController extends AppController
         $session = Yii::$app->session;
         $session->open();
         $order = new Order();
-        $this->setMeta('Корзина');
+        $this->setMeta('TMART | Корзина');
         if ($this->orderLoad($order, $session))
         {
             Yii::$app->session->setFlash('success','Ваш заказ оформлен, мы свяжемся с вами в ближайшее время');

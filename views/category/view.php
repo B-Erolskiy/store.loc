@@ -173,7 +173,13 @@ use yii\web\View;
                                     <?php endif;?>
                                 <?php endforeach; ?>
                             <?php else : ?>
-                                <h2 >Здесь товаров пока нет...</h2>
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    Здесь товаров пока нет...
+                                </div>
+
                             <?php endif;?>
                             <div class="clearfix"></div>
                         </div>

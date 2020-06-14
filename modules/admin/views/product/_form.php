@@ -23,7 +23,6 @@ use mihaildev\elfinder\ElFinder;
         </select>
         <div class="help-block"></div>
     </div>
-    <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
@@ -68,26 +67,22 @@ use mihaildev\elfinder\ElFinder;
             <?php endif;?>
             <div class="help-block"></div>
         </div>
-
-
-
-
         <div class="form-group field-product-gallery">
             <label class="control-label" style="float: left;" for="product-gallery">Галерея</label>
             <div class="clearfix"></div>
             <?php $gallery = $model->getImages();?>
             <?php foreach ($gallery as $image):?>
-                <?php if($image->getUrl() =="/yii2images/images/image-by-item-and-alias?item=&dirtyAlias=placeHolder.jpg"):?>
-                    <div class="clearfix"></div>
-                    <?php break;?>
-                <?php else:?>
-                    <div class="col-md-4 gallery-image" style="display: block; float: left; text-align: center;">
-                        <?=  Html::img($image->getUrl(), ['alt' => $model->name, 'title' => $model->name, 'style' => 'width: 300px; ']) ?>
-                        <a class="btn btn-danger remove-gallery-image" data-image="<?= $image->getPrimaryKey()?>" data-id="<?= $model->id?>" href="<?= \yii\helpers\Url::to(['product/dgimage','id' => $model->id, 'imageId' => $image->getPrimaryKey()])?>">X</a>
-                    </div>
-
-
-                <?php endif;?>
+                    <?php if($image->getUrl() =="/yii2images/images/image-by-item-and-alias?item=&dirtyAlias=placeHolder.jpg"):?>
+                        <div class="clearfix"></div>
+                        <?php break;?>
+                    <?php else:?>
+                        <?php if($mainImage != $image):?>
+                        <div class="col-md-4 gallery-image" style="display: block; float: left; text-align: center;">
+                            <?=  Html::img($image->getUrl(), ['alt' => $model->name, 'title' => $model->name, 'style' => 'width: 300px; ']) ?>
+                            <a class="btn btn-danger remove-gallery-image" data-image="<?= $image->getPrimaryKey()?>" data-id="<?= $model->id?>" href="<?= \yii\helpers\Url::to(['product/dgimage','id' => $model->id, 'imageId' => $image->getPrimaryKey()])?>">X</a>
+                        </div>
+                        <?php endif;?>
+                    <?php endif;?>
             <?php endforeach;?>
             <div class="clearfix"></div>
             <input type="hidden" name="Product[gallery][]" value=""><input type="file" id="product-gallery" name="Product[gallery][]" multiple accept="image/*">

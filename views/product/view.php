@@ -15,7 +15,7 @@ use yii\helpers\Html;
                         <nav class="bradcaump-inner">
                             <a class="breadcrumb-item" href="<?=\yii\helpers\Url::home(); ?>">Главная</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb-item active"><a href="<?=\yii\helpers\Url::to(['category/view', 'id' => $product->category->id]) ?>"><?= $product->category->name?></a></span>
+                            <span class="breadcrumb-item active"><a href="<?=\yii\helpers\Url::to(['category/view', 'id' => $product->category->alias]) ?>"><?= $product->category->name?></a></span>
                         </nav>
                     </div>
                 </div>
@@ -31,12 +31,24 @@ use yii\helpers\Html;
             <div class="row">
                 <div class="col-md-7 col-lg-7 col-sm-5 col-xs-12">
                     <div class="product__details__container product-details-5">
-                        <?php $gallery = $product->getImages();
-                        foreach ($gallery as $image):?>
-                        <div class="scroll-single-product mb--30">
-                            <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
+                        <div class="col-md-12">
+                            <div id="large">
+                                <?php $image = $product->getImage();?>
+                                <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
+                            </div>
                         </div>
-                        <?php endforeach;?>
+                        <div class="product-slider-active owl-carousel col-md-10">
+                            <?php $gallery = $product->getImages();
+                            foreach ($gallery as $image):?>
+                                <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-6">
+                                    <div class="pro__thumb" id="thumbnail" >
+                                        <a href="#">
+                                            <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
                 <div class="sidebar-active col-md-5 col-lg-5 col-sm-7 col-xs-12 xmt-30">
@@ -109,7 +121,7 @@ use yii\helpers\Html;
                 </ul>
             </div>
         </div>
-        <div class="row">
+        <div class="row table-responsive">
             <div class="col-md-12">
                 <div class="product__details__tab__content">
                     <!-- Start Single Content -->
@@ -140,123 +152,6 @@ use yii\helpers\Html;
                     <!-- End Single Content -->
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="reviews" class="product__tab__content fade">
-                        <div class="review__address__inner">
-                            <!-- Start Single Review -->
-                            <div class="pro__review">
-                                <div class="review__thumb">
-                                    <img src="images/review/1.jpg" alt="review images">
-                                </div>
-                                <div class="review__details">
-                                    <div class="review__info">
-                                        <h4><a href="#">Gerald Barnes</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                        </ul>
-                                        <div class="rating__send">
-                                            <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="review__date">
-                                        <span>27 Jun, 2016 at 2:30pm</span>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                </div>
-                            </div>
-                            <!-- End Single Review -->
-                            <!-- Start Single Review -->
-                            <div class="pro__review ans">
-                                <div class="review__thumb">
-                                    <img src="images/review/2.jpg" alt="review images">
-                                </div>
-                                <div class="review__details">
-                                    <div class="review__info">
-                                        <h4><a href="#">Gerald Barnes</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                            <li><i class="zmdi zmdi-star-half"></i></li>
-                                        </ul>
-                                        <div class="rating__send">
-                                            <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                            <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="review__date">
-                                        <span>27 Jun, 2016 at 2:30pm</span>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                </div>
-                            </div>
-                            <!-- End Single Review -->
-                        </div>
-                        <!-- Start RAting Area -->
-                        <div class="rating__wrap">
-                            <h2 class="rating-title">Write  A review</h2>
-                            <h4 class="rating-title-2">Your Rating</h4>
-                            <div class="rating__list">
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                            </div>
-                        </div>
-                        <!-- End RAting Area -->
-                        <div class="review__box">
-                            <form id="review-form">
-                                <div class="single-review-form">
-                                    <div class="review-box name">
-                                        <input type="text" placeholder="Type your name">
-                                        <input type="email" placeholder="Type your email">
-                                    </div>
-                                </div>
-                                <div class="single-review-form">
-                                    <div class="review-box message">
-                                        <textarea placeholder="Write your review"></textarea>
-                                    </div>
-                                </div>
-                                <div class="review-btn">
-                                    <a class="fv-btn" href="#">submit review</a>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                     <!-- End Single Content -->
                 </div>

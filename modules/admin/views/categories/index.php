@@ -34,8 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php echo(Yii::$app->session->getFlash('error')); ?>
         </div>
     <?php endif;?>
-
     <?php \yii\widgets\Pjax::begin()?>
+
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [

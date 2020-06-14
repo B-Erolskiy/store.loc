@@ -25,7 +25,7 @@
         </li>
     <?php else:?>
         <li>
-            <a href="<?= \yii\helpers\Url::to(['category/view', 'id' => $category['alias']])?>" class="categories-subtitle">
+            <a href="<?= \yii\helpers\Url::to(['category/view', 'id' => $category['alias']])?>">
                 <?= $category['name']?></a>
         </li>
     <?php endif;?>

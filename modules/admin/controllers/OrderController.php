@@ -40,7 +40,7 @@ class OrderController extends Controller
             'query' => Order::find(),
             'sort' => [
                 'defaultOrder' => [
-                    'status' => SORT_DESC,
+                    'id' => SORT_DESC,
                 ]
             ]
         ]);

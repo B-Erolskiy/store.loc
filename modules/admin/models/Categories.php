@@ -53,8 +53,8 @@ class Categories extends \yii\db\ActiveRecord
             'id' => '№ категории',
             'name' => 'Название',
             'parent' => 'Родительская категория',
-            'keywords' => 'Keywords',
-            'description' => 'Description',
+            'keywords' => 'Ключевые слова',
+            'description' => 'Тег описание',
         ];
     }
 
@@ -75,8 +75,10 @@ class Categories extends \yii\db\ActiveRecord
         return [
             [
                 'class' => SluggableBehavior::className(),
-                'attribute' => ['name','id'],
+                'attribute' => ['name', 'id'],
                 'slugAttribute' => 'alias',
+                'immutable' => true,//неизменный
+                'ensureUnique'=>true,//генерировать уникальный
             ]
         ];
     }

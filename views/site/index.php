@@ -22,7 +22,7 @@ use yii\helpers\Html;
                                             <div class="slider__inner">
                                                 <h1>Новая коллекция продуктов <span class="text--theme">Samsung</span></h1>
                                                 <div class="slider__btn">
-                                                    <a class="htc__btn" href="<?= \yii\helpers\Url::to(['category/view', 'id' => 4])?>">к покупкам</a>
+                                                    <a class="htc__btn" href="<?= \yii\helpers\Url::to(['category/view', 'id' => 'samsung'])?>">к покупкам</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -53,11 +53,16 @@ use yii\helpers\Html;
                 <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12 float-right-style">
                     <div class="categories-menu mrg-xs">
                         <div class="category-heading">
-                            <h3> Категории</h3>
+                            <h3>Категории</h3>
                         </div>
                         <div class="category-menu-list">
                             <ul>
                                 <?= MenuWidget::widget(['tpl' => 'menu'])?>
+                            </ul>
+                        </div>
+                        <div class="category-menu-list">
+                            <ul class="catalog">
+                                <?= MenuWidget::widget(['tpl' => 'menu-index'])?>
                             </ul>
                         </div>
                     </div>
@@ -145,7 +150,7 @@ use yii\helpers\Html;
                                                     <div class="product__hover__info">
                                                         <ul class="product__action">
                                                             <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                            <li><a class="ti-shopping-cart" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $hit->id])?>" data-id="<?= $hit->id?>"></a></li>
+                                                            <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $hit->id])?>" data-id="<?= $hit->id?>"></a></li>
                                                             <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
                                                         </ul>
                                                     </div>
@@ -181,7 +186,7 @@ use yii\helpers\Html;
                                                             <div class="product__hover__info">
                                                                 <ul class="product__action">
                                                                     <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                                    <li><a class="ti-shopping-cart" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $new->id])?>" data-id="<?= $hit->id?>"></a></li>
+                                                                    <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $new->id])?>" data-id="<?= $hit->id?>"></a></li>
                                                                     <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
                                                                 </ul>
                                                             </div>

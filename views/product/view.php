@@ -83,7 +83,7 @@ use yii\helpers\Html;
                             </div>
                         </div>
                         <ul class="pro__dtl__btn">
-                            <li class="buy__now__btn"><a class="ti-shopping-cart"  href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>">купить</a></li>
+                            <li class="buy__now__btn"><a class="cart-add"  href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>">купить</a></li>
                             <li><a href="#"><span class="ti-heart"></span></a></li>
                             <li><a href="#"><span class="ti-email"></span></a></li>
                         </ul>

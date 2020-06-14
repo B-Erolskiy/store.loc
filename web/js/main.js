@@ -93,7 +93,7 @@
     });
 
     //добавление товара в корзину
-    $('.ti-shopping-cart').on('click', function (e) {
+    $('.cart-add').on('click', function (e) {
         e.preventDefault(); //отмена дефолтного поведения
         $('.modal-cart').modal('show');
         var obj = $('.number');

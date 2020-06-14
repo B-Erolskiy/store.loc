@@ -52,23 +52,6 @@ ltAppAsset::register($this);
                         </div>
                         <!-- Start MAinmenu Ares -->
                         <div class="col-md-8 col-lg-8 col-sm-6 col-xs-6">
-                            <nav class="mainmenu__nav hidden-xs hidden-sm">
-                                <ul class="main__menu">
-                                    <li><a href="<?=\yii\helpers\Url::home(); ?>">Главная</a></li>
-                                    <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
-
-                                    <li><a href="contact.html">contact</a></li>
-                                </ul>
-                            </nav>
-                            <div class="mobile-menu clearfix visible-xs visible-sm">
-                                <nav id="mobile_dropdown">
-                                    <ul>
-                                        <li><a href="<?=\yii\helpers\Url::home(); ?>">Home</a></li>
-                                        <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
-                                        <li><a href="contact.html">contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
                         </div>
                         <!-- End MAinmenu Ares -->
                         <div class="col-md-2 col-sm-4 col-xs-3">

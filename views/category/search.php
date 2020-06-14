@@ -158,7 +158,7 @@ use yii\helpers\Html;
                                                 <div class="product__hover__info">
                                                     <ul class="product__action">
                                                         <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                        <li><a class="ti-shopping-cart" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>"></a></li>
+                                                        <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>"></a></li>
                                                         <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
                                                     </ul>
                                                 </div>
@@ -203,7 +203,7 @@ use yii\helpers\Html;
                                                 <p><?= $product->content?></p>
                                                 <span class="product__price"><?= $product->price/100 ?> ₽</span>
                                                 <div class="shop__btn">
-                                                    <a class="htc__btn" href="cart.html"><span class="ti-shopping-cart"></span>Add to Cart</a>
+                                                    <a class="htc__btn cart-add" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>"  data-id="<?= $product->id?>">Добавить в корзину</a>
                                                 </div>
                                             </div>
                                         </div>

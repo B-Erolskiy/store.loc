@@ -36,8 +36,13 @@ use yii\web\View;
                     <div class="htc__shop__cat">
                         <h4 class="section-title-4"> Категории</h4>
                         <div class="category-menu-list">
-                            <ul class="catalog">
+                            <ul>
                                 <?= MenuWidget::widget(['tpl' => 'menu'])?>
+                            </ul>
+                        </div>
+                        <div class="category-menu-list">
+                            <ul class="catalog">
+                                <?= MenuWidget::widget(['tpl' => 'menu-index'])?>
                             </ul>
                         </div>
                     </div>
@@ -62,48 +67,6 @@ use yii\web\View;
                         </div>
                     </div>
                     <!-- End Product Cat -->
-                    <!-- Start Color Cat -->
-                    <div class="htc__shop__cat">
-                        <h4 class="section-title-4">CHOOSE COLOUR</h4>
-                        <ul class="sidebar__list">
-                            <li class="black"><a href="#"><i class="zmdi zmdi-circle"></i>Black<span>3</span></a></li>
-                            <li class="blue"><a href="#"><i class="zmdi zmdi-circle"></i>Blue <span>4</span></a></li>
-                            <li class="brown"><a href="#"><i class="zmdi zmdi-circle"></i>Brown <span>3</span></a></li>
-                            <li class="red"><a href="#"><i class="zmdi zmdi-circle"></i>Red <span>6</span></a></li>
-                            <li class="orange"><a href="#"><i class="zmdi zmdi-circle"></i>Orange <span>10</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- End Color Cat -->
-                    <!-- Start Size Cat -->
-                    <div class="htc__shop__cat">
-                        <h4 class="section-title-4">PRODUCT CATEGORIES</h4>
-                        <ul class="sidebar__list">
-                            <li><a href="#">xl <span>3</span></a></li>
-                            <li><a href="#">l <span>4</span></a></li>
-                            <li><a href="#">lm <span>3</span></a></li>
-                            <li><a href="#">ml <span>6</span></a></li>
-                            <li><a href="#">m <span>10</span></a></li>
-                            <li><a href="#">ml <span>3</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- End Size Cat -->
-                    <!-- Start Tag Area -->
-                    <div class="htc__shop__cat">
-                        <h4 class="section-title-4">Tags</h4>
-                        <ul class="htc__tags">
-                            <li><a href="#">All</a></li>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Kids</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Stationery</a></li>
-                            <li><a href="#">Homelife</a></li>
-                            <li><a href="#">Appliances</a></li>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Baby</a></li>
-                            <li><a href="#">Beauty</a></li>
-                        </ul>
-                    </div>
-                    <!-- End Tag Area -->
                 </div>
             </div>
             <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12 smt-30">
@@ -153,7 +116,7 @@ use yii\web\View;
                                                 <div class="product__hover__info">
                                                     <ul class="product__action">
                                                         <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                        <li><a class="ti-shopping-cart" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>"></a></li>
+                                                        <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>"></a></li>
                                                         <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
                                                     </ul>
                                                 </div>
@@ -204,7 +167,7 @@ use yii\web\View;
                                                 <p><?= $product->content?></p>
                                                 <span class="product__price"><?= $product->price/100 ?> ₽</span>
                                                 <div class="shop__btn">
-                                                    <a class="ti-shopping-cart htc__btn" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>"  data-id="<?= $product->id?>">Добавить в корзину</a>
+                                                    <a class="cart-add htc__btn" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>"  data-id="<?= $product->id?>">Добавить в корзину</a>
                                                 </div>
                                             </div>
                                         </div>

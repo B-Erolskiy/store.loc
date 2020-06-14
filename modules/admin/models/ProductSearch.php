@@ -71,15 +71,15 @@ class ProductSearch extends Product
         else{
             // grid filtering conditions
             $query->andFilterWhere([
-                'id' => $this->id,
-                'price' => $this->price,
+                'product.id' => $this->id,
+                'product.price' => $this->price,
                 'hit' => $this->hit,
                 'new' => $this->new,
                 'sale' => $this->sale,
             ]);
         }
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'product.name', $this->name])
             ->andFilterWhere(['like', 'alias', $this->alias])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'keywords_tag', $this->keywords_tag])

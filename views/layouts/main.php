@@ -76,17 +76,16 @@ ltAppAsset::register($this);
                     <div class="col-md-2 col-sm-4 col-xs-3">
                         <ul class="menu-extra">
                             <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li>
-                                        <a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span></a>
-                                </li>
-                            <li class="li-cart">
+                            <li><a href="<?=\yii\helpers\Url::to(['/admin'])?>"><span class="ti-user"></span></a></li>
+                            <li>
 
                                 <a href="<?=\yii\helpers\Url::to(['cart/view']); ?>">
-                                    <?= Html::img('@web/images/cart/cart.png')?>
+                                    <span class="ti-shopping-cart"><?php $session = Yii::$app->session;
+                                        if ($session['cart.qty']):?>
+                                            <div class="c-amount-indicator mini-basket-amount sel-mini-cart-count"><?= $session['cart.qty']?></div>
+                                        <?php endif;?></span>
                                 </a>
-
                             </li>
-                            <li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>
                         </ul>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
             <div class="category-menu-dropdown">
                 <?php foreach ($category['childs'] as $categoryChildFirst):?>
                     <div class="category-common mb--30">
-                        <h4 >
+                        <h4>
                             <a class="categories-subtitle" href="<?= \yii\helpers\Url::to(['category/view', 'id' => $categoryChildFirst['alias']])?>">
                                 <?= $categoryChildFirst['name']?></a>
                         </h4>

@@ -16,6 +16,10 @@ class MenuWidget extends Widget
     public function run()
     {
         //get cache
+        if ($this->tpl == 'menu-index.php'){
+            $menu = \Yii::$app->cache->get('menu-index');
+            if ($menu) return $menu;
+        }
         if ($this->tpl == 'menu.php'){
             $menu = \Yii::$app->cache->get('menu');
             if ($menu) return $menu;
@@ -27,6 +31,9 @@ class MenuWidget extends Widget
         //set cache
         if ($this->tpl == 'menu.php'){
             Yii::$app->cache->set('menu', $this->menuHtml, 60);
+        }
+        if ($this->tpl == 'menu-index.php'){
+            Yii::$app->cache->set('menu-index', $this->menuHtml, 60);
         }
         return $this->menuHtml;
     }

@@ -103,30 +103,33 @@
         //$('body').classList.add('stop-scrolling');
         var id = $(this).data('id'),
             qty = $('#qtybutton').val();
-        $.ajax({
-            url: '/cart/add',
-            data: {id: id, qty: qty},
-            type: 'GET',
-            success: function () {
-                if(qty == undefined){
-                    qty = 1;
+        console.log(qty);
+        if (qty >= 1 || qty == undefined){
+            $.ajax({
+                url: '/cart/add',
+                data: {id: id, qty: qty},
+                type: 'GET',
+                success: function () {
+                    if(qty == undefined){
+                        qty = 1;
+                    }
+                    else {
+                        qty = filterInt(qty);
+                    }
+                    if (filterInt($('.mini-basket-amount').text())){
+                        $('.mini-basket-amount').css('display', 'block');
+                        qty += filterInt($('.mini-basket-amount').text());
+                        $('.mini-basket-amount').html(qty);
+                    }
+                    else {
+                        $('.menu-extra .ti-shopping-cart').html('<div class="c-amount-indicator mini-basket-amount sel-mini-cart-count">'+qty+'</div>');
+                    }
+                },
+                error: function () {
+                    console.log('Error');
                 }
-                else {
-                    qty = filterInt(qty);
-                }
-                if (filterInt($('.mini-basket-amount').text())){
-                    $('.mini-basket-amount').css('display', 'block');
-                    qty += filterInt($('.mini-basket-amount').text());
-                    $('.mini-basket-amount').html(qty);
-                }
-                else {
-                    $('.menu-extra .ti-shopping-cart').html('<div class="c-amount-indicator mini-basket-amount sel-mini-cart-count">'+qty+'</div>');
-                }
-            },
-            error: function () {
-                console.log('Error');
-            }
-        });
+            });
+        }
     });
 
 
@@ -203,6 +206,13 @@
                 }
             });
         }
+    });
+
+    //отмена повторной отправки формы "Свяжитесь с нами"
+    $('#contact-form').on('beforeSubmit', function () {
+        // Вызывается после удачной валидации всех полей и до того как форма отправляется на северер.
+        // Тут можно отправить форму через AJAX. Не забудьте вернуть false для того, чтобы форма не отправлялась как обычно.
+        return false;
     });
 
     /*  CAROUSEL  */

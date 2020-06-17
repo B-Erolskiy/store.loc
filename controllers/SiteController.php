@@ -54,6 +54,10 @@ class SiteController extends AppController
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'foreColor' => 0xFF4136, // цвет символов
+                'minLength' => 5, // минимальное количество символов
+                'maxLength' => 6, // максимальное
+                'offset' => 6,
             ],
         ];
     }
@@ -74,16 +78,21 @@ class SiteController extends AppController
         return $this->render('index', compact('categories','hits', 'news'));
     }
 
-    public function actionOffices()
+    public function actionOffices($isFormSent = false)
     {
+        //Yii::$app->session->destroy();
         $this->setMeta('TMART | Магазины');
         $offices = Offices::find()->all();
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post())) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-            return $this->refresh();
+
+        if ($model->load(Yii::$app->request->post())&& $model->validate()) {
+
+                $model->contact(Yii::$app->params['adminEmail']);
+                $session = Yii::$app->session;
+                $session->open();
+                return $this->redirect(['/offices', 'isFormSent' => true]);
         }
-        return $this->render('contact', compact('offices','model'));
+        return $this->render('contact', compact('offices','model', 'isFormSent'));
     }
 
     /**
@@ -118,24 +127,6 @@ class SiteController extends AppController
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
     }
 
     /**

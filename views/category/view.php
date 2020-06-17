@@ -47,7 +47,7 @@ use yii\web\View;
                         </div>
                     </div>
                     <div class="htc-grid-range">
-                        <h4 class="section-title-4">FILTER BY PRICE</h4>
+                        <h4 class="section-title-4">Фильтрация по цене</h4>
                         <div class="content-shopby">
                             <div class="price_filter s-filter clear">
                                 <form action="#" method="GET">
@@ -55,10 +55,10 @@ use yii\web\View;
                                     <div class="slider__range--output">
                                         <div class="price__output--wrap">
                                             <div class="price--output">
-                                                <span>Price :</span><input type="text" id="amount" readonly>
+                                                <span>Цена :</span><input type="text" id="amount" readonly>
                                             </div>
                                             <div class="price--filter">
-                                                <a href="#">Filter</a>
+                                                <a href="#" class="ti-search"></a>
                                             </div>
                                         </div>
                                     </div>

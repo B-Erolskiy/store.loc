@@ -33,7 +33,7 @@ use yii\helpers\Html;
                 <div class="htc__shop__left__sidebar">
                     <!-- Start Range -->
                     <div class="htc-grid-range">
-                        <h4 class="section-title-4">FILTER BY PRICE</h4>
+                        <h4 class="section-title-4">Фильтрация по цене</h4>
                         <div class="content-shopby">
                             <div class="price_filter s-filter clear">
                                 <form action="#" method="GET">
@@ -41,10 +41,10 @@ use yii\helpers\Html;
                                     <div class="slider__range--output">
                                         <div class="price__output--wrap">
                                             <div class="price--output">
-                                                <span>Price :</span><input type="text" id="amount" readonly>
+                                                <span>Цена :</span><input type="text" id="amount" readonly>
                                             </div>
                                             <div class="price--filter">
-                                                <a href="#">Filter</a>
+                                                <a href="#" class="ti-search"></a>
                                             </div>
                                         </div>
                                     </div>
@@ -57,56 +57,17 @@ use yii\helpers\Html;
                     <div class="htc__shop__cat">
                         <h4 class="section-title-4"> Категории</h4>
                         <div class="category-menu-list">
-                            <ul class="catalog">
+                            <ul>
                                 <?= MenuWidget::widget(['tpl' => 'menu'])?>
                             </ul>
                         </div>
+                        <div class="category-menu-list">
+                            <ul class="catalog">
+                                <?= MenuWidget::widget(['tpl' => 'menu-index'])?>
+                            </ul>
+                        </div>
                     </div>
-
-
                     <!-- End Product Cat -->
-                    <!-- Start Color Cat -->
-                    <div class="htc__shop__cat">
-                        <h4 class="section-title-4">CHOOSE COLOUR</h4>
-                        <ul class="sidebar__list">
-                            <li class="black"><a href="#"><i class="zmdi zmdi-circle"></i>Black<span>3</span></a></li>
-                            <li class="blue"><a href="#"><i class="zmdi zmdi-circle"></i>Blue <span>4</span></a></li>
-                            <li class="brown"><a href="#"><i class="zmdi zmdi-circle"></i>Brown <span>3</span></a></li>
-                            <li class="red"><a href="#"><i class="zmdi zmdi-circle"></i>Red <span>6</span></a></li>
-                            <li class="orange"><a href="#"><i class="zmdi zmdi-circle"></i>Orange <span>10</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- End Color Cat -->
-                    <!-- Start Size Cat -->
-                    <div class="htc__shop__cat">
-                        <h4 class="section-title-4">PRODUCT CATEGORIES</h4>
-                        <ul class="sidebar__list">
-                            <li><a href="#">xl <span>3</span></a></li>
-                            <li><a href="#">l <span>4</span></a></li>
-                            <li><a href="#">lm <span>3</span></a></li>
-                            <li><a href="#">ml <span>6</span></a></li>
-                            <li><a href="#">m <span>10</span></a></li>
-                            <li><a href="#">ml <span>3</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- End Size Cat -->
-                    <!-- Start Tag Area -->
-                    <div class="htc__shop__cat">
-                        <h4 class="section-title-4">Tags</h4>
-                        <ul class="htc__tags">
-                            <li><a href="#">All</a></li>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Kids</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Stationery</a></li>
-                            <li><a href="#">Homelife</a></li>
-                            <li><a href="#">Appliances</a></li>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Baby</a></li>
-                            <li><a href="#">Beauty</a></li>
-                        </ul>
-                    </div>
-                    <!-- End Tag Area -->
                 </div>
             </div>
             <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12 smt-30">

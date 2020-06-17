@@ -77,7 +77,7 @@ use yii\helpers\Html;
                             <div class="product-quantity">
                                     <div class="product-quantity">
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" id="qtybutton" min="1" value="1">
+                                            <input class="cart-plus-minus-box" type="number" id="qtybutton" min="1" value="1">
                                         </div>
                                     </div>
                             </div>

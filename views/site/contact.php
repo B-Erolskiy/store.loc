@@ -8,6 +8,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
+$res = Yii::$app->session->getFlash('contactFormSubmitted');
+
 $this->title = 'Магазины компании';
 
 foreach ($offices as $office){
@@ -109,6 +111,7 @@ JS
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url('../../web/images/bg/2.jpg') no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
         <div class="container">
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="bradcaump__inner text-center">
@@ -127,6 +130,14 @@ JS
 
 <div class="site-contact container">
     <div class="ptb--30">
+        <?php if ($isFormSent): ?>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Ваше обращение принято. Мы свяжемся с вами в ближайшее время
+            </div>
+        <?php endif;?>
         <h2>Поиск магазина</h2>
         <p><?php if($officesCount == 1) $officesCountStr = "магазин";
             elseif ($officesCount < 5) $officesCountStr = "магазина";
@@ -147,39 +158,33 @@ JS
     ]);?>
         </div>
     </div>
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')):?>
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <?= Yii::$app->session->getFlash('contactFormSubmitted')?>
-        </div>
-    <?php  else: ?>
-    <div class="row">
-        <div class="col-lg-5 ptb--50">
-            <h2>Свяжитесь с нами</h2>
+    <div class="contact-form">
+    <?php if (!$isFormSent):?>
+        <div class="row">
+            <div class="col-lg-5 ptb--50">
+                <h2>Свяжитесь с нами</h2>
 
-            <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
-            <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
 
-            <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'email') ?>
 
-            <?= $form->field($model, 'subject') ?>
+                <?= $form->field($model, 'subject') ?>
 
-            <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
-            <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-            ]) ?>
+                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                ]) ?>
 
-            <div class="form-group">
-                <?= Html::submitButton('Отправить', ['class' => 'btn btn-success', 'name' => 'contact-button']) ?>
+                <div class="form-group">
+                    <?= Html::submitButton('Отправить', ['class' => 'btn btn-success', 'name' => 'contact-button']) ?>
+                </div>
+
+                <?php ActiveForm::end(); ?>
             </div>
-
-            <?php ActiveForm::end(); ?>
         </div>
-    </div>
     <?php endif; ?>
-
+    </div>
 </div>

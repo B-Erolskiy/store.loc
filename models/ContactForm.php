@@ -61,6 +61,5 @@ class ContactForm extends Model
                     ->setTextBody('От: ' . $this->name . ' <' . $this->email . '>. 
 Обращение: ' . $this->body)
                     ->send();
-                return true;
     }
 }

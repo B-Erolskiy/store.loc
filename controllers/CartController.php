@@ -115,7 +115,7 @@ class CartController extends AppController
                     ['session' => $session,
                         'order' => $order,
                     ])
-                    ->setFrom(['bogdan8080@yandex.ru' => 'STORE.LOC'])
+                    ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
                     ->setTo($order->email)
                     ->setSubject('Заказ с сайта store.loc - ' . $order->id)
                     ->send();

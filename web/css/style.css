@@ -2182,7 +2182,6 @@ product__style--7
     float: left;
 }
 .price--filter a {
-    font-family: poppins;
     text-transform: uppercase;
 }
 .price--output > * {
@@ -4317,6 +4316,18 @@ a.shipping-calculator-button:hover {
     }
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
 /* СЧЕТЧИК КОРЗИНЫ */
 
 .c-amount-indicator{
@@ -4335,6 +4346,23 @@ a.shipping-calculator-button:hover {
 
 .mini-basket-amount{
     position: absolute;
-    right: .4rem;
+    right: 1.2rem;
     top: 49%;
 }
+
+@media (max-width: 991px) and (min-width: 768px){
+    .mini-basket-amount{
+        left: 58%;
+        right: auto;
+    }
+}
+@media (max-width: 767px){
+    .mini-basket-amount{
+        left: auto;
+        right: auto;
+    }
+}
+
+
+
+

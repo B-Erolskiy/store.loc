@@ -353,10 +353,10 @@
     justify-content: flex-end;
 }
 .menu-extra li {
-    padding: 0 15px;
+    padding: 0 20px 0 0;
 }
 .menu-extra li:last-child {
-    padding-right: 0;
+    padding-right: 15px;
 }
 .menu-extra li:first-child {
     padding-left: 0;

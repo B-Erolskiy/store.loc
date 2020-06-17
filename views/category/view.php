@@ -15,8 +15,12 @@ use yii\web\View;
                     <div class="bradcaump__inner text-center">
                         <h2 class="bradcaump-title">Shop Sidebar</h2>
                         <nav class="bradcaump-inner">
-                            <a class="breadcrumb-item" href="<?=\yii\helpers\Url::home(); ?>">Главная</a>
+                            <a class="breadcrumb-item" href="<?=\yii\helpers\Url::to(['category/'])?>">Каталог</a>
                             <span class="brd-separetor">/</span>
+                            <?php foreach ($parents as $parent):?>
+                                <a class="breadcrumb-item" href="<?=\yii\helpers\Url::to(['category/view', 'id' => $parent['alias']]); ?>"><?= $parent['name']?></a>
+                                <span class="brd-separetor">/</span>
+                            <?php endforeach;?>
                             <span class="breadcrumb-item active"><?= $category->name?></span>
                         </nav>
                     </div>

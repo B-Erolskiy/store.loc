@@ -77,7 +77,7 @@ $config = [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.yandex.ru',
                 'username' => 'bogdan8080@yandex.ru',
-                'password' => 'boger808080',
+                'password' => 'u911023n',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],

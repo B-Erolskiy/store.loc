@@ -14,7 +14,7 @@ foreach ($offices as $office){
     $codeJS .= "var menuItem = " . "\$(" . "'<li class=\"nav-item\"><a id=$office->id class=\"nav-link active\" href=\"#\"> " . "$office->addess" . "</a></li>'),\n" .
     "placemark$office->id = new ymaps.Placemark([$office->coord1, $office->coord2], 
     { balloonContentHeader: \"$office->addess\", balloonContentBody: \"$office->worktime<br><a href='tel:$office->phone' class='btn btn-danger center-block'>Позвонить</a>\",balloonContentFooter: 'Информация предоставлена:<br/>OOO \"TMART\"', options:{maxWidth: '350px'}},
-    {iconLayout: 'default#image',iconImageHref: 'images/map/map-marker-icon.png',iconImageSize: [35, 50],iconImageOffset: [-5, -38]});\n" .
+    {iconLayout: 'default#image',iconImageHref: 'images/map/map-marker-icon.png',iconImageSize: [30, 43],iconImageOffset: [-5, -38]});\n" .
     "menuItem.appendTo('#menu-item')\n" .
     ".find('a#$office->id')
             .bind('click', function () {
@@ -146,41 +146,40 @@ JS
         'map' => $map,
     ]);?>
         </div>
-
     </div>
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
-        <div class="alert alert-success">
-            Спасибо за заявку! Мы обязательно ответим вам в ближайшее время.
+    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')):?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <?= Yii::$app->session->getFlash('contactFormSubmitted')?>
         </div>
-    <?php else: ?>
+    <?php  else: ?>
+    <div class="row">
+        <div class="col-lg-5 ptb--50">
+            <h2>Свяжитесь с нами</h2>
 
-        <div class="row">
-            <div class="col-lg-5 ptb--50">
-                <h2>Свяжитесь с нами</h2>
+            <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
-                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+            <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'email') ?>
 
-                <?= $form->field($model, 'email') ?>
+            <?= $form->field($model, 'subject') ?>
 
-                <?= $form->field($model, 'subject') ?>
+            <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
-                <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+            ]) ?>
 
-                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                ]) ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Отправить', ['class' => 'btn btn-success', 'name' => 'contact-button']) ?>
-                </div>
-
-                <?php ActiveForm::end(); ?>
-
+            <div class="form-group">
+                <?= Html::submitButton('Отправить', ['class' => 'btn btn-success', 'name' => 'contact-button']) ?>
             </div>
-        </div>
 
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
     <?php endif; ?>
 
 </div>

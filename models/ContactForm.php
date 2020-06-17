@@ -39,7 +39,7 @@ class ContactForm extends Model
     {
         return [
             'name' => 'Ваше имя',
-            'email' => 'Ваше e-mail',
+            'email' => 'Ваш e-mail',
             'subject' => 'Тема обращения',
             'body' => 'Что вы хотите сказать',
             'verifyCode' => 'Проверка "на робота"',
@@ -49,21 +49,18 @@ class ContactForm extends Model
     /**
      * Sends an email to the specified email address using the information collected by this model.
      * @param string $email the target email address
-     * @return bool whether the model passes validation
+     * @return bool whether the model sent email
      */
     public function contact($email)
     {
-        if ($this->validate()) {
             Yii::$app->mailer->compose()
-                ->setTo($email)
-                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-                ->setReplyTo([$this->email => $this->name])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body)
-                ->send();
-
-            return true;
-        }
-        return false;
+                    ->setTo($email)
+                    ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                    ->setReplyTo([$this->email => $this->name])
+                    ->setSubject('Обращение с сайта STORE.LOC: ' . $this->subject)
+                    ->setTextBody('От: ' . $this->name . ' <' . $this->email . '>. 
+Обращение: ' . $this->body)
+                    ->send();
+                return true;
     }
 }

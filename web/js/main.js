@@ -80,12 +80,19 @@
                 else {
                     $('#orderForm').css('display', 'block');
                 }
+                $('.mini-basket-amount').css('display', 'none');
             },
             error: function () {
                 console.log('Error');
             }
         });
     });
+
+    var filterInt = function (value) {
+        if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
+            return Number(value);
+        return NaN;
+    }
 
     //добавление товара в корзину
     $('.cart-add').on('click', function (e) {
@@ -101,7 +108,20 @@
             data: {id: id, qty: qty},
             type: 'GET',
             success: function () {
-                //showCart();
+                if(qty == undefined){
+                    qty = 1;
+                }
+                else {
+                    qty = filterInt(qty);
+                }
+                if (filterInt($('.mini-basket-amount').text())){
+                    $('.mini-basket-amount').css('display', 'block');
+                    qty += filterInt($('.mini-basket-amount').text());
+                    $('.mini-basket-amount').html(qty);
+                }
+                else {
+                    $('.menu-extra .ti-shopping-cart').html('<div class="c-amount-indicator mini-basket-amount sel-mini-cart-count">'+qty+'</div>');
+                }
             },
             error: function () {
                 console.log('Error');
@@ -109,10 +129,13 @@
         });
     });
 
+
+
     //удаление товара из корзины
     $('.cart-main-area').on('click', '.del-item', function (e) {
         e.preventDefault(); //отмена дефолтного поведения
         var id = $(this).data('id');
+        var qty = filterInt($(this).data('qty'));
         $.ajax({
             url: '/cart/delete',
             data: {id: id, isAjax: true},
@@ -122,9 +145,14 @@
                 var emptyCart = $("input[name='emptyCart']").val();
                 if(emptyCart == "true"){
                     $('#orderForm').css('display', 'none');
+                    $('.mini-basket-amount').css('display', 'none');
                 }
                 else {
+                    console.log(qty);
                     $('#orderForm').css('display', 'block');
+                    qty = filterInt($('.mini-basket-amount').text())-qty;
+                    console.log($('.mini-basket-amount').text());
+                    $('.mini-basket-amount').html(qty);
                 }
             },
             error: function (res) {

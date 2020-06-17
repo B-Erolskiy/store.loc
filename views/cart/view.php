@@ -156,7 +156,7 @@ JS
                                             <td class="product-price"><span class="amount"><?=$item['price']/100?></span></td>
                                             <td class="product-price"><span class="amount"><?=$item['qty']?></span></td>
                                             <td class="product-subtotal"><?=$item['price']/100*$item['qty']?></td>
-                                            <td class="product-remove"><a href="<?= \yii\helpers\Url::to(['cart/delete','id'=> $item['id']])?>" data-id="<?=$item['id']?>" class="del-item">X</a></td>
+                                            <td class="product-remove"><a href="<?= \yii\helpers\Url::to(['cart/delete','id'=> $item['id']])?>" data-qty="<?=$item['qty']?>" data-id="<?=$item['id']?>" class="del-item">X</a></td>
                                             <input type="hidden" name="emptyCart" value="false"/>
                                         </tr>
                                     <?php endforeach; ?>

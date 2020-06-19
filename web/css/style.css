@@ -4276,10 +4276,8 @@ a.shipping-calculator-button:hover {
     background: url("../images/gif/load.gif") no-repeat 50% 40%;
     width: 300px;
     height: 350px;
+    cursor: pointer;
     /*padding-bottom: 30px;*/
-}
-#large img{
-
 }
 #thumbnail {
     float: left;

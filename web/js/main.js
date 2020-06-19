@@ -48,6 +48,32 @@
         speed: 300
     });
 
+    var openPhotoSwipe = function() {
+        var pswpElement = document.querySelectorAll('.pswp')[0];
+
+        // build items array
+        var items = [
+            {
+                src: $('#large img').attr('src'),
+                w: 600,
+                h: 600,
+            }
+        ];
+        // define options (if needed)
+        var options = {
+            // history & focus options are disabled on CodePen
+            history: false,
+            focus: false,
+            opacity: 0.7,
+
+            showAnimationDuration: 0,
+            hideAnimationDuration: 0
+        };
+        var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+        gallery.init();
+    };
+    $('#large').on('click',openPhotoSwipe);
+
     /*$('#clearCart-button').addEventListener("onclick", function(){
         $.ajax({
             url: 'cart/clear',

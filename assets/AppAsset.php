@@ -26,6 +26,9 @@ class AppAsset extends AssetBundle
         'css/style.css',
         'css/responsive.css',
         'css/custom.css',
+        'css/photoswipe.css',
+        'css/default-skin/default-skin.css',
+
     ];
     public $js = [
         'js/vendor/modernizr-2.8.3.min.js',
@@ -36,6 +39,8 @@ class AppAsset extends AssetBundle
         'js/slick.min.js',
         'js/jquery-ui.js',
         'js/jquery.accordion.js',
+        'js/photoswipe.js',
+        'js/photoswipe-ui-default.js',
         'js/main.js',
     ];
     public $depends = [

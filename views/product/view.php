@@ -13,7 +13,7 @@ use yii\helpers\Html;
                     <div class="bradcaump__inner text-center">
                         <h2 class="bradcaump-title">Информация о товаре</h2>
                         <nav class="bradcaump-inner">
-                            <a class="breadcrumb-item" href="<?=\yii\helpers\Url::home(); ?>">Главная</a>
+                            <a class="breadcrumb-item" href="<?=\yii\helpers\Url::to(['/category']); ?>">Каталог</a>
                             <span class="brd-separetor">/</span>
                             <span class="breadcrumb-item active"><a href="<?=\yii\helpers\Url::to(['category/view', 'id' => $product->category->alias]) ?>"><?= $product->category->name?></a></span>
                         </nav>
@@ -32,6 +32,45 @@ use yii\helpers\Html;
                 <div class="col-md-7 col-lg-7 col-sm-5 col-xs-12">
                     <div class="product__details__container product-details-5">
                         <div class="col-md-12">
+                            <!-- Root element of PhotoSwipe. Must have class pswp. -->
+                            <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                                <!-- Background of PhotoSwipe.
+                                     It's a separate element as animating opacity is faster than rgba(). -->
+                                <div class="pswp__bg"></div>
+                                <!-- Slides wrapper with overflow:hidden. -->
+                                <div class="pswp__scroll-wrap">
+                                    <!-- Container that holds slides.
+                                        PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                                        Don't modify these 3 pswp__item elements, data is added later on. -->
+                                    <div class="pswp__container">
+                                        <div class="pswp__item"></div>
+                                        <div class="pswp__item"></div>
+                                        <div class="pswp__item"></div>
+                                    </div>
+                                    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                                    <div class="pswp__ui pswp__ui--hidden">
+                                        <div class="pswp__top-bar">
+                                            <!--  Controls are self-explanatory. Order can be changed. -->
+                                            <div class="pswp__counter"></div>
+                                            <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                                            <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                                            <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                                            <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                                            <!-- element will get class pswp__preloader--active when preloader is running -->
+                                            <div class="pswp__preloader">
+                                                <div class="pswp__preloader__icn">
+                                                    <div class="pswp__preloader__cut">
+                                                        <div class="pswp__preloader__donut"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pswp__caption">
+                                            <div class="pswp__caption__center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div id="large">
                                 <?php $image = $product->getImage();?>
                                 <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>

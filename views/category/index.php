@@ -13,10 +13,7 @@ use yii\web\View;
             <div class="row">
                 <div class="col-xs-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">Shop Sidebar</h2>
-                        <nav class="bradcaump-inner">
-                            <span class="breadcrumb-item active">Каталог</span>
-                        </nav>
+                        <h2 class="bradcaump-title">Каталог товаров</h2>
                     </div>
                 </div>
             </div>

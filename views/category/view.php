@@ -13,7 +13,7 @@ use yii\web\View;
             <div class="row">
                 <div class="col-xs-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">Shop Sidebar</h2>
+                        <h2 class="bradcaump-title">Каталог товаров</h2>
                         <nav class="bradcaump-inner">
                             <a class="breadcrumb-item" href="<?=\yii\helpers\Url::to(['category/'])?>">Каталог</a>
                             <span class="brd-separetor">/</span>

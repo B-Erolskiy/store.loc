@@ -55,8 +55,8 @@
         var items = [
             {
                 src: $('#large img').attr('src'),
-                w: 600,
-                h: 600,
+                w: 1500,
+                h: 1500,
             }
         ];
         // define options (if needed)
@@ -120,10 +120,28 @@
         return NaN;
     }
 
+    //открытие модального окна с краткой информацией о товаре
+    $('.product-quick-view').on('click', function (e) {
+        e.preventDefault(); //отмена дефолтного поведения
+        var id = $(this).data('id');
+        $.ajax({
+            url: '/product/qview',
+            data:{id: id},
+            type: 'GET',
+            success: function (res) {
+                $('#myProductModal').html(res);
+                $('#myProductModal').modal('show');
+            },
+            error: function (res) {
+                console.log('Error' + res);
+            }
+        });
+    });
+
+
     //добавление товара в корзину
     $('.cart-add').on('click', function (e) {
         e.preventDefault(); //отмена дефолтного поведения
-        $('.modal-cart').modal('show');
         var obj = $('.number');
         obj.removeClass('hidden');
         //$('body').classList.add('stop-scrolling');
@@ -136,6 +154,9 @@
                 data: {id: id, qty: qty},
                 type: 'GET',
                 success: function () {
+                    $('#myProductModal').modal('hide');
+                    $('.modal-cart').modal('show');
+
                     if(qty == undefined){
                         qty = 1;
                     }
@@ -150,6 +171,7 @@
                     else {
                         $('.menu-extra .ti-shopping-cart').html('<div class="c-amount-indicator mini-basket-amount sel-mini-cart-count">'+qty+'</div>');
                     }
+
                 },
                 error: function () {
                     console.log('Error');

@@ -19,4 +19,12 @@ class ProductController extends AppController
         //$product = Product::find()->with('category')->where(['id' => $id])->limit(1)->one();
         return $this->render('view', compact('product', 'hits'));
     }
+
+    public function actionQview($id){
+        $product = Product::find()->where(['id' => $id])->one();
+        if (empty($product))
+            throw new \yii\web\HttpException(404, 'Такого товара не существует');
+        $this->layout = false;
+        return $this->render('quick-view', compact('product'));
+    }
 }

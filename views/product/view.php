@@ -49,10 +49,14 @@ use yii\helpers\Html;
                                     </div>
                                     <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
                                     <div class="pswp__ui pswp__ui--hidden">
+
                                         <div class="pswp__top-bar">
+
                                             <!--  Controls are self-explanatory. Order can be changed. -->
+
                                             <div class="pswp__counter"></div>
                                             <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                                            <button class="pswp__button pswp__button--share" title="Share"></button>
                                             <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
                                             <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
                                             <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
@@ -65,6 +69,13 @@ use yii\helpers\Html;
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                            <div class="pswp__share-tooltip"></div>
+                                        </div>
+                                        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                                        </button>
+                                        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                                        </button>
                                         <div class="pswp__caption">
                                             <div class="pswp__caption__center"></div>
                                         </div>
@@ -122,7 +133,7 @@ use yii\helpers\Html;
                             </div>
                         </div>
                         <ul class="pro__dtl__btn">
-                            <li class="buy__now__btn"><a class="cart-add"  href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>">купить</a></li>
+                            <li class="buy__now__btn"><a class="cart-add"  href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>">Добавить в корзину</a></li>
                             <li><a href="#"><span class="ti-heart"></span></a></li>
                             <li><a href="#"><span class="ti-email"></span></a></li>
                         </ul>
@@ -175,18 +186,7 @@ use yii\helpers\Html;
                     <!-- End Single Content -->
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="sheet" class="product__tab__content fade">
-                        <div class="pro__feature">
-                            <h2 class="title__6">Ссылки</h2>
-                            <ul class="feature__list">
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit esse</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
-                            </ul>
-                        </div>
+
                     </div>
                     <!-- End Single Content -->
                     <!-- Start Single Content -->

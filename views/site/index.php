@@ -149,9 +149,9 @@ use yii\helpers\Html;
                                                     </div>
                                                     <div class="product__hover__info">
                                                         <ul class="product__action">
-                                                            <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                            <li><a data-toggle="modal" data-target="#productModal" title="Быстрый просмотр" data-id="<?= $hit->id?>" class="product-quick-view quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
                                                             <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $hit->id])?>" data-id="<?= $hit->id?>"></a></li>
-                                                            <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
+                                                            <li><a title="Wishlist" href="#"><span class="ti-heart"></span></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -185,7 +185,7 @@ use yii\helpers\Html;
                                                             </div>
                                                             <div class="product__hover__info">
                                                                 <ul class="product__action">
-                                                                    <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                                    <li><a data-toggle="modal" data-target="#productModal" title="Быстрый просмотр" data-id="<?= $new->id?>" class="product-quick-view quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
                                                                     <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $new->id])?>" data-id="<?= $hit->id?>"></a></li>
                                                                     <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
                                                                 </ul>

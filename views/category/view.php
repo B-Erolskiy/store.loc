@@ -119,7 +119,7 @@ use yii\web\View;
                                                 </div>
                                                 <div class="product__hover__info">
                                                     <ul class="product__action">
-                                                        <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                        <li><a data-toggle="modal" data-target="#productModal" title="Быстрый просмотр" data-id="<?= $product->id?>" class="product-quick-view quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
                                                         <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>"></a></li>
                                                         <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
                                                     </ul>

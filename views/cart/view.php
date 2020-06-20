@@ -86,7 +86,7 @@ JS
 );
 
 ?>
-<div class="wrapper fixed__footer">
+<div class="wrapper">
 
     <div class="body__overlay"></div>
     <!-- Start Bradcaump area -->

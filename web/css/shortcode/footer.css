@@ -120,7 +120,6 @@
     position: relative;
   right: 0;
   width: 100%;
-  z-index: -99999;
 }
 .ft__widget.contact__us {
   left: 58px;

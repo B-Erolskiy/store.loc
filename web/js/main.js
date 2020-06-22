@@ -273,6 +273,14 @@
         $("#large>img").load(function(){$("#large>img:hidden").show('fast')});
     });
 
+    $().ready(function(){
+        $("#quickview-wrapper").on('click', '#thumbnail a', function (e) {
+            e.preventDefault();
+            $("#large img").hide().attr({"src": $("> img", this).attr("src"), "title": $("> img", this).attr("title")});
+            $("#large>img").load(function(){$("#large>img:hidden").show('fast')});
+        });
+    });
+
     /*-------------------------------------------
   01. jQuery MeanMenu
 --------------------------------------------- */

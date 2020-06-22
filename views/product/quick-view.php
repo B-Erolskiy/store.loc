@@ -3,18 +3,30 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
-        <div class="modal-body">
-            <div class="modal-product">
+        <div class="modal-body row">
+            <div class="modal-product col-md-12">
                 <!-- Start product images -->
-                <div class="product-images">
-                    <div class="main-image images">
+                <div class="product-images col-md-6">
+                    <div class="main-image images" id="large">
                         <?php use yii\helpers\Html;
                         $image = $product->getImage(); ?>
                         <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
                     </div>
+                    <div class="col-md-10">
+                        <?php $gallery = $product->getImages();
+                        foreach ($gallery as $image):?>
+                            <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-6">
+                                <div class="pro__thumb" id="thumbnail" >
+                                    <a href="#">
+                                        <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
                 <!-- end product images -->
-                <div class="product-info">
+                <div class="product-info col-md-6">
                     <h1><?= $product->name?></h1>
                     <div class="price-box-3">
                         <div class="s-price-box">

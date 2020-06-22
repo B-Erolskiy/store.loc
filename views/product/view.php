@@ -87,18 +87,20 @@ use yii\helpers\Html;
                                 <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
                             </div>
                         </div>
+                        <?php $gallery = $product->getImages();
+                        if (count($gallery) > 1):?>
                         <div class="product-slider-active owl-carousel col-md-10">
-                            <?php $gallery = $product->getImages();
-                            foreach ($gallery as $image):?>
-                                <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-6">
-                                    <div class="pro__thumb" id="thumbnail" >
-                                        <a href="#">
-                                            <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
-                                        </a>
-                                    </div>
+                        <?php foreach ($gallery as $image):?>
+                            <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-6">
+                                <div class="pro__thumb" id="thumbnail" >
+                                    <a href="#">
+                                        <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
+                                    </a>
                                 </div>
-                            <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
                         </div>
+                        <?php endif;?>
                     </div>
                 </div>
                 <div class="sidebar-active col-md-5 col-lg-5 col-sm-7 col-xs-12 xmt-30">

@@ -12,9 +12,10 @@
                         $image = $product->getImage(); ?>
                         <?=  Html::img($image->getUrl(), ['alt' => $product->name, 'title' => $product->name]) ?>
                     </div>
-                    <div class="col-md-10">
-                        <?php $gallery = $product->getImages();
-                        foreach ($gallery as $image):?>
+                    <?php $gallery = $product->getImages();
+                    if (count($gallery) > 1):?>
+                        <div class="col-md-10">
+                        <?php foreach ($gallery as $image):?>
                             <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-6">
                                 <div class="pro__thumb" id="thumbnail" >
                                     <a href="#">
@@ -23,7 +24,8 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                    </div>
+                        </div>
+                    <?php endif;?>
                 </div>
                 <!-- end product images -->
                 <div class="product-info col-md-6">

@@ -955,8 +955,7 @@ h3.widget-title-modal {
     font-size: 20px;
     height: 60px;
     line-height: 60px;
-    padding: 0 87px;
-    text-transform: capitalize;
+    padding: 0 47px;
     transition: all 0.5s ease 0s;
 }
 .addtocart-btn a:hover {
@@ -4361,6 +4360,54 @@ input[type=number] {
     }
 }
 
+.continue-btn {
+    background: #fff none repeat scroll 0 0;
+    border: 1.5px #333 solid;
+    color: #333;
+    display: inline-block;
+    font-size: 18px;
+    height: 50px;
+    padding: 0 17px;
+    transition: all 0.5s ease 0s;
+    border-radius: unset;
+}
 
+.gotocart-btn {
+    background: #333 none repeat scroll 0 0;
+    border: 1.5px #333 solid;
+    color: #fff;
+    display: inline-block;
+    font-size: 18px;
+    height: 50px;
+    padding: 0 17px;
+    transition: all 0.5s ease 0s;
+    border-radius: unset;
+}
+
+.gotocart-btn:hover , .continue-btn:hover {
+    color: #fff;
+    background: #ff4136;
+    border: 1px solid #ff4136;
+}
+
+.modal-footer, .modal-body{
+    text-align: center;
+}
+.modal-body {
+    padding: 45px 15px 30px;
+}
+.modal-body p{
+    font-size: 24px;
+}
+.modal-header {
+    border-bottom: 0;
+}
+.modal-footer {
+    border-top: 0;
+    padding: 15px 15px 30px;
+}
+.modal-title{
+    display: none;
+}
 
 

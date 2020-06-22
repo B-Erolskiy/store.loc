@@ -377,8 +377,8 @@ ltAppAsset::register($this);
                 <p>Товар добавлен в корзину</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Продолжить покупки</button>
-                <a href="<?=\yii\helpers\Url::to(['cart/view']); ?>"><button type="button" class="btn btn-primary">Перейти к корзине</button></a>
+                <button type="button" class="continue-btn btn btn-secondary" data-dismiss="modal">Продолжить покупки</button>
+                <a href="<?=\yii\helpers\Url::to(['cart/view']); ?>"><button type="button" class="btn btn-primary gotocart-btn">Перейти к корзине</button></a>
             </div>
         </div><!-- /.модальное окно-Содержание -->
     </div><!-- /.модальное окно-диалог -->

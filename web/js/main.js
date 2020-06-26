@@ -48,6 +48,8 @@
         speed: 300
     });
 
+
+    //увеличенный просмотр изображений
     var openPhotoSwipe = function() {
         var pswpElement = document.querySelectorAll('.pswp')[0];
 
@@ -121,7 +123,7 @@
     }
 
     //открытие модального окна с краткой информацией о товаре
-    $('.product-quick-view').on('click', function (e) {
+    $('body').on('click', '.product-quick-view', function (e) {
         e.preventDefault(); //отмена дефолтного поведения
         var id = $(this).data('id');
         $.ajax({

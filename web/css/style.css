@@ -855,6 +855,7 @@
 .product-info {
     padding-left: 50px;
     width: 50%;
+    text-align: left;
 }
 .quick-desc {
     color: #999;
@@ -4410,4 +4411,7 @@ input[type=number] {
     display: none;
 }
 
+#noUiSlider{
+    padding-bottom: 50px;
+}
 

@@ -28,7 +28,6 @@ class AppAsset extends AssetBundle
         'css/custom.css',
         'css/photoswipe.css',
         'css/default-skin/default-skin.css',
-
     ];
     public $js = [
         'js/vendor/modernizr-2.8.3.min.js',

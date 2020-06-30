@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\models\Category;
 use app\models\Product;
 use Yii;
-use yii\web\Request;
+use app\models\ProductSearch;
 
 
 class CategoryController extends AppController
@@ -16,49 +16,71 @@ class CategoryController extends AppController
 
 
     public function actionIndex(){
-        $hits = Product::find()->where(['hit' => 1])->limit(6)->all();
-        $news = Product::find()->where(['new' => 1])->limit(6)->all();
+        //заголовок страницы
         $this->setMeta('TMART | Каталог');
 
-        $products = Product::find()->all();
+        //модель для поиска и вывода товаров
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', compact('products','hits', 'news'));
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionView($id){
-        //$id = Yii::$app->request->get('id');
-
-        //получение данных
+        //получение текущей категории
         $category = Category::find()->where(['alias' => $id])->one();
-        $this->categories = Category::find()->indexBy('id')->asArray()->all();
 
-        $this->findIdChilds($category['id']);
-        $this->getParents($category['id']);
-        $parents = array_reverse($this->parents);
-
+        //вывод ошибки, если категория не нашлась
         if (empty($category))
             throw new \yii\web\HttpException(404, 'Такой категории не существует');
 
+        //получение всех категорий
+        $this->categories = Category::find()->indexBy('id')->asArray()->all();
+
+        //поиск родительских и дочерних категорий
+        $this->findIdChilds($category['id']);
+        $this->getParents($category['id']);
+
+        //родительские категории для вывода breadcrumbs
+        $parents = array_reverse($this->parents);
+
+        //получени всех товаров текущей и дочерних категорий
         $products = Product::find()->where(['category_id' => $this->ids])->all();
 
+        //заголовок страницы
         $this->setMeta('TMART | '. $category->name, $category->keywords, $category->description);
+
         return $this->render('view', compact('products', 'category', 'parents'));
     }
 
     public  function actionSearch()
     {
+        //получение строки поиска товаров
         $q = trim(Yii::$app->request->get('q'));
-        $this->setMeta('TMART | '. $q);
         if(!$q)
             return $this->render('search');
+
+        //заголовок страницы
+        $this->setMeta('TMART | '. $q);
+
+        //получение товаров в соответствии с условием поиска
         $products = Product::find()->where(['like', 'name', $q])->all();
-        return$this->render('search', compact('products', 'q'));
+
+        return $this->render('search', compact('products', 'q'));
     }
+
+    //функция заполнения первого элемента массива дочерних категорий и запуска рекурсивной функции
+    //входной параметр - id текущей категории
     protected function findIdChilds($idCat){
         $this->ids[] = "$idCat";
         $this->findIdChild($idCat);
     }
 
+    //рекурсивная функция для заполнения массива дочерних категорий
+    //входной параметр - id категории
     protected function findIdChild($id){
         foreach ($this->categories as $category){
             if ($id == $category['parent']){
@@ -71,6 +93,7 @@ class CategoryController extends AppController
         }
     }
 
+    //рекурсивная функция заполнения массива родительских категорий
     protected function getParents($categoryId){
             foreach ($this->categories as $category){
                 if ($this->categories[$categoryId]['parent'] == 0) break;

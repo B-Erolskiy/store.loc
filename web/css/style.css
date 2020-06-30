@@ -2087,7 +2087,7 @@ product__style--7
 }
 .htc__shop__cat {
     border-bottom: 1px solid #b7b7b7;
-    margin-bottom: 57px;
+    margin-bottom: 17px;
     padding-bottom: 32px;
 }
 .htc-grid-range {
@@ -4411,7 +4411,19 @@ input[type=number] {
     display: none;
 }
 
-#noUiSlider{
-    padding-bottom: 50px;
+.field-all_prices_max{
+    display: none;
 }
 
+.field-productsearch-price_min, .field-productsearch-price_max{
+    display: inline-block;
+    padding: 2px;
+}
+
+.field-productsearch-sortby{
+    padding-bottom: 20px;
+}
+
+.form-control{
+    padding: 6px 7px;
+}

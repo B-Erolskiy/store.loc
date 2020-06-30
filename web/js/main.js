@@ -149,7 +149,7 @@
         //$('body').classList.add('stop-scrolling');
         var id = $(this).data('id'),
             qty = $('#qtybutton').val();
-        console.log(qty);
+        //console.log(qty);
         if (qty >= 1 || qty == undefined){
             $.ajax({
                 url: '/cart/add',
@@ -762,21 +762,56 @@ $('.image-popup').magnificPopup({
   }
 });
 
-
 /*-------------------------------
   19. Price Slider Active
 --------------------------------*/
-  $("#slider-range").slider({
-      range: true,
-      min: 10,
-      max: 500,
-      values: [110, 400],
-      slide: function(event, ui) {
-          $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-      }
-  });
-  $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-      " - $" + $("#slider-range").slider("values", 1));
+
+    var minP = $("#productsearch-price_min").val();
+    var maxP = $("#productsearch-price_max").val();
+    var max = $("#all_prices_max").val();
+
+    if(maxP == 0)
+        maxP = max;
+    if(minP > maxP)
+        maxP = minP;
+
+    $("#slider-range").slider({
+        range: true,
+        min: 0,
+        max: max,
+        values: [minP, maxP],
+        slide: function (event, ui) {
+            $("#amount").val(ui.values[0] + " ₽ - " + ui.values[1] + " ₽");
+            $("#productsearch-price_min").val(ui.values[0]);
+            $("#productsearch-price_max").val(ui.values[1]);
+        }
+    });
+    $("#amount").val($("#slider-range").slider("values", 0) +
+        " ₽ - " + $("#slider-range").slider("values", 1)+ " ₽");
+
+    //та же функция для выполнения после ajax-запроса
+    $(document).ajaxComplete(function() {
+        var minP = $("#productsearch-price_min").val();
+        var maxP = $("#productsearch-price_max").val();
+        var max = $("#all_prices_max").val();
+
+        if(maxP == 0)
+            maxP = max;
+
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: max,
+            values: [minP, maxP],
+            slide: function (event, ui) {
+                $("#amount").val(ui.values[0] + " ₽ - " + ui.values[1] + " ₽");
+                $("#productsearch-price_min").val(ui.values[0]);
+                $("#productsearch-price_max").val(ui.values[1]);
+            }
+        });
+        $("#amount").val($("#slider-range").slider("values", 0) +
+            " ₽ - " + $("#slider-range").slider("values", 1)+ " ₽");
+    });
 
 
 /*-------------------------------

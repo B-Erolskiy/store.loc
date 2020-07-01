@@ -9,7 +9,7 @@ use yii\helpers\Html;
             <div class="pro__thumb">
                 <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $model->alias]); ?>">
                     <?php $image = $model->getImage();
-                    echo Html::img($image->getUrl(), ['alt' => $model->name, 'title' => $model->name])?>
+                    echo Html::img($image->getUrl('400x'), ['alt' => $model->name, 'title' => $model->name])?>
                 </a>
             </div>
             <div class="product__hover__info">

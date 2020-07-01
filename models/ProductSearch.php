@@ -63,14 +63,10 @@ class ProductSearch extends Product
     {
         $query = Product::find();
 
+        //запрос для определения максимальной цены товаров
         $minMaxQuery = clone $query;
         list($this->all_prices_max) = array_values($minMaxQuery->select(['MAX(price)'])->createCommand()->queryOne());
         $this->all_prices_max /= 100;
-        /*$this->price_max /= 100;
-        $this->all_prices_max = $this->price_max;*/
-
-        //debug($this->price_min . "_" . $this->price_max);
-        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

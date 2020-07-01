@@ -842,7 +842,22 @@ $('.image-popup').magnificPopup({
 ---------------------------- */
     $('.onepage--menu').onePageNav({
         scrollOffset: 0
-    }); 
+    });
+
+
+
+/*--------------------------
+  22. Preloader
+---------------------------- */
+
+$(document).on('pjax:send', function() {
+    document.getElementById('cube-loader').classList.remove("hidden");
+    document.querySelector('.shop__grid__view__wrap').classList.add("hidden");
+});
+$(window).on('load', function() {
+    document.getElementById('cube-loader').classList.add("hidden");
+    document.querySelector('.shop__grid__view__wrap').classList.remove("hidden");
+});
 
 
 
@@ -917,7 +932,4 @@ $('.image-popup').magnificPopup({
     
     
 })(jQuery);
-
-
-
 

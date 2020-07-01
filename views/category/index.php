@@ -135,6 +135,18 @@ use yii\widgets\Pjax;
                     </div>
                 </div>
                 <div class="row">
+                    <!-- Start preloader -->
+                    <div id="cube-loader" class="hidden">
+                        <div class="caption">
+                            <div class="cube-loader">
+                                <div class="cube loader-1"></div>
+                                <div class="cube loader-2"></div>
+                                <div class="cube loader-4"></div>
+                                <div class="cube loader-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End preloader -->
                     <div class="shop__grid__view__wrap another-product-style">
                         <!-- Start Single View -->
                         <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade in active clearfix">

@@ -799,6 +799,25 @@ $('.image-popup').magnificPopup({
         }).prop('disabled',true);
     });
 
+    //деактивирование чекбоксов при выборе "все"
+    var check1 = document.getElementById('all');
+    if (check1.checked == true){
+        document.getElementById('new').disabled = true;
+        document.getElementById('sale').disabled = true;
+        document.getElementById('hit').disabled = true;
+    }
+    check1.onchange = function () { // Отслеживаем изменение чекбокса
+        if (check1.checked == true){ // Если элемент не выбран, то
+            document.getElementById('new').disabled = true;
+            document.getElementById('sale').disabled = true;
+            document.getElementById('hit').disabled = true;
+        } else {
+            document.getElementById('new').disabled = false;
+            document.getElementById('sale').disabled = false;
+            document.getElementById('hit').disabled = false;
+        }
+    }
+
     //та же функция для выполнения после ajax-запроса
     $(document).ajaxComplete(function() {
         var minP = $("#price_min").val();
@@ -815,8 +834,8 @@ $('.image-popup').magnificPopup({
             values: [minP, maxP],
             slide: function (event, ui) {
                 $("#amount").val(ui.values[0] + " ₽ - " + ui.values[1] + " ₽");
-                $("#productsearch-price_min").val(ui.values[0]);
-                $("#productsearch-price_max").val(ui.values[1]);
+                $("#price_min").val(ui.values[0]);
+                $("#price_max").val(ui.values[1]);
             }
         });
         $("#amount").val($("#slider-range").slider("values", 0) +
@@ -828,6 +847,25 @@ $('.image-popup').magnificPopup({
                 return !$.trim(this.value).length;  // get all empty fields
             }).prop('disabled',true);
         });
+
+        //деактивирование чекбоксов при выборе "все"
+        var check1 = document.getElementById('all');
+        if (check1.checked == true){
+            document.getElementById('new').disabled = true;
+            document.getElementById('sale').disabled = true;
+            document.getElementById('hit').disabled = true;
+        }
+        check1.onchange = function () { // Отслеживаем изменение чекбокса
+            if (check1.checked == true){ // Если элемент не выбран, то
+                document.getElementById('new').disabled = true;
+                document.getElementById('sale').disabled = true;
+                document.getElementById('hit').disabled = true;
+            } else {
+                document.getElementById('new').disabled = false;
+                document.getElementById('sale').disabled = false;
+                document.getElementById('hit').disabled = false;
+            }
+        }
     });
 
 

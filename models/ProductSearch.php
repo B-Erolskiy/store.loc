@@ -117,12 +117,21 @@ class ProductSearch extends Product
 
         //добавление фильтра по хитам, новинкам и распродажам при условии не выбора чекбокса "Все"
         if(!$this->all){
-            $query->andFilterWhere([
-                'or',
-                ['=', 'hit', $this->hit],
-                ['=', 'new', $this->new],
-                ['=', 'sale', $this->sale],
-            ]);
+            if ($this->hit){
+                $query->andFilterWhere([
+                    'hit' => $this->hit,
+                ]);
+            }
+            if ($this->new){
+                $query->andFilterWhere([
+                    'new' => $this->new,
+                ]);
+            }
+            if ($this->sale){
+                $query->andFilterWhere([
+                    'sale' => $this->sale,
+                ]);
+            }
         }
 
         return $dataProvider;

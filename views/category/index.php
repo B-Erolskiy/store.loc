@@ -71,21 +71,25 @@ use yii\widgets\Pjax;
                         <?= $form->field($searchModel, 'all')
                             ->checkbox([
                                 'label' => 'Все',
+                                'uncheck' => null
                             ]);?>
 
                         <?= $form->field($searchModel, 'new')
                             ->checkbox([
                                 'label' => 'Новый товар',
+                                'uncheck' => null
                             ]);?>
 
                         <?= $form->field($searchModel, 'hit')
                             ->checkbox([
                                 'label' => 'Хит',
+                                'uncheck' => null
                             ]);?>
 
                         <?= $form->field($searchModel, 'sale')
                             ->checkbox([
                                 'label' => 'Распродажа',
+                                'uncheck' => null
                             ]);?>
 
                         <h4 class="section-title-4">По цене</h4>

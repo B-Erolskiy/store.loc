@@ -768,7 +768,7 @@ $('.image-popup').magnificPopup({
 
     var minP = $("#price_min").val();
     var maxP = $("#price_max").val();
-    var max = $("#all_prices_max").val();
+    var max = $("#all_prices_max").text();
 
     if(maxP == undefined || maxP == 0)
         maxP = max;
@@ -792,11 +792,18 @@ $('.image-popup').magnificPopup({
     $("#amount").val($("#slider-range").slider("values", 0) +
         " ₽ - " + $("#slider-range").slider("values", 1)+ " ₽");
 
+    //удаление пустых параметров
+    $('#filter-products').submit(function(e){
+        var emptyinputs = $(this).find('input').filter(function(){
+            return !$.trim(this.value).length;  // get all empty fields
+        }).prop('disabled',true);
+    });
+
     //та же функция для выполнения после ajax-запроса
     $(document).ajaxComplete(function() {
         var minP = $("#price_min").val();
         var maxP = $("#price_max").val();
-        var max = $("#all_prices_max").val();
+        var max = $("#all_prices_max").text();
 
         if(maxP == 0)
             maxP = max;
@@ -814,6 +821,13 @@ $('.image-popup').magnificPopup({
         });
         $("#amount").val($("#slider-range").slider("values", 0) +
             " ₽ - " + $("#slider-range").slider("values", 1)+ " ₽");
+
+        //удаление пустых параметров
+        $('#filter-products').submit(function(e){
+            var emptyinputs = $(this).find('input').filter(function(){
+                return !$.trim(this.value).length;  // get all empty fields
+            }).prop('disabled',true);
+        });
     });
 
 

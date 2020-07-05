@@ -70,11 +70,8 @@ class ProductSearch extends Product
 
         //запрос для определения максимальной цены товаров
         $minMaxQuery = clone $query;
-        if($this->all_prices_max == null){
-            list($this->all_prices_max) = array_values($minMaxQuery->select(['MAX(price)'])->createCommand()->queryOne());
-            $this->all_prices_max /= 100;
-            debug(1);
-        }
+        list($this->all_prices_max) = array_values($minMaxQuery->select(['MAX(price)'])->createCommand()->queryOne());
+        $this->all_prices_max /= 100;
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

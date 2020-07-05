@@ -71,8 +71,6 @@ use yii\widgets\Pjax;
                         <?= $form->field($searchModel, 'all')
                             ->checkbox([
                                 'label' => 'Все',
-                                'value' => true,
-                                'checked',
                             ]);?>
 
                         <?= $form->field($searchModel, 'new')
@@ -105,7 +103,7 @@ use yii\widgets\Pjax;
 
                         <?= $form->field($searchModel, 'price_max', ['options' => ['class' => 'col-md-5']]) ?>
 
-                        <?= $form->field($searchModel, 'all_prices_max')->input("text",['display' => 'none', 'id' => 'all_prices_max']) ?>
+                        <div id="all_prices_max" class="hidden"><?= $searchModel['all_prices_max'] ?></div>
 
                         <div class="form-group">
                             <?= Html::submitButton('Применить', ['class' => 'btn btn-primary']) ?>

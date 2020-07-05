@@ -52,6 +52,11 @@ class ProductSearch extends Product
         ];
     }
 
+    public function formName()
+    {
+        return '';
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -65,8 +70,11 @@ class ProductSearch extends Product
 
         //запрос для определения максимальной цены товаров
         $minMaxQuery = clone $query;
-        list($this->all_prices_max) = array_values($minMaxQuery->select(['MAX(price)'])->createCommand()->queryOne());
-        $this->all_prices_max /= 100;
+        if($this->all_prices_max == null){
+            list($this->all_prices_max) = array_values($minMaxQuery->select(['MAX(price)'])->createCommand()->queryOne());
+            $this->all_prices_max /= 100;
+            debug(1);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -97,9 +105,8 @@ class ProductSearch extends Product
         //добавление фильтра по цене при наличии максимального значения
         if ($this->price_max){
             if($this->price_min > $this->price_max)
-
-            if (empty($this->price_min))
-                $this->price_min = 0;
+                if (empty($this->price_min))
+                    $this->price_min = 0;
             $this->price_min *= 100;
             $this->price_max *= 100;
             $query->andFilterWhere([

@@ -766,14 +766,17 @@ $('.image-popup').magnificPopup({
   19. Price Slider Active
 --------------------------------*/
 
-    var minP = $("#productsearch-price_min").val();
-    var maxP = $("#productsearch-price_max").val();
+    var minP = $("#price_min").val();
+    var maxP = $("#price_max").val();
     var max = $("#all_prices_max").val();
 
-    if(maxP == 0)
+    if(maxP == undefined || maxP == 0)
         maxP = max;
     if(minP > maxP)
         maxP = minP;
+    if (minP == undefined)
+        minP = 0;
+    console.log(minP + ' - ' + maxP + ' -- ' + max);
 
     $("#slider-range").slider({
         range: true,
@@ -782,8 +785,8 @@ $('.image-popup').magnificPopup({
         values: [minP, maxP],
         slide: function (event, ui) {
             $("#amount").val(ui.values[0] + " ₽ - " + ui.values[1] + " ₽");
-            $("#productsearch-price_min").val(ui.values[0]);
-            $("#productsearch-price_max").val(ui.values[1]);
+            $("#price_min").val(ui.values[0]);
+            $("#price_max").val(ui.values[1]);
         }
     });
     $("#amount").val($("#slider-range").slider("values", 0) +
@@ -791,8 +794,8 @@ $('.image-popup').magnificPopup({
 
     //та же функция для выполнения после ajax-запроса
     $(document).ajaxComplete(function() {
-        var minP = $("#productsearch-price_min").val();
-        var maxP = $("#productsearch-price_max").val();
+        var minP = $("#price_min").val();
+        var maxP = $("#price_max").val();
         var max = $("#all_prices_max").val();
 
         if(maxP == 0)

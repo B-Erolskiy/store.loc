@@ -71,6 +71,8 @@ use yii\widgets\Pjax;
                         <?= $form->field($searchModel, 'all')
                             ->checkbox([
                                 'label' => 'Все',
+                                'value' => true,
+                                'checked',
                             ]);?>
 
                         <?= $form->field($searchModel, 'new')
@@ -153,7 +155,8 @@ use yii\widgets\Pjax;
                             <?php if (!empty($dataProvider)):  ?>
                                 <?php
                                 echo ListView::widget([
-                                    'layout' => "{summary}\n{pager}\n{items}\n",
+                                    'summary' => '<div class="summary">Показаны товары <b>{begin}-{end}</b> из <b>{totalCount}</b></div>',
+                                    'layout' => "{summary}\n{pager}\n<div class='row'>{items}</div>\n{pager}",
                                     'dataProvider' => $dataProvider,
                                     'itemView' => 'grid-product.php',
                                     'pager' => [
@@ -161,6 +164,7 @@ use yii\widgets\Pjax;
                                         'lastPageLabel' => 'последняя',
                                         'prevPageLabel' => '<span class="ti-arrow-circle-left"></span>',
                                         'nextPageLabel' => '<span class="ti-arrow-circle-right"></span>',
+                                        'maxButtonCount' => 3,
                                     ],
                                 ]);?>
                                 <div class="clearfix"></div>

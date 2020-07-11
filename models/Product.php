@@ -23,4 +23,6 @@ class Product extends ActiveRecord
             ]
         ];
     }
+
+
 }

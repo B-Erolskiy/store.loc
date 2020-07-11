@@ -9,6 +9,7 @@ use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 ?>
+<?php Pjax::begin();?>
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url('../../web/images/bg/2.jpg') no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
@@ -28,8 +29,6 @@ use yii\widgets\Pjax;
 <section class="htc__shop__sidebar bg__white ptb--40">
     <div class="container">
         <div class="row">
-            <?php Pjax::begin();?>
-
             <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
                 <div class="htc__shop__left__sidebar">
                     <!-- Start Product Cat -->
@@ -55,15 +54,15 @@ use yii\widgets\Pjax;
                             'action' => ['index'],
                             'options' => ['data-pjax' => true],
                             'id' => 'filter-products',
-                            ]); ?>
+                        ]); ?>
 
                         <?= $form->field($searchModel, 'sortBy')->dropDownList([
-                            '0' => 'Сортировка по умолчанию',
-                            '1' => 'По дате добавления ↑',
-                            '2' => 'По названию ↑',
-                            '3' => 'По названию ↓',
-                            '4' => 'По цене ↑',
-                            '5' => 'По цене ↓',
+                            'default' => 'Сортировка по умолчанию',
+                            'date' => 'По дате добавления ↑',
+                            'name-asc' => 'По названию ↑',
+                            'name-desc' => 'По названию ↓',
+                            'price-asc' => 'По цене ↑',
+                            'price-desc' => 'По цене ↓',
                         ]);?>
 
                         <h4 class="section-title-4">Специальные предложения</h4>
@@ -203,8 +202,9 @@ use yii\widgets\Pjax;
                 </div>
             </div>
 
-            <?php Pjax::end();?>
+
         </div>
     </div>
 </section>
 <!-- End Our ShopSide Area -->
+<?php Pjax::end();?>

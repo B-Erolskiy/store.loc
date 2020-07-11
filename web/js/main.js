@@ -776,7 +776,6 @@ $('.image-popup').magnificPopup({
         maxP = minP;
     if (minP == undefined)
         minP = 0;
-    console.log(minP + ' - ' + maxP + ' -- ' + max);
 
     $("#slider-range").slider({
         range: true,
@@ -801,20 +800,23 @@ $('.image-popup').magnificPopup({
 
     //деактивирование чекбоксов при выборе "все"
     var check1 = document.getElementById('all');
-    if (check1.checked == true){
-        document.getElementById('new').disabled = true;
-        document.getElementById('sale').disabled = true;
-        document.getElementById('hit').disabled = true;
-    }
-    check1.onchange = function () { // Отслеживаем изменение чекбокса
-        if (check1.checked == true){ // Если элемент не выбран, то
+    console.log(check1);
+    if (check1 != null) {
+        if (check1.checked == true){
             document.getElementById('new').disabled = true;
             document.getElementById('sale').disabled = true;
             document.getElementById('hit').disabled = true;
-        } else {
-            document.getElementById('new').disabled = false;
-            document.getElementById('sale').disabled = false;
-            document.getElementById('hit').disabled = false;
+        }
+        check1.onchange = function () { // Отслеживаем изменение чекбокса
+            if (check1.checked == true){ // Если элемент не выбран, то
+                document.getElementById('new').disabled = true;
+                document.getElementById('sale').disabled = true;
+                document.getElementById('hit').disabled = true;
+            } else {
+                document.getElementById('new').disabled = false;
+                document.getElementById('sale').disabled = false;
+                document.getElementById('hit').disabled = false;
+            }
         }
     }
 
@@ -850,20 +852,22 @@ $('.image-popup').magnificPopup({
 
         //деактивирование чекбоксов при выборе "все"
         var check1 = document.getElementById('all');
-        if (check1.checked == true){
-            document.getElementById('new').disabled = true;
-            document.getElementById('sale').disabled = true;
-            document.getElementById('hit').disabled = true;
-        }
-        check1.onchange = function () { // Отслеживаем изменение чекбокса
-            if (check1.checked == true){ // Если элемент не выбран, то
+        if (check1 != null) {
+            if (check1.checked == true) {
                 document.getElementById('new').disabled = true;
                 document.getElementById('sale').disabled = true;
                 document.getElementById('hit').disabled = true;
-            } else {
-                document.getElementById('new').disabled = false;
-                document.getElementById('sale').disabled = false;
-                document.getElementById('hit').disabled = false;
+            }
+            check1.onchange = function () { // Отслеживаем изменение чекбокса
+                if (check1.checked == true) { // Если элемент не выбран, то
+                    document.getElementById('new').disabled = true;
+                    document.getElementById('sale').disabled = true;
+                    document.getElementById('hit').disabled = true;
+                } else {
+                    document.getElementById('new').disabled = false;
+                    document.getElementById('sale').disabled = false;
+                    document.getElementById('hit').disabled = false;
+                }
             }
         }
     });
@@ -906,12 +910,16 @@ $('.image-popup').magnificPopup({
 ---------------------------- */
 
 $(document).on('pjax:send', function() {
-    document.getElementById('cube-loader').classList.remove("hidden");
-    document.querySelector('.shop__grid__view__wrap').classList.add("hidden");
+    if (document.getElementById('cube-loader') != null) {
+        document.getElementById('cube-loader').classList.remove("hidden");
+        document.querySelector('.shop__grid__view__wrap').classList.add("hidden");
+    }
 });
 $(window).on('load', function() {
-    document.getElementById('cube-loader').classList.add("hidden");
-    document.querySelector('.shop__grid__view__wrap').classList.remove("hidden");
+    if (document.getElementById('cube-loader') != null){
+        document.getElementById('cube-loader').classList.add("hidden");
+        document.querySelector('.shop__grid__view__wrap').classList.remove("hidden");
+    }
 });
 
 

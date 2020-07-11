@@ -10,8 +10,8 @@ use app\models\ProductSearch;
 
 class CategoryController extends AppController
 {
-    public $ids = array();  //массив дочерних категорий
     public $parents = array();  //массив родительских категорий
+    public $ids = array();  //массив дочерних категорий
     public $categories;
 
 
@@ -40,20 +40,25 @@ class CategoryController extends AppController
         //получение всех категорий
         $this->categories = Category::find()->indexBy('id')->asArray()->all();
 
-        //поиск родительских и дочерних категорий
+        //поиск дочерних и родительских категорий
         $this->findIdChilds($category['id']);
         $this->getParents($category['id']);
 
         //родительские категории для вывода breadcrumbs
         $parents = array_reverse($this->parents);
 
-        //получени всех товаров текущей и дочерних категорий
-        $products = Product::find()->where(['category_id' => $this->ids])->all();
-
         //заголовок страницы
         $this->setMeta('TMART | '. $category->name, $category->keywords, $category->description);
+        //модель для поиска и вывода товаров
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->ids);
 
-        return $this->render('view', compact('products', 'category', 'parents'));
+        return $this->render('view', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'category' => $category,
+            'parents' => $parents,
+        ]);
     }
 
     public  function actionSearch()
@@ -72,10 +77,24 @@ class CategoryController extends AppController
         return $this->render('search', compact('products', 'q'));
     }
 
+
+    //рекурсивная функция заполнения массива родительских категорий
+    protected function getParents($categoryId){
+            foreach ($this->categories as $category){
+                if ($this->categories[$categoryId]['parent'] == 0) break;
+                if($category['id'] == $this->categories[$categoryId]['parent']){
+                    $this->parents[] = $category;
+                    $categoryId = $category['id'];
+                    $this->getParents($categoryId);
+                }
+            }
+    }
+
     //функция заполнения первого элемента массива дочерних категорий и запуска рекурсивной функции
     //входной параметр - id текущей категории
     protected function findIdChilds($idCat){
         $this->ids[] = "$idCat";
+
         $this->findIdChild($idCat);
     }
 
@@ -91,17 +110,5 @@ class CategoryController extends AppController
         for ($j=0;$j<count($idsFind);$j++){
             $this->findIdChild($idsFind[$j]);
         }
-    }
-
-    //рекурсивная функция заполнения массива родительских категорий
-    protected function getParents($categoryId){
-            foreach ($this->categories as $category){
-                if ($this->categories[$categoryId]['parent'] == 0) break;
-                if($category['id'] == $this->categories[$categoryId]['parent']){
-                    $this->parents[] = $category;
-                    $categoryId = $category['id'];
-                    $this->getParents($categoryId);
-                }
-            }
     }
 }

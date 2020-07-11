@@ -74,8 +74,9 @@ class SiteController extends AppController
         $categories = $this->getTree(Category::find()->indexBy('id')->asArray()->all());
         $hits = Product::find()->where(['hit' => 1])->limit(6)->all();
         $news = Product::find()->where(['new' => 1])->limit(6)->all();
+        $sales = Product::find()->where(['sale' => 1])->limit(6)->all();
 
-        return $this->render('index', compact('categories','hits', 'news'));
+        return $this->render('index', compact('categories','hits', 'news', 'sales'));
     }
 
     public function actionOffices($isFormSent = false)
@@ -139,6 +140,7 @@ class SiteController extends AppController
         return $this->render('about');
     }
 
+    //функция для взятия дерева категорий
     public function getTree($data){
         $tree = [];
         foreach ($data as $id=>&$node) {

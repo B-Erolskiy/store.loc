@@ -19,18 +19,19 @@ class ProductSearch extends Product
     public $all_prices_max;
     public $price_min;
     public $sortBy;
+    public $id;
     public $all;
 
     public function rules()
     {
         return [
-            [['id', 'price', 'hit', 'new', 'all', 'sale', 'price_min', 'price_max', 'sortBy'], 'integer'],
+            [['price', 'hit', 'new', 'all', 'sale', 'price_min', 'price_max'], 'integer'],
             [['price_min'], 'default', 'value'=> $this->price_min],
             [['price_max'], 'default', 'value'=> $this->price_max],
             ['price_min', 'compare', 'compareAttribute' => 'price_max', 'operator' => '<=', 'type' => 'number', 'message' => 'Минимальная цена не может быть больше максимальной'],
             ['price_max', 'compare', 'compareAttribute' => 'price_min', 'operator' => '>=', 'type' => 'number', 'message' => 'Максимальная цена не может быть больше минимальной'],
             [['all_prices_max'], 'default', 'value'=> $this->all_prices_max],
-            [['all_prices_max'], 'safe'],
+            [['all_prices_max', 'id', 'sortBy'], 'safe'],
         ];
     }
 
@@ -61,10 +62,11 @@ class ProductSearch extends Product
      * Creates data provider instance with search query applied
      *
      * @param array $params
+     * @param array $catIds
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $catIds = null)
     {
         $query = Product::find();
 
@@ -82,21 +84,31 @@ class ProductSearch extends Product
             ],
         ]);
 
+        if ($catIds){
+            $query->andFilterWhere([
+                'category_id' => $catIds,
+            ]);
+        }
+
+
         //возврат при отсутствии фильтра
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
+
+
+
         //сортировка товаров
-        if ($this->sortBy == 1)
+        if ($this->sortBy == 'date')
             $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
-        if ($this->sortBy == 2)
+        if ($this->sortBy == 'name-asc')
             $dataProvider->sort->defaultOrder = ['name' => SORT_ASC];
-        if ($this->sortBy == 3)
+        if ($this->sortBy == 'name-desc')
             $dataProvider->sort->defaultOrder = ['name' => SORT_DESC];
-        if ($this->sortBy == 4)
+        if ($this->sortBy == 'price-asc')
             $dataProvider->sort->defaultOrder = ['price' => SORT_ASC];
-        if ($this->sortBy == 5)
+        if ($this->sortBy == 'price-desc')
             $dataProvider->sort->defaultOrder = ['price' => SORT_DESC];
 
         //добавление фильтра по цене при наличии максимального значения
@@ -136,4 +148,6 @@ class ProductSearch extends Product
 
         return $dataProvider;
     }
+
+
 }

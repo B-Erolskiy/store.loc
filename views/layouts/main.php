@@ -66,7 +66,7 @@ ltAppAsset::register($this);
                                 <ul>
                                     <li><a href="<?=\yii\helpers\Url::home(); ?>">Home</a></li>
                                     <li><a href="<?= \yii\helpers\Url::to(['category/index'])?>">Каталог</a></li>
-                                    <li><a href="blog.html">Акции</a></li>
+                                    <li><a href="<?=\yii\helpers\Url::to(['cart/view']); ?>">Корзина</a></li>
                                     <li><a href="<?= \yii\helpers\Url::to(['/offices'])?>">Магазины</a></li>
                                 </ul>
                             </nav>

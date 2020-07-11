@@ -38,7 +38,7 @@ use yii\helpers\Html;
                                             <div class="slider__inner">
                                                 <h1>Новая коллекция продуктов <span class="text--theme">Samsung</span></h1>
                                                 <div class="slider__btn">
-                                                    <a class="htc__btn" href="<?= \yii\helpers\Url::to(['category/view', 'id' => 4])?>">к покупкам</a>
+                                                    <a class="htc__btn" href="#">к покупкам</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,8 +136,7 @@ use yii\helpers\Html;
                                 <div class="row">
                                     <div class="product-slider-active owl-carousel">
                                         <?php if (!empty($hits)):  ?>
-                                        <!-- Start Single Product -->
-                                        <?php $i = 0; foreach ($hits as $hit): ?>
+                                        <?php foreach ($hits as $hit): ?>
                                         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
                                             <div class="product">
                                                 <div class="product__inner">
@@ -173,7 +172,7 @@ use yii\helpers\Html;
                                     <div class="product-slider-active owl-carousel">
                                         <?php if (!empty($news)):  ?>
                                             <!-- Start Single Product -->
-                                            <?php $i = 0; foreach ($news as $new): ?>
+                                            <?php foreach ($news as $new): ?>
                                                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
                                                     <div class="product">
                                                         <div class="product__inner">
@@ -186,7 +185,7 @@ use yii\helpers\Html;
                                                             <div class="product__hover__info">
                                                                 <ul class="product__action">
                                                                     <li><a data-toggle="modal" data-target="#productModal" title="Быстрый просмотр" data-id="<?= $new->id?>" class="product-quick-view quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                                    <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $new->id])?>" data-id="<?= $hit->id?>"></a></li>
+                                                                    <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $new->id])?>" data-id="<?= $new->id?>"></a></li>
                                                                     <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
                                                                 </ul>
                                                             </div>
@@ -201,7 +200,42 @@ use yii\helpers\Html;
                                                 </div>
                                             <?php endforeach;
                                         endif;?>
-
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="home3">
+                                <div class="row">
+                                    <div class="product-slider-active owl-carousel">
+                                        <?php if (!empty($sales)):  ?>
+                                            <!-- Start Single Product -->
+                                            <?php foreach ($sales as $sale): ?>
+                                                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+                                                    <div class="product">
+                                                        <div class="product__inner">
+                                                            <div class="pro__thumb">
+                                                                <a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $sale->alias]); ?>">
+                                                                    <?php $image = $sale->getImage();
+                                                                    echo Html::img($image->getUrl(), ['alt' => $sale->name, 'title' => $sale->name]) ?>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product__hover__info">
+                                                                <ul class="product__action">
+                                                                    <li><a data-toggle="modal" data-target="#productModal" title="Быстрый просмотр" data-id="<?= $sale->id?>" class="product-quick-view quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                                    <li><a class="ti-shopping-cart cart-add" title="Добавить в корзину" href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $sale->id])?>" data-id="<?= $sale->id?>"></a></li>
+                                                                    <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product__details">
+                                                            <h2><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $sale->alias]); ?>"><?= $sale->name?></a></h2>
+                                                            <ul class="product__price">
+                                                                <li class="new__price"><?= $sale->price/100 ?> ₽</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach;
+                                        endif;?>
                                     </div>
                                 </div>
                             </div>

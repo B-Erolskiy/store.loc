@@ -153,9 +153,9 @@ JS
                                                 </a>
                                             </td>
                                             <td class="product-name"><a href="<?=\yii\helpers\Url::to(['product/view', 'id' => $item['alias']]); ?>"><?=$item['name']?></a></td>
-                                            <td class="product-price"><span class="amount"><?=$item['price']/100?></span></td>
+                                            <td class="product-price"><span class="amount"><?=$item['price']/100?> ₽</span></td>
                                             <td class="product-price"><span class="amount"><?=$item['qty']?></span></td>
-                                            <td class="product-subtotal"><?=$item['price']/100*$item['qty']?></td>
+                                            <td class="product-subtotal"><?=$item['price']/100*$item['qty']?> ₽</td>
                                             <td class="product-remove"><a href="<?= \yii\helpers\Url::to(['cart/delete','id'=> $item['id']])?>" data-qty="<?=$item['qty']?>" data-id="<?=$item['id']?>" class="del-item">X</a></td>
                                             <input type="hidden" name="emptyCart" value="false"/>
                                         </tr>
@@ -182,13 +182,13 @@ JS
                                         <tbody>
                                         <?php if(!empty($session['cart'])): ?>
                                         <tr class="cart-subtotal">
-                                            <th>Итоговое количество</th>
+                                            <th>Итоговое количество:</th>
                                             <td><span class="amount"><?=$session['cart.qty']?></span></td>
                                         </tr>
                                         <tr class="order-total">
-                                            <th>Итого к оплате</th>
+                                            <th>Итого к оплате:</th>
                                             <td>
-                                                <strong><span class="amount"><?=$session['cart.sum']?></span></strong>
+                                                <strong><span class="amount"><?=$session['cart.sum']?> ₽</span></strong>
                                             </td>
                                         </tr>
                                         </tbody>

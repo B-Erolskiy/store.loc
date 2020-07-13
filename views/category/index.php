@@ -16,9 +16,20 @@ use yii\widgets\Pjax;
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">Каталог товаров</h2>
-                    </div>
+                    <?php if ($search_name != null):?>
+                        <div class="bradcaump__inner text-center">
+                            <h2 class="bradcaump-title">Каталог товаров</h2>
+                            <nav class="bradcaump-inner">
+                                <a class="breadcrumb-item" href="<?=\yii\helpers\Url::to(['category/'])?>">Каталог</a>
+                                <span class="brd-separetor">/</span>
+                                <span class="breadcrumb-item active">Поиск по запросу: <?= Html::encode($search_name)?></span>
+                            </nav>
+                        </div>
+                    <?php else:?>
+                        <div class="bradcaump__inner text-center">
+                            <h2 class="bradcaump-title">Каталог товаров</h2>
+                        </div>
+                    <?php endif;?>
                 </div>
             </div>
         </div>

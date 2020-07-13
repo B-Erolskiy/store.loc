@@ -49,6 +49,7 @@ class CategoryController extends AppController
 
         //заголовок страницы
         $this->setMeta('TMART | '. $category->name, $category->keywords, $category->description);
+
         //модель для поиска и вывода товаров
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->ids);
@@ -64,18 +65,24 @@ class CategoryController extends AppController
     public  function actionSearch()
     {
         //получение строки поиска товаров
-        $q = trim(Yii::$app->request->get('q'));
-        if(!$q)
+        $search_name = trim(Yii::$app->request->get('search_name'));
+        if(!$search_name)
             return $this->render('search');
 
         //заголовок страницы
-        $this->setMeta('TMART | '. $q);
+        $this->setMeta('TMART | Поиск '. $search_name);
 
-        //получение товаров в соответствии с условием поиска
-        $products = Product::find()->where(['like', 'name', $q])->all();
+        //модель для поиска и вывода товаров
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('search', compact('products', 'q'));
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'search_name' => $search_name,
+        ]);
     }
+
 
 
     //рекурсивная функция заполнения массива родительских категорий

@@ -15,10 +15,10 @@ class ProductSearch extends Product
      * {@inheritdoc}
      */
 
-    public $price_max;
-    public $all_prices_max;
-    public $price_min;
-    public $sortBy;
+    public $price_max; //установленная максимальная стоимость товара для выборки
+    public $price_min; //установленная минимальная стоимость товара для выборки
+    public $all_prices_max; //максимальная стоимость товара среди всех товаров
+    public $sortBy; //вид сортировки
     public $id;
     public $all;
 
@@ -89,14 +89,16 @@ class ProductSearch extends Product
                 'category_id' => $catIds,
             ]);
         }
+        if($params['search_name']){
+            $query->andFilterWhere(['like', 'name', $params['search_name']]);
+        }
 
+        //debug($params['search_name']);
 
         //возврат при отсутствии фильтра
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
-
-
 
 
         //сортировка товаров

@@ -106,7 +106,7 @@ ltAppAsset::register($this);
                     <div class="col-md-12" >
                         <div class="search__inner">
                             <form action="<?= \yii\helpers\Url::to(['category/search'])?>" method="get">
-                                <input placeholder="Введите здесь... " name="q" type="text">
+                                <input placeholder="Введите здесь... " name="search_name" type="text">
                                 <button type="submit"></button>
                             </form>
                             <div class="search__close__btn">

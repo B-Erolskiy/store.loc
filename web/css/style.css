@@ -4428,7 +4428,12 @@ input[type=number] {
     padding: 6px 7px;
 }
 
-
+#orderForm {
+    text-align: left;
+}
+.gotoformorder-btn{
+    cursor: pointer;
+}
 
 /* ПРЕЛОАДЕР */
 
@@ -4502,3 +4507,65 @@ input[type=number] {
         opacity: 0;
     }
 }
+
+/* TABS */
+
+.my-tabs {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.my-tabs input[type="radio"] {
+    display: none;
+}
+
+.my-tabs input[type="radio"]:checked+label {
+    background-color: #ededed;
+}
+
+.my-tabs>div {
+    /* скрыть контент по умолчанию */
+    display: none;
+}
+
+
+/* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */
+#tab-btn-1:checked~#content-1,
+#tab-btn-2:checked~#content-2{
+    display: block;
+}
+
+.my-tabs label {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 10px;
+    border: 1px solid transparent;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 4px;
+}
+
+.my-tabs label:hover {
+    color: #ff4136;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+.my-tabs label span {
+    font-size: 19px;
+}
+
+.my-tabs label:first-of-type {
+    margin-left: 0;
+}
+
+
+

@@ -56,7 +56,7 @@ use yii\widgets\ActiveForm;
                     <tr>
                         <td colspan="6">Корзина пуста</td>
                         <input type="hidden" name="emptyCart" value="true"/>
-                        <?php $emptyCart = true; endif;?>
+                        <?php endif;?>
                     </tbody>
                 </table>
             </div>
@@ -86,7 +86,7 @@ use yii\widgets\ActiveForm;
                             </tbody>
                         </table>
                         <div class="wc-proceed-to-checkout">
-                            <a href="#form">Оформить заказ</a>
+                            <a class="gotoformorder-btn">Оформить заказ</a>
                         </div>
                         <?php else : ?>
                             <tr class="order-total">

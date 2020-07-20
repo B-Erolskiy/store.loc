@@ -34,4 +34,4 @@
 ![screenshot-16](Screenshots/orders-admin-edit.gif)
 ## Officces (admin panel)
 ![screenshot-17](Screenshots/officces-admin.jpg)
-![screenshot-18](Screenshots/officces-admin-edit.gif)
+![screenshot-18](Screenshots/offices-admin-edit.gif)

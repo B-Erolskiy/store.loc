@@ -8,7 +8,7 @@
 ## Contact form + officces
 ![screenshot-2](Screenshots/Video_2018-06-08_224332.gif)
 ## Category view
-![screenshot-3](Screenshots/main-page.png)
+![screenshot-3](Screenshots/main-page.gif)
 ## Fitering
 ![screenshot-4](Screenshots/editing.png)
 ## Short product view
